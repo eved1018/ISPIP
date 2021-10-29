@@ -5,13 +5,12 @@ from concurrent.futures import ProcessPoolExecutor
 import  matplotlib.pyplot as plt 
 
 
-def postprocess(test_frame,feature_cols,args_container,annotated_col) -> Tuple[pd.DataFrame, list, list]:   
+def postprocess(test_frame,feature_cols,args_container,annotated_col,autocutoff) -> Tuple[pd.DataFrame, list, list]:   
     predicted_col = feature_cols + ['logisticregresion', 'randomforest']
     results = []
     roc_curve_data :list = []
     pr_curve_data:list = []
-    default_cutoff_val = 15 #change to self when in class
-    cutoff_dict = cutoff_file_parser(args_container.cutoff_frame) if (args_container.use_cutoff_from_file) else  {protein:default_cutoff_val for protein in test_frame.protein.unique()}
+    cutoff_dict = cutoff_file_parser(args_container.cutoff_frame) if (args_container.use_cutoff_from_file) else  {protein:autocutoff for protein in test_frame.protein.unique()}
     bin_frame = test_frame
     params = [(pred,cutoff_dict, bin_frame,annotated_col) for pred in predicted_col] #make testframe and cutoff dict this self in class
     with ProcessPoolExecutor(max_workers=4) as exe:

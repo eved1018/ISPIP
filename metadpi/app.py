@@ -24,7 +24,7 @@ def run() -> None:
     if args_container.mode == 'predict':
         df = logreg_predict_from_trained_model(df,feature_cols,annotated_col,args_container.input_folder_path,args_container.model_name)
         df = randomforest_predict_from_trained_model(df,feature_cols,annotated_col, args_container.rf_params, args_container.input_folder_path,args_container.model_name)
-        results_df, roc_curve_data, pr_curve_data = postprocess(df,feature_cols,args_container,annotated_col,)
+        results_df, roc_curve_data, pr_curve_data = postprocess(df,feature_cols,args_container,annotated_col,args_container.autocutoff)
         roc_viz(roc_curve_data, args_container.output_path_dir,args_container.model_name)
         pr_viz(pr_curve_data,args_container.output_path_dir,args_container.model_name, df, annotated_col)
         print(results_df)
@@ -38,7 +38,7 @@ def run() -> None:
         
         df, test_frame = logistic_regresion_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.output_path_dir, args_container.model_name)
         df, test_frame = randomforest_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.rf_params,args_container.output_path_dir,args_container.model_name)
-        results_df, roc_curve_data,pr_curve_data = postprocess(test_frame,feature_cols,args_container,annotated_col,)
+        results_df, roc_curve_data,pr_curve_data = postprocess(test_frame,feature_cols,args_container,annotated_col,args_container.autocutoff)
         roc_viz(roc_curve_data,args_container.output_path_dir, args_container.model_name)
         pr_viz(pr_curve_data,args_container.output_path_dir,args_container.model_name, test_frame, annotated_col)        
         print(results_df)

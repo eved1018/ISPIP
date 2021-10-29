@@ -9,6 +9,7 @@ class FilePaths:
         self.mode = args.modeselection
         self.folder_path  = folder_path
         self.model_name = args.model_name
+        self.autocutoff = args.autocutoff
         self.use_test_train_files = True
         self.use_cutoff_from_file = True
         self.output_path_dir= os.path.join(folder_path, 'output')

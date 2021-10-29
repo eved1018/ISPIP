@@ -8,7 +8,7 @@ from .containers.filepaths import FilePaths
 def interface() -> FilePaths :
     parser = argparse.ArgumentParser()
     parser.add_argument('-i','--inputfile' ,default='input.csv', help= 'file name')
-    parser.add_argument('-m','--modeselection' ,choices=['predict', 'test', 'generate'] , default='predict',help= "predict: Use pretrained model in input folder to predict on set.\nTest_Train: genrate a new rf model from a test set and train on a training set.\nGenerate:  genrate a new rf model from a test set without predicting on any data.")
+    parser.add_argument('-mode','--modeselection' ,choices=['predict', 'test', 'generate'] , default='predict',help= "predict: Use pretrained model in input folder to predict on set.\nTest_Train: genrate a new rf model from a test set and train on a training set.\nGenerate:  genrate a new rf model from a test set without predicting on any data.")
     parser.add_argument('-trainset', default='train_set.txt', help='')
     parser.add_argument('-testset', default='test_set.txt', help='')
     parser.add_argument('-randomforest_parameter_trees', default=10, help='')
@@ -17,6 +17,7 @@ def interface() -> FilePaths :
     parser.add_argument('-tree_visualization', default=False, help='')
     parser.add_argument('-protein_visualization', default=False, help='')
     parser.add_argument('-cutoffs', default='cutoffs.csv', help='')
+    parser.add_argument('-autocutoff', default='15', help='')
     parser.add_argument('-model_name', default='model', help='')
     args = parser.parse_args()
     args_container:FilePaths = parse(args)
@@ -31,7 +32,7 @@ def parse(args:argparse.Namespace) -> FilePaths:
             args_container.use_test_train_files = False
 
     if not os.path.isfile(args_container.cutoff_frame):
-        print("cutoffs not found, a global cutoff of 15 residues will be used")
+        print(f"cutoffs not found, a global cutoff of {args.autocutoff} residues will be used")
         args_container.use_cutoff_from_file = False
 
     if not os.path.isfile(args_container.input_frames_file):
