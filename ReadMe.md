@@ -3,14 +3,17 @@ Meta Dpi:
 Written by  Evan Edelstein
  	
 requirements:
+
 	-python3
 	-packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt'
 	
 Usage: 
+
 	1) cd to MetaDpiNew
-	2) execute 'python -m metadpi -mode {mode to use} '
+	2) execute 'python -m metadpi -mode {mode to use}' 
 
 arguments:
+
 	-i: [str] defualt:'input.csv- csv file should be in input folder
 
 	-mode: ['predict', 'test', 'generate'] defualt:'predict' - 
