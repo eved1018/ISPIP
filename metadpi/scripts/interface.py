@@ -1,6 +1,5 @@
 import argparse
 import pathlib
-import pandas as pd
 import os 
 from .containers.filepaths import FilePaths
 

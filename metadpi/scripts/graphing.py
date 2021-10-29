@@ -1,7 +1,6 @@
 import pandas as pd 
 import  matplotlib.pyplot as plt 
 from dtreeviz.trees import *
-import graphviz
 
 
     

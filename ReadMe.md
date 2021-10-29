@@ -6,7 +6,7 @@ requirements:
 
 	-python3
 	-packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt'
-	
+	- optinoal: pymol
 Usage: 
 
 	1) cd to MetaDpiNew
