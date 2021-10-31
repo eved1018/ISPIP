@@ -9,7 +9,7 @@ requirements:
 	- optinoal: pymol
 Usage: 
 
-	1) cd to MetaDpiNew
+	1) cd to MetaDPIv2 
 	2) execute 'python -m metadpi -mode {mode to use}' 
 
 arguments:
