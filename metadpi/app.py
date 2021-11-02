@@ -5,7 +5,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 from .scripts.postprocess import postprocess
 from .scripts.logisticregrsion import logistic_regresion_test_train, logreg_predict_from_trained_model, logreg_generate_model
 from .scripts.randomforest import randomforest_test_train, randomforest_predict_from_trained_model,randomforest_generate_model
-from .scripts.graphing import roc_viz, pr_viz
+from .scripts.graphing import roc_viz, pr_viz, treeviz, pymol_viz
 from .scripts.linearregression import linear_regresion_test_train, linreg_predict_from_trained_model,linreg_generate_model
 
 
@@ -21,16 +21,19 @@ def run() -> None:
     args_container = interface()
     df = pd.read_csv(args_container.input_frames_file)
     df, feature_cols, annotated_col, proteins  = data_preprocesss(df) 
-    
+    predicted_col = feature_cols + ['logisticregresion', "linearregression",'randomforest']
+
 
     #mode selection 
     if args_container.mode == 'predict':
         df = linreg_predict_from_trained_model(df, feature_cols, args_container.input_folder_path, args_container.model_name)
         df = logreg_predict_from_trained_model(df,feature_cols,annotated_col,args_container.input_folder_path,args_container.model_name)
         df = randomforest_predict_from_trained_model(df,feature_cols,annotated_col, args_container.rf_params, args_container.input_folder_path,args_container.model_name)
-        results_df, roc_curve_data, pr_curve_data = postprocess(df,feature_cols,args_container,annotated_col,args_container.autocutoff)
+        results_df, roc_curve_data, pr_curve_data , bin_frame= postprocess(df,predicted_col,args_container,annotated_col,args_container.autocutoff)
         roc_viz(roc_curve_data, args_container.output_path_dir,args_container.model_name)
         pr_viz(pr_curve_data,args_container.output_path_dir,args_container.model_name, df, annotated_col)
+        protein_to_viz = bin_frame["protein"].unique()[0] #TODO set this as a config (do all or list)
+        pymol_viz(bin_frame, protein_to_viz, predicted_col,annotated_col, args_container.pymolscriptpath, args_container.output_path_dir)
         print(results_df)
 
     elif args_container.mode == 'test':
@@ -42,18 +45,22 @@ def run() -> None:
         
         df, test_frame = linear_regresion_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.output_path_dir, args_container.model_name)
         df, test_frame = logistic_regresion_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.output_path_dir, args_container.model_name)
-        df, test_frame = randomforest_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.rf_params,args_container.output_path_dir,args_container.model_name)
+        df, test_frame, tree = randomforest_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.rf_params,args_container.output_path_dir,args_container.model_name)
 
-        results_df, roc_curve_data,pr_curve_data = postprocess(test_frame,feature_cols,args_container,annotated_col,args_container.autocutoff)
+        results_df, roc_curve_data,pr_curve_data , bin_frame= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
         roc_viz(roc_curve_data,args_container.output_path_dir, args_container.model_name)
         pr_viz(pr_curve_data,args_container.output_path_dir,args_container.model_name, test_frame, annotated_col)        
+        treeviz(tree,df,feature_cols,annotated_col, args_container.model_name, args_container.output_path_dir)
+        protein_to_viz = bin_frame["protein"].unique()[0] #TODO set this as a config (do all or list)
+        pymol_viz(bin_frame, protein_to_viz, predicted_col,annotated_col, args_container.pymolscriptpath, args_container.output_path_dir)
         print(results_df)
+    
     
     elif  args_container.mode == 'generate':
         linreg_generate_model(df, feature_cols, annotated_col, args_container.output_path_dir, args_container.model_name)
         logreg_generate_model(df,feature_cols,annotated_col,args_container.output_path_dir,args_container.model_name)
-        randomforest_generate_model(df,feature_cols,annotated_col, args_container.rf_params,args_container.output_path_dir, args_container.model_name)
-
+        tree = randomforest_generate_model(df,feature_cols,annotated_col, args_container.rf_params,args_container.output_path_dir, args_container.model_name)
+        treeviz(tree,df,feature_cols,annotated_col, args_container.model_name, args_container.output_path_dir)
     else:
         print("mode is set incorrectly")
 

@@ -5,8 +5,7 @@ from concurrent.futures import ProcessPoolExecutor
 import  matplotlib.pyplot as plt 
 
 
-def postprocess(test_frame,feature_cols,args_container,annotated_col,autocutoff) -> Tuple[pd.DataFrame, list, list]:   
-    predicted_col = feature_cols + ['logisticregresion', "linearregression",'randomforest']
+def postprocess(test_frame,predicted_col,args_container,annotated_col,autocutoff) -> Tuple[pd.DataFrame, list, list]:   
     results = []
     roc_curve_data :list = []
     pr_curve_data:list = []
@@ -19,9 +18,10 @@ def postprocess(test_frame,feature_cols,args_container,annotated_col,autocutoff)
             results.append(return_val[0])
             roc_curve_data.append(return_val[1])
             pr_curve_data.append(return_val[2])
+            bin_frame[return_val[3][0]] = return_val[3][1] 
 
     result_df = pd.DataFrame(results, columns = ['predictor','f-score','mcc','roc_auc','pr_auc'])
-    return  result_df, roc_curve_data, pr_curve_data
+    return  result_df, roc_curve_data, pr_curve_data , bin_frame
 
 def cutoff_file_parser(cutoff_frame) -> dict:
     cutoff_frame_df : pd.DataFrame= pd.read_csv(cutoff_frame)  # type: ignore
@@ -42,5 +42,5 @@ def analyses(params) -> list:
     fscore = f1_score(y_true,y_pred)
     precision, recall, thresholds = precision_recall_curve(y_true, y_pred)
     pr_auc = round(auc(recall, precision),3)
-    return_values = [[pred, fscore, mcc, roc_auc, pr_auc],[pred,fpr,tpr,roc_auc,thresholds],[pred,recall,precision, pr_auc, thresholds]]
+    return_values = [[pred, fscore, mcc, roc_auc, pr_auc],[pred,fpr,tpr,roc_auc,thresholds],[pred,recall,precision, pr_auc, thresholds], [pred, y_pred]]
     return return_values

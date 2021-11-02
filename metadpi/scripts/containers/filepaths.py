@@ -20,6 +20,7 @@ class FilePaths:
         self.train_proteins_file =  os.path.join(folder_path, 'input', args.trainset)
         self.cutoff_frame = os.path.join(folder_path, 'input', args.cutoffs)
         self.rf_params = [args.randomforest_parameter_trees, args.random_forest_parameter_depth, args.random_forest_parameter_ccp]
+        self.pymolscriptpath = os.path.join(folder_path, 'scripts', 'visualization', 'pymolviz.py')
         return
  
 

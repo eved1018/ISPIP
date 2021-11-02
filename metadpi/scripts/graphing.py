@@ -1,12 +1,11 @@
+import subprocess
 import  matplotlib.pyplot as plt 
 from dtreeviz.trees import *
 import pandas as pd 
-
-
+import pathlib
 
 def roc_viz(roc_curve_data, output_path_dir, model_name):
     roc_frame = pd.DataFrame()
-
     plt.figure()
     lw = 2
     for data in roc_curve_data:
@@ -53,20 +52,21 @@ def pr_viz(pr_curve_data, output_path_dir, model_name, df, annotated_col):
     return
 
 
-def treeviz(treeparams,result_path,code,cols):
-    (X, y, tree,depth) = treeparams
-    viz = dtreeviz(tree, 
-        X, 
-        y,
-        target_name='Interface',
-        feature_names= cols, 
-        class_names= ["non_interface", "interface"], 
-        show_node_labels= True, 
-        fancy=False 
-        )  
-    
-    path = f"{result_path}/META_DPI_RESULTS{code}/Trees/Rftree_{depth}.svg" 
-    viz.save(path)
+def treeviz(tree, df,feature_cols,annotated_col, model_name, output_path_dir):
+    try:
+        viz = dtreeviz(tree, 
+            df[feature_cols], 
+            df[annotated_col], 
+            target_name='Interface',
+            feature_names= feature_cols, 
+            class_names= ["non_interface", "interface"], 
+            show_node_labels= True, 
+            fancy=False 
+            )  
+        path = f"{output_path_dir}/Rftree_{model_name}.svg" 
+        viz.save(path)
+    except:
+        print("Please install Graphviz")
     return
 
 def roc_to_csv(roc_curve_data, output_path_dir, model_name):
@@ -88,4 +88,19 @@ def pr_to_csv(pr_curve_data, output_path_dir, model_name):
     pr_frame.to_csv(f"{output_path_dir}/roc_{model_name}.csv")
     return
 
+def pymol_viz(bin_frame, protein, predicted_col,annotated_col,pymolscriptpath,output_path_dir):
+    bin_frame = bin_frame[bin_frame['protein'] == protein]
+    new_folder = os.path.join(output_path_dir, protein)
 
+    pathlib.Path(new_folder).mkdir(parents=True, exist_ok=True)
+    for pred in predicted_col: 
+        pred_residues = bin_frame[bin_frame[pred] == 1].index.tolist()
+        pred_residues = [i.split("_")[0] for i in pred_residues]
+        pred_residues = "+".join(pred_residues)
+
+        annotated_resiues =  bin_frame[bin_frame[annotated_col] == 1].index.tolist()
+        annotated_resiues = [i.split("_")[0] for i in annotated_resiues]
+        annotated_resiues = "+".join(annotated_resiues)
+        subprocess.run(f"pymol -c -q {pymolscriptpath} -- {output_path_dir} {protein} {pred_residues} {annotated_resiues} {pred}", shell = True)
+        
+    return
