@@ -6,7 +6,7 @@ import  matplotlib.pyplot as plt
 
 
 def postprocess(test_frame,feature_cols,args_container,annotated_col,autocutoff) -> Tuple[pd.DataFrame, list, list]:   
-    predicted_col = feature_cols + ['logisticregresion', 'randomforest']
+    predicted_col = feature_cols + ['logisticregresion', "linearregrsion",'randomforest']
     results = []
     roc_curve_data :list = []
     pr_curve_data:list = []

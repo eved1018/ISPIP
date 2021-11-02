@@ -18,7 +18,7 @@ def logistic_regresion_test_train(test_frame,train_frame,df,feature_cols,annotat
     sum_pred = sum(vals)
     val = -1 *(coefficients[0] + sum_pred)
     exponent = np.exp(val)
-    pval = (1/(1+exponent))
+    pval = (1/(1+exponent))  # type: ignore
     test_frame['logisticregresion'] = list(pval)
     df['logisticregresion'] = pval
     result.save(f"{output_path_dir}/LG_{model_name}.pickle")
@@ -37,7 +37,7 @@ def logreg_predict_from_trained_model(df,feature_cols,annotated_col,input_folder
     sum_pred = sum(vals)
     val = -1 *(coefficients[0] + sum_pred)
     exponent = np.exp(val)
-    pval = (1/(1+exponent))
+    pval = (1/(1+exponent)) #type: ignore
     df['logisticregresion'] = list(pval)
     df['logisticregresion'] = pval
     return df
