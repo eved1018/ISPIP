@@ -23,7 +23,6 @@ def randomforest_predict_from_trained_model(df: pd.DataFrame,feature_cols,annota
     y_prob = loaded_rf.predict_proba(X_test)
     y_prob_interface = [p[1] for p in y_prob]
     df['randomforest'] = y_prob_interface
-    df['randomforest'] = df['randomforest']
     return df 
 
 

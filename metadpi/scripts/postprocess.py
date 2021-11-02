@@ -6,7 +6,7 @@ import  matplotlib.pyplot as plt
 
 
 def postprocess(test_frame,feature_cols,args_container,annotated_col,autocutoff) -> Tuple[pd.DataFrame, list, list]:   
-    predicted_col = feature_cols + ['logisticregresion', "linearregrsion",'randomforest']
+    predicted_col = feature_cols + ['logisticregresion', "linearregression",'randomforest']
     results = []
     roc_curve_data :list = []
     pr_curve_data:list = []
@@ -24,7 +24,7 @@ def postprocess(test_frame,feature_cols,args_container,annotated_col,autocutoff)
     return  result_df, roc_curve_data, pr_curve_data
 
 def cutoff_file_parser(cutoff_frame) -> dict:
-    cutoff_frame_df = pd.read_csv(cutoff_frame)
+    cutoff_frame_df : pd.DataFrame= pd.read_csv(cutoff_frame)  # type: ignore
     cutoff_frame_df.columns= cutoff_frame_df.columns.str.lower()
     cutoff_dict =  dict(zip(cutoff_frame_df['protein'], cutoff_frame_df['cutoff res']))
     return cutoff_dict

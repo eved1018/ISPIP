@@ -17,7 +17,10 @@ def interface() -> FilePaths :
     parser.add_argument('-protein_visualization', default=False, help='')
     parser.add_argument('-cutoffs', default='cutoffs.csv', help='')
     parser.add_argument('-autocutoff', default='15', help='')
-    parser.add_argument('-model_name', default='model', help='')
+    parser.add_argument('-model_name', default='model', help='') 
+    #TODO add this later 
+    parser.add_argument('-plot','--plotselection' ,choices=['plot', 'csv', 'both'] , default='both',help= "output pr and roc curve as csv, png or both")
+
     args = parser.parse_args()
     args_container:FilePaths = parse(args)
     return args_container

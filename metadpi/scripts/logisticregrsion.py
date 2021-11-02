@@ -39,7 +39,6 @@ def logreg_predict_from_trained_model(df,feature_cols,annotated_col,input_folder
     exponent = np.exp(val)
     pval = (1/(1+exponent)) #type: ignore
     df['logisticregresion'] = list(pval)
-    df['logisticregresion'] = pval
     return df
 
 def logreg_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name):

@@ -6,7 +6,7 @@ from .scripts.postprocess import postprocess
 from .scripts.logisticregrsion import logistic_regresion_test_train, logreg_predict_from_trained_model, logreg_generate_model
 from .scripts.randomforest import randomforest_test_train, randomforest_predict_from_trained_model,randomforest_generate_model
 from .scripts.graphing import roc_viz, pr_viz
-from .scripts.linearregersion import linear_regresion_test_train, linreg_predict_from_trained_model,linreg_generate_model
+from .scripts.linearregression import linear_regresion_test_train, linreg_predict_from_trained_model,linreg_generate_model
 
 
 """
@@ -21,7 +21,8 @@ def run() -> None:
     args_container = interface()
     df = pd.read_csv(args_container.input_frames_file)
     df, feature_cols, annotated_col, proteins  = data_preprocesss(df) 
-        
+    
+
     #mode selection 
     if args_container.mode == 'predict':
         df = linreg_predict_from_trained_model(df, feature_cols, args_container.input_folder_path, args_container.model_name)
@@ -42,6 +43,7 @@ def run() -> None:
         df, test_frame = linear_regresion_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.output_path_dir, args_container.model_name)
         df, test_frame = logistic_regresion_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.output_path_dir, args_container.model_name)
         df, test_frame = randomforest_test_train(test_frame,train_frame,df,feature_cols,annotated_col, args_container.rf_params,args_container.output_path_dir,args_container.model_name)
+
         results_df, roc_curve_data,pr_curve_data = postprocess(test_frame,feature_cols,args_container,annotated_col,args_container.autocutoff)
         roc_viz(roc_curve_data,args_container.output_path_dir, args_container.model_name)
         pr_viz(pr_curve_data,args_container.output_path_dir,args_container.model_name, test_frame, annotated_col)        
@@ -90,3 +92,4 @@ def input_parser(file, df):
     lines = [i if i[-2] == '.' else f"{i[:-1]}.{i[-1:]}"  if i[-2].isdigit() or i[-2].isalpha() else  i.replace(i[-2],'.')  for i in lines]
     frame : pd.DataFrame = df[df['protein'].isin(lines)]
     return frame
+
