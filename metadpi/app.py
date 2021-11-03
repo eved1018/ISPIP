@@ -7,6 +7,7 @@ from .scripts.logisticregrsion import logistic_regresion_test_train, logreg_pred
 from .scripts.randomforest import randomforest_test_train, randomforest_predict_from_trained_model,randomforest_generate_model
 from .scripts.graphing import roc_viz, pr_viz, treeviz, pymol_viz
 from .scripts.linearregression import linear_regresion_test_train, linreg_predict_from_trained_model,linreg_generate_model
+from .scripts.crossvalidation import cross_validation
 
 
 """
@@ -50,9 +51,9 @@ def run() -> None:
         results_df, roc_curve_data,pr_curve_data , bin_frame= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
         roc_viz(roc_curve_data,args_container.output_path_dir, args_container.model_name)
         pr_viz(pr_curve_data,args_container.output_path_dir,args_container.model_name, test_frame, annotated_col)        
-        treeviz(tree,df,feature_cols,annotated_col, args_container.model_name, args_container.output_path_dir)
-        protein_to_viz = bin_frame["protein"].unique()[0] #TODO set this as a config (do all or list)
-        pymol_viz(bin_frame, protein_to_viz, predicted_col,annotated_col, args_container.pymolscriptpath, args_container.output_path_dir)
+        # treeviz(tree,df,feature_cols,annotated_col, args_container.model_name, args_container.output_path_dir)
+        # protein_to_viz = bin_frame["protein"].unique()[0] #TODO set this as a config (do all or list)
+        # pymol_viz(bin_frame, protein_to_viz, predicted_col,annotated_col, args_container.pymolscriptpath, args_container.output_path_dir)
         print(results_df)
     
     
@@ -61,8 +62,16 @@ def run() -> None:
         logreg_generate_model(df,feature_cols,annotated_col,args_container.output_path_dir,args_container.model_name)
         tree = randomforest_generate_model(df,feature_cols,annotated_col, args_container.rf_params,args_container.output_path_dir, args_container.model_name)
         treeviz(tree,df,feature_cols,annotated_col, args_container.model_name, args_container.output_path_dir)
+   
+    elif  args_container.mode == 'cv':
+        test_frame, train_frame = data_split_auto(df, proteins)
+        cross_validation(train_frame ,feature_cols, annotated_col)
+
+   
     else:
         print("mode is set incorrectly")
+
+    
 
     return
 

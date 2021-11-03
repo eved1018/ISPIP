@@ -1,6 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd 
 import joblib
+from sklearn.model_selection import cross_val_score
 
 
 def randomforest_test_train(test_frame: pd.DataFrame,train_frame: pd.DataFrame,df: pd.DataFrame,feature_cols,annotated_col, rf_params,output_path_dir, model_name) -> tuple:
@@ -32,8 +33,12 @@ def randomforest_generate_model(df: pd.DataFrame,feature_cols,annotated_col, rf_
     print(df)
     X = df[feature_cols]
     y = df[annotated_col]
-    model = RandomForestClassifier(n_estimators = trees, random_state = 0, bootstrap=False, max_depth=depth, ccp_alpha= ccp)
-    model.fit(X, y)
+    model = RandomForestClassifier(n_estimators = trees, random_state = 0, bootstrap=False, max_depth=depth, ccp_alpha= ccp).fit(X, y)
     tree = model.estimators_[0]
     joblib.dump(model, f"{output_path_dir}/RF_{model_name}.joblib", compress=3)  # compression is ON!
     return tree
+
+def randomforest_kfold(test_frame, feature_cols, annoatted_cols ,rf_params, kframes):
+    trees, depth, ccp = rf_params
+    model = RandomForestClassifier(n_estimators = trees, random_state = 0, bootstrap=False, max_depth=depth, ccp_alpha= ccp)
+    scores = cross_val_score(model, test_frame[feature_cols], test_frame[annoatted_cols], cv=kframes) # 
