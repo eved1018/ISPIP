@@ -1,16 +1,16 @@
 import argparse
 import pathlib
 import os 
-from .containers.filepaths import FilePaths
+from .containers.argscontainer import ArgsContainer
 
 
-def interface() -> FilePaths :
+def userinterface() -> ArgsContainer :
     parser = argparse.ArgumentParser()
     parser.add_argument('-i','--inputfile' ,default='input.csv', help= 'file name')
     parser.add_argument('-mode','--modeselection' ,choices=['predict', 'test', 'generate','cv'] , default='predict',help= "predict: Use pretrained model in input folder to predict on set.\nTest_Train: genrate a new rf model from a test set and train on a training set.\nGenerate:  genrate a new rf model from a test set without predicting on any data.\ncrossvalidateion")
     parser.add_argument('-trainset', default='train_set.txt', help='')
     parser.add_argument('-testset', default='test_set.txt', help='')
-    parser.add_argument('-randomforest_parameter_trees', default=10, help='')
+    parser.add_argument('-randomforest_parameter_trees', default=100, help='')
     parser.add_argument('-random_forest_parameter_depth', default=None, help='')
     parser.add_argument('-random_forest_parameter_ccp', default=0.0, help='')
     parser.add_argument('-tree_visualization', default=False, help='')
@@ -22,25 +22,27 @@ def interface() -> FilePaths :
     parser.add_argument('-plot','--plotselection' ,choices=['plot', 'csv', 'both'] , default='both',help= "output pr and roc curve as csv, png or both")
 
     args = parser.parse_args()
-    args_container:FilePaths = parse(args)
+    args_container:ArgsContainer = parse(args)
     return args_container
 
-def parse(args:argparse.Namespace) -> FilePaths:
+def parse(args:argparse.Namespace) -> ArgsContainer:
     folder_path:pathlib.PosixPath = pathlib.Path(__file__).parent.parent
-    args_container = FilePaths(args, folder_path)
+    args_container = ArgsContainer(args, folder_path)
+
     if args_container.mode == 'test':        
         if (not os.path.isfile(args_container.test_proteins_file)) or (not os.path.isfile(args_container.train_proteins_file)):
             print("train and or test sets are not set, random 80/20 ditribution will be used")
             args_container.use_test_train_files = False
 
-    if not os.path.isfile(args_container.cutoff_frame):
+    elif not os.path.isfile(args_container.cutoff_frame):
         print(f"cutoffs not found, a global cutoff of {args.autocutoff} residues will be used")
         args_container.use_cutoff_from_file = False
 
-    if not os.path.isfile(args_container.input_frames_file):
+    elif not os.path.isfile(args_container.input_frames_file):
         print("please include an input csv file")
         return
-
+    else:
+        print("error")
     return args_container
     
 

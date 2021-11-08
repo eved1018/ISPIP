@@ -3,7 +3,7 @@ import argparse
 import os
 import pathlib
 
-class FilePaths:
+class ArgsContainer:
     def __init__(self,args: argparse.Namespace, folder_path:pathlib.PosixPath) -> None:
         self.args = args
         self.mode = args.modeselection
@@ -13,6 +13,9 @@ class FilePaths:
         self.plotmode = args.plotselection
         self.use_test_train_files = True
         self.use_cutoff_from_file = True
+        self.save_tree = args.tree_visualization
+        self.usepymol = args.protein_visualization
+        self.cvs_path =  os.path.join(folder_path, 'input', 'cv')
         self.output_path_dir= os.path.join(folder_path, 'output')
         self.input_folder_path = os.path.join(folder_path, 'input')
         self.input_frames_file = os.path.join(folder_path, 'input', args.inputfile)
@@ -22,6 +25,8 @@ class FilePaths:
         self.rf_params = [args.randomforest_parameter_trees, args.random_forest_parameter_depth, args.random_forest_parameter_ccp]
         self.pymolscriptpath = os.path.join(folder_path, 'scripts', 'visualization', 'pymolviz.py')
         return
+
+
  
 
 

@@ -5,16 +5,18 @@ import pandas as pd
 import pathlib
 
 def roc_viz(roc_curve_data, output_path_dir, model_name):
-    roc_frame = pd.DataFrame()
+    roc_frames = []
     plt.figure()
     lw = 2
     for data in roc_curve_data:
         pred,fpr,tpr,roc_auc,thresholds = data
-        roc_frame[f"{pred}_fpr"] = fpr 
-        roc_frame[f"{pred}_tpr"] = tpr 
+        new_roc_frame= pd.DataFrame()
+        new_roc_frame[f"{pred}_fpr"] = fpr 
+        new_roc_frame[f"{pred}_tpr"] = tpr 
+        roc_frames.append(new_roc_frame)
         plt.plot(fpr,tpr,lw=lw, label=f"{pred} (area = {roc_auc})")
 
-
+    roc_frame  = pd.concat(roc_frames, axis=1)
     roc_frame.to_csv(f"{output_path_dir}/roc_{model_name}.csv")
     plt.plot([0, 1], [0, 1], color="gray", lw=lw, linestyle="--", alpha = 0.5)
     plt.xlim([0.0, 1.0])
@@ -29,14 +31,18 @@ def roc_viz(roc_curve_data, output_path_dir, model_name):
     return
     
 def pr_viz(pr_curve_data, output_path_dir, model_name, df, annotated_col):
-    pr_frame = pd.DataFrame()
+    pr_frames = [pd.DataFrame()]
     plt.figure()
     lw = 2
     for data in pr_curve_data:
         pred,recall,precision,pr_auc,thresholds = data
+        pr_frame = pd.DataFrame()
         pr_frame[f"{pred}_fpr"] = recall 
         pr_frame[f"{pred}_tpr"] = precision 
+        pr_frames.append(pr_frame)
         plt.plot(recall,precision,lw=lw, label=f"{pred} (area = {pr_auc})")
+
+    pr_frame = pd.concat(pr_frames, axis=1)
     pr_frame.to_csv(f"{output_path_dir}/roc_{model_name}.csv")
     no_skill = len(df[df[annotated_col]==1]) / len(df)
     plt.plot([0, 1], [no_skill, no_skill], linestyle='--', color='gray')
@@ -45,7 +51,7 @@ def pr_viz(pr_curve_data, output_path_dir, model_name, df, annotated_col):
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
     plt.title("Precision-Recall curve")
-    plt.legend(loc="lower left")
+    plt.legend(loc="upper right")
     plt.tight_layout()
     plt.savefig(f"{output_path_dir}/PR_{model_name}.png")
     # plt.show()
@@ -94,13 +100,14 @@ def pymol_viz(bin_frame, protein, predicted_col,annotated_col,pymolscriptpath,ou
 
     pathlib.Path(new_folder).mkdir(parents=True, exist_ok=True)
     for pred in predicted_col: 
-        pred_residues = bin_frame[bin_frame[pred] == 1].index.tolist()
+        pred_residues = bin_frame[bin_frame[f'{pred}_bin'] == 1].index.tolist()
         pred_residues = [i.split("_")[0] for i in pred_residues]
         pred_residues = "+".join(pred_residues)
 
         annotated_resiues =  bin_frame[bin_frame[annotated_col] == 1].index.tolist()
         annotated_resiues = [i.split("_")[0] for i in annotated_resiues]
         annotated_resiues = "+".join(annotated_resiues)
-        subprocess.run(f"pymol -c -q {pymolscriptpath} -- {output_path_dir} {protein} {pred_residues} {annotated_resiues} {pred}", shell = True)
+        
+        subprocess.run(f"pymol -Q -c -q  {pymolscriptpath} -- {output_path_dir} {protein} {pred_residues} {annotated_resiues} {pred}", shell = True)
         
     return
