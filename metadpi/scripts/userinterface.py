@@ -5,6 +5,11 @@ from .containers.argscontainer import ArgsContainer
 
 
 def userinterface() -> ArgsContainer :
+    """
+    See ReadMe for details
+    """
+    
+    
     parser = argparse.ArgumentParser()
     parser.add_argument('-i','--inputfile' ,default='input.csv', help= 'file name')
     parser.add_argument('-mode','--modeselection' ,choices=['predict', 'test', 'generate','cv'] , default='predict',help= "predict: Use pretrained model in input folder to predict on set.\nTest_Train: genrate a new rf model from a test set and train on a training set.\nGenerate:  genrate a new rf model from a test set without predicting on any data.\ncrossvalidateion")
@@ -18,12 +23,15 @@ def userinterface() -> ArgsContainer :
     parser.add_argument('-cutoffs', default='cutoffs.csv', help='')
     parser.add_argument('-autocutoff', default='15', help='')
     parser.add_argument('-model_name', default='model', help='') 
-    #TODO add this later 
+    parser.add_argument('-o', '--outputfolder', default='output', help='') 
+    parser.add_argument('-if', '--inputfolder', default='input', help='') 
+    #TODO add this argscontainer 
     parser.add_argument('-plot','--plotselection' ,choices=['plot', 'csv', 'both'] , default='both',help= "output pr and roc curve as csv, png or both")
 
     args = parser.parse_args()
     args_container:ArgsContainer = parse(args)
     return args_container
+
 
 def parse(args:argparse.Namespace) -> ArgsContainer:
     folder_path:pathlib.PosixPath = pathlib.Path(__file__).parent.parent
@@ -41,8 +49,7 @@ def parse(args:argparse.Namespace) -> ArgsContainer:
     elif not os.path.isfile(args_container.input_frames_file):
         print("please include an input csv file")
         return
-    else:
-        print("error")
+
     return args_container
     
 

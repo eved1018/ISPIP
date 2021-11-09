@@ -15,13 +15,15 @@ class ArgsContainer:
         self.use_cutoff_from_file = True
         self.save_tree = args.tree_visualization
         self.usepymol = args.protein_visualization
-        self.cvs_path =  os.path.join(folder_path, 'input', 'cv')
-        self.output_path_dir= os.path.join(folder_path, 'output')
-        self.input_folder_path = os.path.join(folder_path, 'input')
-        self.input_frames_file = os.path.join(folder_path, 'input', args.inputfile)
-        self.test_proteins_file=  os.path.join(folder_path, 'input', args.testset)
-        self.train_proteins_file =  os.path.join(folder_path, 'input', args.trainset)
-        self.cutoff_frame = os.path.join(folder_path, 'input', args.cutoffs)
+        self.outputfolder = args.outputfolder
+        self.inputfolder = args.inputfolder
+        self.cvs_path =  os.path.join(folder_path, self.inputfolder, 'cv')
+        self.output_path_dir= os.path.join(folder_path, self.outputfolder)
+        self.input_folder_path = os.path.join(folder_path, self.inputfolder)
+        self.input_frames_file = os.path.join(folder_path, self.inputfolder, args.inputfile)
+        self.test_proteins_file=  os.path.join(folder_path, self.inputfolder, args.testset)
+        self.train_proteins_file =  os.path.join(folder_path, self.inputfolder, args.trainset)
+        self.cutoff_frame = os.path.join(folder_path, self.inputfolder, args.cutoffs)
         self.rf_params = [args.randomforest_parameter_trees, args.random_forest_parameter_depth, args.random_forest_parameter_ccp]
         self.pymolscriptpath = os.path.join(folder_path, 'scripts', 'visualization', 'pymolviz.py')
         return
