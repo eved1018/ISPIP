@@ -65,8 +65,8 @@ def run() -> None:
     
     elif  args_container.mode == 'cv':
         test_frame, cvs,train_proteins = cross_validation_set_generater(args_container.cvs_path,df)
-        randomforest_model, linear_model,logit_model, = hyperparamtertuning_and_crossvalidation(df, train_proteins,feature_cols, annotated_col)
-        models = [randomforest_model, linear_model, logit_model]
+        randomforest_model, linear_model,logit_model,NN_model = hyperparamtertuning_and_crossvalidation(df, train_proteins,feature_cols, annotated_col)
+        models = [randomforest_model, linear_model, logit_model,NN_model]
         print(f"random forest params: {randomforest_model.get_params()}\nLinear regr coefs: {linear_model.coef_}\nLogit regr coefs:{logit_model.coef_}")
         test_frame = predict(test_frame,feature_cols,args_container.input_folder_path,args_container.model_name,  models)
         results_df, roc_curve_data,pr_curve_data , bin_frame, fscore_mcc_by_protein= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
