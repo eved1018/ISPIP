@@ -10,13 +10,13 @@ from .scripts.crossvalidation import hyperparamtertuning_and_crossvalidation
 from .scripts.generate import generate
 from .scripts.predict import predict
 from .scripts.graphing import roc_viz, pr_viz, treeviz, pymol_viz
+from .scripts.tensorflow import tfrf
 
 
 """
 TODO:
 1) change return type tuple to be Tuple[type1,type2...]
 2) up the oop
-3) make the parametrs less terrible!
 """
 
 def run() -> None:
@@ -50,15 +50,15 @@ def run() -> None:
             test_frame, train_frame = data_split_auto(df, proteins)
         
         print(f'lenght of test set: {len(test_frame)}', f"length of training set: {len(train_frame)}")
-        
-        models, tree = generate(train_frame, feature_cols, annotated_col, args_container.output_path_dir, args_container.model_name,args_container.rf_params ) #train 
-        test_frame  = predict(test_frame,feature_cols,args_container.input_folder_path,args_container.model_name, models) #test
-        results_df, roc_curve_data,pr_curve_data , bin_frame, fscore_mcc_by_protein= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
-        df_saver(results_df, "results", args_container.output_path_dir)
-        df_saver(bin_frame, "bin_frame", args_container.output_path_dir)
-        df_saver(fscore_mcc_by_protein, "fscore_mcc_by_protein", args_container.output_path_dir)
-        visualization(roc_curve_data,pr_curve_data ,tree,df,feature_cols,annotated_col,predicted_col,test_frame ,bin_frame,args_container)
-        print(results_df)
+        tfrf(test_frame, train_frame, annotated_col)
+        # models, tree = generate(train_frame, feature_cols, annotated_col, args_container.output_path_dir, args_container.model_name,args_container.rf_params ) #train 
+        # test_frame  = predict(test_frame,feature_cols,args_container.input_folder_path,args_container.model_name, models) #test
+        # results_df, roc_curve_data,pr_curve_data , bin_frame, fscore_mcc_by_protein= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
+        # df_saver(results_df, "results", args_container.output_path_dir)
+        # df_saver(bin_frame, "bin_frame", args_container.output_path_dir)
+        # df_saver(fscore_mcc_by_protein, "fscore_mcc_by_protein", args_container.output_path_dir)
+        # visualization(roc_curve_data,pr_curve_data ,tree,df,feature_cols,annotated_col,predicted_col,test_frame ,bin_frame,args_container)
+        # print(results_df)
 
 
     #Mode 4: Cross-validation: 

@@ -8,8 +8,6 @@ def userinterface() -> ArgsContainer :
     """
     See ReadMe for details
     """
-    
-    
     parser = argparse.ArgumentParser()
     parser.add_argument('-i','--inputfile' ,default='input.csv', help= 'file name')
     parser.add_argument('-mode','--modeselection' ,choices=['predict', 'test', 'generate','cv'] , default='predict',help= "predict: Use pretrained model in input folder to predict on set.\nTest_Train: genrate a new rf model from a test set and train on a training set.\nGenerate:  genrate a new rf model from a test set without predicting on any data.\ncrossvalidateion")
