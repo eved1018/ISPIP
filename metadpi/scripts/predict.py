@@ -4,16 +4,18 @@ import joblib
 
 def predict(df,feature_cols,input_folder_path,model_name, models=None) -> pd.DataFrame:
     if  models is not None:
-        rf_model ,linreg_model, logreg_model,NN_model = models
+        rf_model ,linreg_model, logreg_model,NN_model, xgboost_model = models
     else:
         rf_model =  joblib.load(f"{input_folder_path}/RF_{model_name}.joblib")
         logreg_model = joblib.load(f"{input_folder_path}/Logit_{model_name}.joblib")
         linreg_model = joblib.load(f"{input_folder_path}/LinRegr_{model_name}.joblib")
         NN_model = joblib.load(f"{input_folder_path}/NN_{model_name}.joblib")
+        xgboost_model  = joblib.load(f"{input_folder_path}/XGB_{model_name}.joblib")
     df:pd.DataFrame = randomforest_predict_from_trained_model(df,feature_cols,rf_model)
     df:pd.DataFrame = logreg_predict_from_trained_model(df,feature_cols,logreg_model)
     df:pd.DataFrame = linreg_predict_from_trained_model(df, feature_cols,linreg_model)
     df:pd.DataFrame = NueralNet_predict_from_trained_model(df, feature_cols,NN_model)
+    df:pd.DataFrame = xgboost_predict_from_trained_model(df, feature_cols,xgboost_model)
     return df
 
 
@@ -35,4 +37,8 @@ def linreg_predict_from_trained_model(df, feature_cols,linreg_model) -> pd.DataF
 
 def NueralNet_predict_from_trained_model(df, feature_cols,NN_model)-> pd.DataFrame:
     df["nueralnet"] = NN_model.predict(df[feature_cols])  
+    return df
+
+def xgboost_predict_from_trained_model(df, feature_cols,xgboost_model)-> pd.DataFrame:
+    df["xgboost"] = xgboost_model.predict(df[feature_cols])  
     return df

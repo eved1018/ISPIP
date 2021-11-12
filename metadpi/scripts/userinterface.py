@@ -23,6 +23,7 @@ def userinterface() -> ArgsContainer :
     parser.add_argument('-model_name', default='model', help='') 
     parser.add_argument('-o', '--outputfolder', default='output', help='') 
     parser.add_argument('-if', '--inputfolder', default='input', help='') 
+    parser.add_argument('-cv', '--cvfoldername', default='cv', help='') 
     #TODO add this argscontainer 
     parser.add_argument('-plot','--plotselection' ,choices=['plot', 'csv', 'both'] , default='both',help= "output pr and roc curve as csv, png or both")
 

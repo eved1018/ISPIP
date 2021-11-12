@@ -3,15 +3,17 @@ import numpy as np
 import pandas as pd 
 from sklearn import linear_model
 import joblib
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingRegressor
 from sklearn.neural_network import MLPRegressor
+
 
 def generate(df, feature_cols, annotated_col, output_path_dir, model_name,rf_params ):
     rf_model, tree = randomforest_generate_model(df,feature_cols,annotated_col, rf_params,output_path_dir, model_name)
     linreg_model = linreg_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name)
     logreg_model = logreg_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name)
     NN_model = NueralNet_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name)
-    models = [rf_model ,linreg_model, logreg_model,NN_model]
+    xgboost_model  = xgboost_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name)
+    models = [rf_model ,linreg_model, logreg_model,NN_model,xgboost_model]
     return  models, tree
 
 def randomforest_generate_model(df: pd.DataFrame,feature_cols,annotated_col, rf_params,output_path_dir, model_name):
@@ -36,4 +38,9 @@ def logreg_generate_model(df,feature_cols,annotated_col,output_path_dir,model_na
 def NueralNet_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name):
     regr = MLPRegressor().fit(df[feature_cols], df[annotated_col])
     joblib.dump(regr, f"{output_path_dir}/NN_{model_name}.joblib", compress=3)  # compression is ON!
+    return regr
+
+def xgboost_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name):
+    regr = HistGradientBoostingRegressor().fit(df[feature_cols], df[annotated_col])
+    joblib.dump(regr, f"{output_path_dir}/XGB_{model_name}.joblib", compress=3)  # compression is ON!
     return regr

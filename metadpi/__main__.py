@@ -1,4 +1,4 @@
 from metadpi import metadpi
 
 if __name__=='__main__':
-    metadpi.run()
+    metadpi.main()

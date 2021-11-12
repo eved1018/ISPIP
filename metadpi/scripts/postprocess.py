@@ -1,10 +1,23 @@
 from typing import Tuple
-from matplotlib.pyplot import annotate
+from numpy.lib.function_base import append
+from pandas.io.stata import StataStrLWriter
 from sklearn.metrics import auc, matthews_corrcoef, f1_score, precision_recall_curve,roc_curve
 import pandas as pd
-import numpy as np
 from concurrent.futures import ProcessPoolExecutor
+import numpy as np 
+from .compare_auc_delong_xu import delong_roc_test
+import itertools
 
+
+""""
+TODO:
+change pval to not log(pval);
+generate table:
+    for each model:
+        for each fold:
+            col1=> parameters
+            col2=> roc-auc
+"""
 
 def postprocess(test_frame,predicted_col,args_container,annotated_col,autocutoff) -> Tuple[pd.DataFrame, list, list]:   
     proteins = test_frame.protein.unique()
@@ -23,10 +36,21 @@ def postprocess(test_frame,predicted_col,args_container,annotated_col,autocutoff
             pr_curve_data.append(return_val[2])
             test_frame[f'{return_val[3][0]}_bin'] = return_val[3][1]
             fscore_mcc_by_protein[[f'{return_val[3][0]}_fscore', f'{return_val[3][0]}_mcc']] = return_val[4].values.tolist()
-
-
+    
     result_df = pd.DataFrame(results, columns = ['predictor','f-score','mcc','roc_auc','pr_auc'])
-    return  result_df, roc_curve_data, pr_curve_data , test_frame, fscore_mcc_by_protein
+    stats_df = pd.DataFrame(index=predicted_col, columns=predicted_col)
+    test_frame = test_frame.sort_values(by=annotated_col, ascending = False)
+    for index in  predicted_col:
+        for column in predicted_col:
+            if index == column:
+                stats_df.loc[index, column] = index
+            else:
+                pval,test, auc_diff = statistics(test_frame, annotated_col, index, column) 
+                stats_df.loc[index,column] = pval
+                stats_df.loc[column,index] = auc_diff
+                
+
+    return  result_df, roc_curve_data, pr_curve_data , test_frame, fscore_mcc_by_protein,stats_df
 
 def cutoff_file_parser(cutoff_frame) -> dict:
     cutoff_frame_df :pd.DataFrame  = pd.read_csv(cutoff_frame)  # type: ignore
@@ -46,7 +70,6 @@ def analyses(params) -> list:
     fpr, tpr ,roc_thresholds, roc_auc, precision, recall, pr_thresholds, pr_auc = roc_pr(test_frame, annotated_col, pred)
 
     fscore, mcc  = fscore_mcc(test_frame, annotated_col, pred)
-    
     return_values = [[pred, fscore, mcc, roc_auc, pr_auc],[pred,fpr,tpr,roc_auc,roc_thresholds],[pred,recall,precision, pr_auc, pr_thresholds], [pred, test_frame[f'{pred}_bin']],fscore_mcc_per_protein]
     return return_values
 
@@ -56,6 +79,18 @@ def fscore_mcc(x, annotated_col, pred):
     mcc = matthews_corrcoef(x[annotated_col],x[f'{pred}_bin'])
     fscore = f1_score(x[annotated_col],x[f'{pred}_bin'])
     return fscore , mcc
+
+def statistics(x, annotated_col, pred1, pred2):
+    y_true = x[annotated_col]
+    y1 = x[pred1]
+    y2 = x[pred2]
+    pval,aucs  = delong_roc_test(y_true, y1, y2)
+    aucs = aucs.tolist()
+    Dauc = round(aucs[1] - aucs[0], 3)
+    pval = round(pval.tolist()[0][0],3)
+    test = "signifigant" if pval < 0.05 else "not significant"
+    return pval, test,Dauc
+    
 
 def roc_pr(x, annotated_col, pred):
     fpr, tpr ,roc_thresholds= roc_curve(x[annotated_col], x[pred])

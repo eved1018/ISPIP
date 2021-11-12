@@ -1,4 +1,3 @@
-from argparse import Namespace
 import argparse
 import os
 import pathlib
@@ -17,7 +16,7 @@ class ArgsContainer:
         self.usepymol = args.protein_visualization
         self.outputfolder = args.outputfolder
         self.inputfolder = args.inputfolder
-        self.cvs_path =  os.path.join(folder_path, self.inputfolder, 'cv')
+        self.cvs_path =  os.path.join(folder_path, self.inputfolder, args.cvfoldername)
         self.output_path_dir= os.path.join(folder_path, self.outputfolder)
         self.input_folder_path = os.path.join(folder_path, self.inputfolder)
         self.input_frames_file = os.path.join(folder_path, self.inputfolder, args.inputfile)
