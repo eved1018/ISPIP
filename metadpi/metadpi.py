@@ -60,7 +60,7 @@ def main() -> None:
     
     elif  args_container.mode == 'cv':
         test_frame, cvs,train_proteins = cross_validation_set_generater(args_container.cvs_path,df)
-        models = hyperparamtertuning_and_crossvalidation(df, train_proteins,feature_cols, annotated_col)
+        models = hyperparamtertuning_and_crossvalidation(df, train_proteins,feature_cols, annotated_col,args_container)
         model_param_writer(models, args_container.output_path_dir)    
         test_frame = predict(test_frame,feature_cols,args_container.input_folder_path,args_container.model_name,  models)
         results_df, roc_curve_data,pr_curve_data , bin_frame, fscore_mcc_by_protein, stats_df= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
