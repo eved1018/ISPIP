@@ -45,7 +45,7 @@ Special thanks to:
 	Dr. Raji Viswanathan for leading this project.
 	Dr. Andras Fiser and Dr. Eduardo J Fajardo for insight and guidance. 
 	Terence Parr and Prince Grover for use of dtreeviz.
-	The current Viswanathan lab for listening to me lectrure about proper python syntax for hours.
+	The current Viswanathan lab for listening to me rant about proper python syntax for hours.
 	The abishar, without you none of this. 
 	
 

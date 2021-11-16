@@ -1,3 +1,4 @@
+from re import L
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.ensemble import RandomForestClassifier,HistGradientBoostingRegressor
 from sklearn.neural_network import MLPRegressor
@@ -47,11 +48,15 @@ def hyperparamtertuning_and_crossvalidation(df:pd.DataFrame, cvs,feature_cols, a
         NN_model = GridSearchCV(estimator=MLPRegressor(), param_grid=param_grid, cv=CViterator, scoring="roc_auc").fit(df[feature_cols],df[annotated_col])
         # hyperparam(NN_model,cvs,args_container.output_path_dir, "NN" )
         NN_model = NN_model.best_estimator_
+    else:
+        NN_model = None
     if args_container.xg:
         xparam_grid = {"loss":["squared_error", "absolute_error", "poisson"]} 
         xgb_model = GridSearchCV(estimator=HistGradientBoostingRegressor(), param_grid=xparam_grid, cv=CViterator, scoring="roc_auc").fit(df[feature_cols],df[annotated_col])
         # hyperparam(xgb_model,cvs,args_container.output_path_dir, "xgb" )
         xgb_model.best_estimator_
+    else:
+        xgb_model = None
     return [rf_model,linear_model,logit_model,NN_model,xgb_model]
      
 

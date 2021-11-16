@@ -88,7 +88,7 @@ def model_param_writer(models, output_path_dir):
     rf_model, linear_model, logit_model,NN_model ,xgb_model = models 
     out = os.path.join(output_path_dir, f'best_parameters.txt')        
     with open(out,'w+') as file:
-        file.write(f"random forest params: {rf_model.get_params()}\nLinear regr coefs: {linear_model.coef_}\nLogit regr coefs:{logit_model.coef_}\nNN params: {NN_model.get_params()}")
+        file.write(f"random forest params: {rf_model.get_params()}\nLinear regr coefs: {linear_model.coef_}\nLogit regr coefs:{logit_model.coef_}")
     return
     
 def visualization(roc_curve_data,pr_curve_data ,tree,df,feature_cols,annotated_col,predicted_col,test_frame, bin_frame,args_container):
