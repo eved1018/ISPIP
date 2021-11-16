@@ -16,8 +16,10 @@ def userinterface() -> ArgsContainer :
     parser.add_argument('-randomforest_parameter_trees', default=100, help='')
     parser.add_argument('-random_forest_parameter_depth', default=None, help='')
     parser.add_argument('-random_forest_parameter_ccp', default=0.0, help='')
-    parser.add_argument('-tree_visualization', default=False, help='')
-    parser.add_argument('-pymol','--protein_visualization', default=False, help='')
+    parser.add_argument('-tv','--tree_visualization',action='store_true', help='add -tv to use it')
+    parser.add_argument('-xg','--xgboost',action='store_true', help='add -tv to use it')
+    parser.add_argument('-nn','--nuarelnet',action='store_true', help='add -tv to use it')
+    parser.add_argument('-pymol','--protein_visualization', action='store_true', help='add -pymol to use it ')
     parser.add_argument('-cutoffs', default='cutoffs.csv', help='')
     parser.add_argument('-autocutoff', default='15', help='')
     parser.add_argument('-model_name', default='model', help='') 
@@ -48,7 +50,12 @@ def parse(args:argparse.Namespace) -> ArgsContainer:
     elif not os.path.isfile(args_container.input_frames_file):
         print("please include an input csv file")
         return
-
+        
+    if args_container.nn:
+        args_container.models_to_use.append("nueralnet")
+    if args_container.xg:
+        args_container.models_to_use.append("xgboost")
+    
     return args_container
     
 

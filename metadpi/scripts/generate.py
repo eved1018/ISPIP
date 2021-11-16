@@ -7,12 +7,12 @@ from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingRegress
 from sklearn.neural_network import MLPRegressor
 
 
-def generate(df, feature_cols, annotated_col, output_path_dir, model_name,rf_params ):
+def generate(df, feature_cols, annotated_col, output_path_dir, model_name,rf_params, nn, xg ):
     rf_model, tree = randomforest_generate_model(df,feature_cols,annotated_col, rf_params,output_path_dir, model_name)
     linreg_model = linreg_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name)
     logreg_model = logreg_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name)
-    NN_model = NueralNet_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name)
-    xgboost_model  = xgboost_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name)
+    NN_model = NueralNet_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name) if nn else None
+    xgboost_model  = xgboost_generate_model(df,feature_cols,annotated_col,output_path_dir,model_name) if xg else None
     models = [rf_model ,linreg_model, logreg_model,NN_model,xgboost_model]
     return  models, tree
 

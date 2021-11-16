@@ -94,20 +94,24 @@ def pr_to_csv(pr_curve_data, output_path_dir, model_name):
     pr_frame.to_csv(f"{output_path_dir}/roc_{model_name}.csv")
     return
 
-def pymol_viz(bin_frame, protein, predicted_col,annotated_col,pymolscriptpath,output_path_dir):
-    bin_frame = bin_frame[bin_frame['protein'] == protein]
-    new_folder = os.path.join(output_path_dir, protein)
+def pymol_viz(bin_frame, proteins, predicted_col,annotated_col,pymolscriptpath,output_path_dir):
+    new_folder = os.path.join(output_path_dir, "proteins")
 
     pathlib.Path(new_folder).mkdir(parents=True, exist_ok=True)
-    for pred in predicted_col: 
-        pred_residues = bin_frame[bin_frame[f'{pred}_bin'] == 1].index.tolist()
-        pred_residues = [i.split("_")[0] for i in pred_residues]
-        pred_residues = "+".join(pred_residues)
-
-        annotated_resiues =  bin_frame[bin_frame[annotated_col] == 1].index.tolist()
-        annotated_resiues = [i.split("_")[0] for i in annotated_resiues]
-        annotated_resiues = "+".join(annotated_resiues)
+    for protein in proteins:
+        bin_frame = bin_frame[bin_frame['protein'] == protein]
+        new_folder = os.path.join(output_path_dir, "proteins", protein)
+        pathlib.Path(new_folder).mkdir(parents=True, exist_ok=True)
         
-        subprocess.run(f"pymol -Q -c -q  {pymolscriptpath} -- {output_path_dir} {protein} {pred_residues} {annotated_resiues} {pred}", shell = True)
+        for pred in predicted_col: 
+            pred_residues = bin_frame[bin_frame[f'{pred}_bin'] == 1].index.tolist()
+            pred_residues = [i.split("_")[0] for i in pred_residues]
+            pred_residues = "+".join(pred_residues)
+
+            annotated_resiues =  bin_frame[bin_frame[annotated_col] == 1].index.tolist()
+            annotated_resiues = [i.split("_")[0] for i in annotated_resiues]
+            annotated_resiues = "+".join(annotated_resiues)
+            
+            subprocess.run(f"pymol -Q -c -q  {pymolscriptpath} -- {output_path_dir} {protein} {pred_residues} {annotated_resiues} {pred}", shell = True)
         
     return

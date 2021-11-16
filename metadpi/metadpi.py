@@ -19,19 +19,21 @@ def main() -> None:
     args_container = userinterface()         # get Command line arguments and defualts 
     df = pd.read_csv(args_container.input_frames_file) # index_col = 0, wrap this in a try statement    #read input file containing residues, individual predictors and annotated columns
     df, feature_cols, annotated_col, proteins  = data_preprocesss(df)   #preprocess data -> remove any null or missing data from the dataset and check that annoted is number  nulls 
-    predicted_col = feature_cols + ['logisticregresion', "linearregression",'randomforest','nueralnet','xgboost']     # make this automatic? if we do more models later change this!!! 
-
+    predicted_col = feature_cols + ['logisticregresion', "linearregression",'randomforest'] + args_container.models_to_use    # make this automatic? if we do more models later change this!!! 
+    nn = args_container.nn
+    xg = args_container.xg
     #Mode 1: predict 
     
     if args_container.mode == 'predict':
-        df = predict(df,feature_cols,args_container.input_folder_path,args_container.model_name)
+        df = predict(df,feature_cols,args_container.input_folder_path,args_container.model_name,nn,xg)
         results_df, roc_curve_data, pr_curve_data , bin_frame, stats_df= postprocess(df,predicted_col,args_container,annotated_col,args_container.autocutoff)
         visualization(roc_curve_data,pr_curve_data ,None,df,feature_cols,annotated_col,predicted_col,df,bin_frame,args_container)
 
     #Mode 2: generate learned model 
     
     elif  args_container.mode == 'generate':
-        models,tree = generate(df, feature_cols, annotated_col, args_container.output_path_dir, args_container.model_name,args_container.rf_params )
+        models, tree = generate(df, feature_cols, annotated_col, args_container.output_path_dir,
+                                args_container.model_name, args_container.rf_params, nn, xg)
         if (tree is not None) and args_container.save_tree:    
             treeviz(tree,df,feature_cols,annotated_col, args_container.model_name, args_container.output_path_dir)
 
@@ -45,8 +47,10 @@ def main() -> None:
             test_frame, train_frame = data_split_auto(df, proteins)
         
         print(f'lenght of test set: {len(test_frame)}', f"length of training set: {len(train_frame)}")
-        models, tree = generate(train_frame, feature_cols, annotated_col, args_container.output_path_dir, args_container.model_name,args_container.rf_params ) #train 
-        test_frame  = predict(test_frame,feature_cols,args_container.input_folder_path,args_container.model_name, models) #test
+        models, tree = generate(train_frame, feature_cols, annotated_col, args_container.output_path_dir,
+                                args_container.model_name, args_container.rf_params, nn, xg)  # train
+        # test
+        test_frame = predict(test_frame, feature_cols, args_container.input_folder_path, args_container.model_name, nn, xg, models)
         results_df, roc_curve_data,pr_curve_data , bin_frame, fscore_mcc_by_protein, stats_df= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
         df_saver(results_df, "results", args_container.output_path_dir)
         df_saver(bin_frame, "bin_frame", args_container.output_path_dir)
@@ -62,7 +66,7 @@ def main() -> None:
         test_frame, cvs,train_proteins = cross_validation_set_generater(args_container.cvs_path,df)
         models = hyperparamtertuning_and_crossvalidation(df, train_proteins,feature_cols, annotated_col,args_container)
         model_param_writer(models, args_container.output_path_dir)    
-        test_frame = predict(test_frame,feature_cols,args_container.input_folder_path,args_container.model_name,  models)
+        test_frame = predict(test_frame,feature_cols,args_container.input_folder_path,args_container.model_name, nn,xg, models)
         results_df, roc_curve_data,pr_curve_data , bin_frame, fscore_mcc_by_protein, stats_df= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
         df_saver(results_df, "results", args_container.output_path_dir)
         df_saver(bin_frame, "bin_frame", args_container.output_path_dir)
@@ -92,7 +96,7 @@ def visualization(roc_curve_data,pr_curve_data ,tree,df,feature_cols,annotated_c
     pr_viz(pr_curve_data,args_container.output_path_dir,args_container.model_name, test_frame, annotated_col) 
     if (tree is not None) and args_container.save_tree:    
         treeviz(tree,df,feature_cols,annotated_col, args_container.model_name, args_container.output_path_dir)
-    protein_to_viz = bin_frame["protein"].unique()[0] #TODO set this as a config (do all or list)
+    protein_to_viz = bin_frame["protein"].unique() #TODO set this as a config (do all or list)
     print(protein_to_viz)
     if args_container.usepymol:
         pymol_viz(bin_frame, protein_to_viz, predicted_col,annotated_col, args_container.pymolscriptpath, args_container.output_path_dir)

@@ -14,6 +14,9 @@ class ArgsContainer:
         self.use_cutoff_from_file = True
         self.save_tree = args.tree_visualization
         self.usepymol = args.protein_visualization
+        self.xg = args.xgboost
+        self.nn = args.nuarelnet
+        self.models_to_use = []
         self.outputfolder = args.outputfolder
         self.inputfolder = args.inputfolder
         self.cvs_path =  os.path.join(folder_path, self.inputfolder, args.cvfoldername)
