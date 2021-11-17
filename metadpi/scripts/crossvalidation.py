@@ -1,4 +1,4 @@
-from re import L
+import joblib 
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.ensemble import RandomForestClassifier,HistGradientBoostingRegressor
 from sklearn.neural_network import MLPRegressor
@@ -25,39 +25,45 @@ def hyperparamtertuning_and_crossvalidation(df:pd.DataFrame, cvs,feature_cols, a
     p_grid = {"n_estimators": [10,50,100,200], "max_depth": [None,5,10,15], "ccp_alpha":[0.0, 0.25, 0.5, 0.75], "bootstrap":[True, False]}
     # p_grid = {"n_estimators": [10,15], "max_depth": [None,5]}
     rf_model = GridSearchCV(estimator=RandomForestClassifier(), param_grid=p_grid, cv=CViterator, scoring="roc_auc").fit(df[feature_cols],df[annotated_col])
-    # hyperparam(rf_model,cvs,args_container.output_path_dir, "rf" )
+    hyperparam(rf_model,cvs,args_container.output_path_dir, "rf" )
     rf_model = rf_model.best_estimator_
     
     logit_frame = pd.DataFrame(cross_validate(LogisticRegression(), df[feature_cols],df[annotated_col], cv=CViterator, return_estimator = True, scoring="roc_auc"))
     logit_model = logit_frame.loc[logit_frame['test_score'].idxmax(),"estimator"]
-    # crossval_chart(logit_frame,args_container.output_path_dir, "logit")
+    crossval_chart(logit_frame,args_container.output_path_dir, "logit")
 
     
     linmodel_frame = pd.DataFrame(cross_validate(LinearRegression(), df[feature_cols],df[annotated_col], cv=CViterator, return_estimator = True, scoring="roc_auc"))
     linear_model = linmodel_frame.loc[linmodel_frame['test_score'].idxmax(),"estimator"]
-    # crossval_chart(linmodel_frame,args_container.output_path_dir, "linear")
+    crossval_chart(linmodel_frame,args_container.output_path_dir, "linear")
 
-    if args_container.nn:
+    # if args_container.nn:
 
         # param_grid = {'hidden_layer_sizes': [(50,50,50), (50,100,50), (100,1)],
         #       'activation': ['relu','tanh','logistic'],
         #       'alpha': [0.0001, 0.05],
         #       'learning_rate': ['constant','adaptive'],
         #       'solver': ['adam']}
-        param_grid = {'alpha': [0.0001, 0.05]}
-        NN_model = GridSearchCV(estimator=MLPRegressor(), param_grid=param_grid, cv=CViterator, scoring="roc_auc").fit(df[feature_cols],df[annotated_col])
-        # hyperparam(NN_model,cvs,args_container.output_path_dir, "NN" )
-        NN_model = NN_model.best_estimator_
-    else:
-        NN_model = None
+        # param_grid = {'alpha': [0.0001, 0.05]}
+        # NN_model = GridSearchCV(estimator=MLPRegressor(), param_grid=param_grid, cv=CViterator, scoring="roc_auc").fit(df[feature_cols],df[annotated_col])
+        # # hyperparam(NN_model,cvs,args_container.output_path_dir, "NN" )
+        # NN_model = NN_model.best_estimator_
+    # else:
+    #     NN_model = None
+    NN_model =  None
     if args_container.xg:
         xparam_grid = {"loss":["squared_error", "absolute_error", "poisson"]} 
         xgb_model = GridSearchCV(estimator=HistGradientBoostingRegressor(), param_grid=xparam_grid, cv=CViterator, scoring="roc_auc").fit(df[feature_cols],df[annotated_col])
-        # hyperparam(xgb_model,cvs,args_container.output_path_dir, "xgb" )
+        hyperparam(xgb_model,cvs,args_container.output_path_dir, "xgb" )
         xgb_model.best_estimator_
     else:
         xgb_model = None
-    return [rf_model,linear_model,logit_model,NN_model,xgb_model]
+
+    models = [rf_model,linear_model,logit_model,NN_model,xgb_model]
+
+    _ = [joblib.dump(i, f"{args_container.output_path_dir}/{type(i).__name__}_{args_container.model_name}.joblib", compress=3) for i in filter(None, models)]
+    return models
+    
      
 
 def hyperparam(model,cvs,output_path_dir,name):
@@ -84,7 +90,8 @@ def hyperparam(model,cvs,output_path_dir,name):
     best_score.to_csv(out)
     return
 
-def crossval_chart(df,output_path_dir,name):
+
+def crossval_chart(df,output_path_dir, name):
     df["coefs"] = [i.coef_ for i in df["estimator"].values.tolist()]
     out = os.path.join(output_path_dir, f'{name}_best_score.csv')
     df.to_csv(out)

@@ -34,6 +34,6 @@ with pymol2.PyMOL() as p1:
     cmd.remove("resn hoh")
     cmd.bg_color("white")
     cmd.zoom(complete=1)
-    cmd.save(f"{output_path_dir}/{pdbid}/pymol_{pred}.pse")
+    cmd.save(f"{output_path_dir}/proteins/{pdbid}/pymol_{pred}.pse")
     # cmd.png(f"{output_path_dir}/{pdbid}/pymol_viz_{pred}.png")
     

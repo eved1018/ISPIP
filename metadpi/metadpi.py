@@ -65,6 +65,8 @@ def main() -> None:
     elif  args_container.mode == 'cv':
         test_frame, cvs,train_proteins = cross_validation_set_generater(args_container.cvs_path,df)
         models = hyperparamtertuning_and_crossvalidation(df, train_proteins,feature_cols, annotated_col,args_container)
+        
+
         model_param_writer(models, args_container.output_path_dir)    
         test_frame = predict(test_frame,feature_cols,args_container.input_folder_path,args_container.model_name, nn,xg, models)
         results_df, roc_curve_data,pr_curve_data , bin_frame, fscore_mcc_by_protein, stats_df= postprocess(test_frame,predicted_col,args_container,annotated_col,args_container.autocutoff)
@@ -74,6 +76,15 @@ def main() -> None:
         df_saver(stats_df, "pairtest",args_container.output_path_dir )
         visualization(roc_curve_data,pr_curve_data ,None,df,feature_cols,annotated_col,predicted_col,test_frame ,bin_frame,args_container)
         print(results_df)
+
+    elif args_container.mode == 'viz':
+        test_frame, cvs, train_proteins = cross_validation_set_generater(
+            args_container.cvs_path, df)
+
+        bin_frame = pd.read_csv(os.path.join(
+            args_container.output_path_dir, "bin_frame.csv"), index_col=0)
+        protein_to_viz = test_frame["protein"].unique()
+        pymol_viz(bin_frame, protein_to_viz, predicted_col,annotated_col, args_container.pymolscriptpath, args_container.output_path_dir)
 
     else:
         print("mode is set incorrectly")
@@ -86,9 +97,17 @@ def df_saver(df, name, output_path_dir):
 
 def model_param_writer(models, output_path_dir):
     rf_model, linear_model, logit_model,NN_model ,xgb_model = models 
+
+    ensable_param_dict = [f"{type(model).__name__}: {model.get_params()}\n"
+                          for model in filter(None,[rf_model, NN_model,xgb_model])]
+
+    regr_param_dict = [f"{type(model).__name__}:    {model.coef_}\n"
+                       for model in filter(None, [linear_model, logit_model])]
+
     out = os.path.join(output_path_dir, f'best_parameters.txt')        
     with open(out,'w+') as file:
-        file.write(f"random forest params: {rf_model.get_params()}\nLinear regr coefs: {linear_model.coef_}\nLogit regr coefs:{logit_model.coef_}")
+        file.writelines(regr_param_dict)
+        file.writelines(ensable_param_dict)
     return
     
 def visualization(roc_curve_data,pr_curve_data ,tree,df,feature_cols,annotated_col,predicted_col,test_frame, bin_frame,args_container):
@@ -96,8 +115,7 @@ def visualization(roc_curve_data,pr_curve_data ,tree,df,feature_cols,annotated_c
     pr_viz(pr_curve_data,args_container.output_path_dir,args_container.model_name, test_frame, annotated_col) 
     if (tree is not None) and args_container.save_tree:    
         treeviz(tree,df,feature_cols,annotated_col, args_container.model_name, args_container.output_path_dir)
-    protein_to_viz = bin_frame["protein"].unique() #TODO set this as a config (do all or list)
-    print(protein_to_viz)
+    protein_to_viz = test_frame["protein"].unique()
     if args_container.usepymol:
         pymol_viz(bin_frame, protein_to_viz, predicted_col,annotated_col, args_container.pymolscriptpath, args_container.output_path_dir)
     return
