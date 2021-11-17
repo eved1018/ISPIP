@@ -80,7 +80,7 @@ def hyperparam(model,cvs,output_path_dir,name):
     stds = model.cv_results_["std_test_score"]
     for mean, std, params in zip(means, stds, model.cv_results_["params"]):
         chart2_list.append([params, mean, std * 2])
-    by_params = pd.DataFrame(chart2_list, columns=["params","mean","+/ std"])
+    by_params = pd.DataFrame(chart2_list, columns=["params","mean roc auc","+/- std"])
     best_score = pd.DataFrame(chart1_list, columns=["CV", "best params","best ROC_AUC","mean","stdev"])
     out = os.path.join(output_path_dir, f'{name}_cv_results.csv')
     cv_results.to_csv(out)
