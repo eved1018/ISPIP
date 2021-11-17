@@ -4,8 +4,9 @@ Meta DPI:
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5706324.svg)](https://doi.org/10.5281/zenodo.5706324)
 
 
-Written by Evan Edelstein
- 	
+Written by Evan Edelstein 
+Manuscript by Mordichia Walder, Evan Edelstein, Dr. Raji Viswanathan
+
 requirements:
 
 	-python3
@@ -41,8 +42,6 @@ arguments:
 	
 
 Special thanks to:
-	Mordichia Walder and Shahar Lazaruz for being amazing partners in putting this all together.	
-	Dr. Raji Viswanathan for leading this project.
 	Dr. Andras Fiser and Dr. Eduardo J Fajardo for insight and guidance. 
 	Terence Parr and Prince Grover for use of dtreeviz.
 	The current Viswanathan lab for listening to me rant about proper python syntax for hours.
