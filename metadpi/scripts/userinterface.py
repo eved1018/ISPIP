@@ -23,7 +23,7 @@ def userinterface() -> ArgsContainer :
     parser.add_argument('-cutoffs', default='cutoffs.csv', help='')
     parser.add_argument('-autocutoff', default='15', help='')
     parser.add_argument('-model_name', default='model', help='') 
-    parser.add_argument('-o', '--outputfolder', default='output', help='') 
+    parser.add_argument('-of', '--outputfolder', default='output', help='') 
     parser.add_argument('-if', '--inputfolder', default='input', help='') 
     parser.add_argument('-cv', '--cvfoldername', default='cv', help='') 
     #TODO add this argscontainer 

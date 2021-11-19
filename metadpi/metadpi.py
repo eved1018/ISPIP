@@ -13,6 +13,8 @@ from .scripts.preprocess import data_preprocesss, data_split_auto,data_split_fro
 TODO:
 1) change return type tuple to be Tuple[type1,type2...] ad inlude typesaftey on arguments!
 2) for output dir: create nested folders for ease of acess!
+3) make folder for all models to output into 
+4) make cvout folder for all cv stuff
 """
 
 def main() -> None:

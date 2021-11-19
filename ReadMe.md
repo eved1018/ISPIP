@@ -1,50 +1,86 @@
-Meta DPI: 
+# Meta-DPI: 
+
+<br>[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5706324.svg)](https://doi.org/10.5281/zenodo.5706324)
 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5706324.svg)](https://doi.org/10.5281/zenodo.5706324)
 
+## Written by Evan Edelstein 
 
-Written by Evan Edelstein 
-Manuscript by Mordichia Walder, Evan Edelstein, Dr. Raji Viswanathan
+### Manuscript by Mordechai Walder , Dr. Raji Viswanathan, Evan Edelstein, Shahar Lazarev, Moshe Carrol 
 
-requirements:
+<br><br>
+Requirements:
 
-	-python3
-	-packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt'
-	- optinoal: pymol
+	- python3  (tested with 3.7 and above)
+
+	- packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt' 
+
+	- optional: pymol, dtreeviz and graphviz
+
 Usage: 
-
-	1) cd to MetaDPIv2 
-	2) execute 'python -m metadpi -mode {mode to use}' 
-
-arguments:
-
-	-i: [str] defualt:'input.csv- csv file should be in input folder
-
-	-mode: ['predict', 'test', 'generate'] defualt:'predict' - 
-		predict: Use pretrained model in input folder to predict on set.
-		test: genrate a new rf model from a test set and train on a training set.
-		Generate:  genrate a new rf model from a test set without predicting on any data.
-	-model_name: [str] defualt:'model' - name of rf and lg models to import/export 
-
-
-	-trainset:[str] defualt: test_set.txt - filename containing proteins for models to train on should be in input folder.
-	-testset: [str] defualt: train_set.txt - filename containing proteins for models to test on should be in input folder.
-	-cutoffs: [str] defualt:'cutoffs.csv' - filename containing length of interface or precalculated cutoff for each protein. 
-	-autocutoff: [int] defualt: 15 - if no cutoff file is used this sets the defualt interface cutoff value.	
 	
-	-randomforest_parameter_trees: [integer] defualt:10 - scikit learn 'n_estimators' parameter.
-	-random_forest_parameter_depth: [integer] defualt:None - scikit learn 'max_depth' parameter.
-	-random_forest_parameter_ccp: [float] defualt:0.0 - scikit learn 'ccp_alpha' parameter. (https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning)
-	-tree_visualization: [bool] defualt:False: output svg image of a randomly sampled tree (for large datasets this can take up a huge amount of time and space) see https://github.com/parrt/dtreeviz for details
+		1. cd to MetaDPIv2 
+		2. execute: python -m metadpi -mode {mode to use} 
 
-	-protein_visualization [bool] defualt:False: output pymol session and image of protein with expermintal and predicted interfaces overlayed. 
+
+Arguments:
+
+	Input/output:
+		-if: [str] default: input - Directory containing input data.
+		-of: [str] default: output - Directory to place output of MeatDPI.
+		-i: [str] default: input.csv - Csv file should be in input folder.
+		-cv: [str] default: cv - Directory containing test and train sets for cross-validation. 
 	
+		-trainset:[str] default: test_set.txt - Filename containing proteins for models to train on should be in input folder.
+		-testset: [str] default: train_set.txt - Filename containing proteins for models to test on should be in input folder.
+		-cutoffs: [str] default:'cutoffs.csv' - Filename containing length of interface or precalculated cutoff for each protein. 
+
+		-model_name: [str] default:'model' - Name of models to import/export.
+
+	Mode selection:
+		-mode: ['predict', 'test', 'generate','cv','viz'] default: 'predict' - 
+			predict: Use pre-trained model in input folder to predict on set.
+			generate: Generate a new rf model from a test set without predicting on any data.
+			test: Generate a new rf model from a test set and train on a training set.
+			viz: Only call the pymol visualization function.
+			cv: perform cross-validation and hyperparameter tuning of models on split training set, the best models are then used to predict on a designated testing set. 
+
+	
+	Parameters:
+		-randomforest_parameter_trees: [integer] default: 10 - Scikit learn 'n_estimators' parameter.
+		-random_forest_parameter_depth: [integer] default: None - Scikit learn 'max_depth' parameter.
+		-random_forest_parameter_ccp: [float] default: 0.0 - Scikit learn 'ccp_alpha' parameter. (https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning).
+
+		-autocutoff: [int] default: 15 - If no cutoff file is used this sets the default interface cutoff value.
+
+	
+	Flags: 
+		-pymol: Output pymol session and image of protein with experimental and predicted interfaces overladed. 
+		-tv: Output svg image of a randomly sampled tree (for large datasets this can take up a huge amount of time and space) see https://github.com/parrt/dtreeviz for details.
+		-xg: Include the use of gradient boosting regression model.
+		-nn: Include the use of Multi-layer Perceptron regressor model.
+
+
+Output:
+
+	- results.csv: this file contains the Fscore, MCC, Roc AUC and PR AUC for each individual method and model. 
+	- roc_model.csv and pr_model.csv: the TRP and FPR by threshold for each individual method and model, can be used to generate specific ROC or PR graphs. 
+	- fscore_mcc_by_protein: the individual fscore and mcc for each protein in the test set. 
+	- *.joblib: the trained models from a generate, test or cv run. Move these into the input directory to be used with 'predict' mode. 
+	-pairtest.csv: Comparison of statistical significance between AUCs.
+		- top triangle: difference in pairs of AUCs
+		- bottom triangle: log(10) of p-values for the difference in pairs of AUCs.
+	- proteins: Directory containing pymol sessions for each protein in the test set.  
+	-cvout: Directory containing the best paramters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
+	
+
 
 Special thanks to:
-	Dr. Andras Fiser and Dr. Eduardo J Fajardo for insight and guidance. 
-	Terence Parr and Prince Grover for use of dtreeviz.
-	The current Viswanathan lab for listening to me rant about proper python syntax for hours.
-	The abishar, without you none of this. 
+
+Dr. Andras Fiser and Dr. Eduardo J Fajardo for insight and guidance. 
+<br>
+Terence Parr and Prince Grover for use of dtreeviz.
+
+ 
 	
 
