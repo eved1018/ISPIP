@@ -10,8 +10,6 @@
 
 <br><br>
 
-
-
 ### Motivation: 
 <p>
 Identifying protein interfaces is important to learn how proteins interact with their binding partners,
@@ -22,6 +20,7 @@ from known interfaces that share high sequence or structure similarity. Methods 
 templates will not be successful in predicting interfaces when structural homologues with known interfaces are
 not available.
 </p>
+
 Requirements:
 
 	- python3  (tested with 3.7 and above)
