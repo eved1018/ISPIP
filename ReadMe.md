@@ -3,23 +3,24 @@
 <br>[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5706324.svg)](https://doi.org/10.5281/zenodo.5706324)
 
 
-
+---
 ## Written by Evan Edelstein 
 
 ## Manuscript by Mordechai Walder , Dr. Raji Viswanathan, Evan Edelstein, Shahar Lazarev, Moshe Carrol 
 
-<br><br>
+---
 
 ### Motivation: 
-<p>
-Identifying protein interfaces is important to learn how proteins interact with their binding partners,
+<p>Identifying protein interfaces is important to learn how proteins interact with their binding partners,
 to uncover the regulatory mechanisms to control biological functions and to develop novel therapeutic agents. A
 variety of computational approaches have been developed for predicting a protein’s interfacial residues from its
 intrinsic features, such as physico-chemical properties of residues, as well as using template-based information
 from known interfaces that share high sequence or structure similarity. Methods that rely on features from
 templates will not be successful in predicting interfaces when structural homologues with known interfaces are
-not available.
-</p>
+not available.</p>
+
+---
+
 
 Requirements:
 
@@ -86,12 +87,12 @@ Output:
 	-cvout: Directory containing the best parameters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
 	
 
+---
+### Special thanks to:
 
-Special thanks to:
+<p>Dr. Andras Fiser and Dr. Eduardo J Fajardo for insight and guidance.</p> 
 
-Dr. Andras Fiser and Dr. Eduardo J Fajardo for insight and guidance. 
-<br>
-Terence Parr and Prince Grover for use of dtreeviz.
+<p>Terence Parr and Prince Grover for use of dtreeviz.</p>
 
  
 	
