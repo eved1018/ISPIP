@@ -63,7 +63,7 @@ Arguments:
 
 Output:
 
-	- results.csv: this file contains the Fscore, MCC, Roc AUC and PR AUC for each individual method and model. 
+	- results.csv: this file contains the fscore, MCC, Roc AUC and PR AUC for each individual method and model. 
 	- roc_model.csv and pr_model.csv: the TRP and FPR by threshold for each individual method and model, can be used to generate specific ROC or PR graphs. 
 	- fscore_mcc_by_protein: the individual fscore and mcc for each protein in the test set. 
 	- *.joblib: the trained models from a generate, test or cv run. Move these into the input directory to be used with 'predict' mode. 
@@ -71,7 +71,7 @@ Output:
 		- top triangle: difference in pairs of AUCs
 		- bottom triangle: log(10) of p-values for the difference in pairs of AUCs.
 	- proteins: Directory containing pymol sessions for each protein in the test set.  
-	-cvout: Directory containing the best paramters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
+	-cvout: Directory containing the best parameters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
 	
 
 
