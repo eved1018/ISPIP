@@ -4,7 +4,7 @@
 
 
 
-## Written by Evan Edelstein 
+### Written by Evan Edelstein 
 
 ### Manuscript by Mordechai Walder , Dr. Raji Viswanathan, Evan Edelstein, Shahar Lazarev, Moshe Carrol 
 
@@ -30,7 +30,7 @@ Arguments:
 		-of: [str] default: output - Directory to place output of MeatDPI.
 		-i: [str] default: input.csv - Csv file should be in input folder.
 		-cv: [str] default: cv - Directory containing test and train sets for cross-validation. 
-	
+
 		-trainset:[str] default: test_set.txt - Filename containing proteins for models to train on should be in input folder.
 		-testset: [str] default: train_set.txt - Filename containing proteins for models to test on should be in input folder.
 		-cutoffs: [str] default:'cutoffs.csv' - Filename containing length of interface or precalculated cutoff for each protein. 
