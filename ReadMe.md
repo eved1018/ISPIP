@@ -6,7 +6,7 @@
 ---
 ## Written by Evan Edelstein 
 
-## Manuscript by R.Viswanathan, M. Walder, E.Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A.Fiser
+## Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser
 ---
 
 ### Motivation: 
