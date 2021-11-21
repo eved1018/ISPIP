@@ -78,20 +78,7 @@ Output:
 
 	- results.csv: this file contains the fscore, MCC, Roc AUC and PR AUC for each individual method and model. 
 
-|   | predictor         | f-score | mcc    | roc_auc | pr_auc |
-| - | ----------------- | ------- | ------ | ------- | ------ |
-| 0 | predus            | 0.337   | 0.2776 | 0.665   | 0.235  |
-| 1 | ispred            | 0.370   | 0.314  | 0.816   | 0.358  |
-| 2 | dockpred          | 0.263   | 0.196  | 0.652   | 0.152  |
-| 3 | logisticregresion | 0.374   | 0.318  | 0.841   | 0.326  |
-| 4 | linearregression  | 0.372   | 0.316  | 0.842   | 0.324  |
-| 5 | randomforest      | 0.403   | 0.350  | 0.846   | 0.369  |
-| 6 | xgboost           | 0.422   | 0.371  | 0.853   | 0.435  |
-
 	- roc_model.csv and pr_model.csv: the TRP and FPR by threshold for each individual method and model, can be used to generate specific ROC or PR graphs.
-
-<img style="justify: center" src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png" width="450" height="400" />
-
 
 	- fscore_mcc_by_protein: the individual fscore and mcc for each protein in the test set. 
 
@@ -103,6 +90,21 @@ Output:
 	- proteins: Directory containing pymol sessions for each protein in the test set.  
 	-cvout: Directory containing the best parameters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
 
+Example: 
+|   | predictor         | f-score | mcc    | roc_auc | pr_auc |
+| - | ----------------- | ------- | ------ | ------- | ------ |
+| 0 | predus            | 0.337   | 0.2776 | 0.665   | 0.235  |
+| 1 | ispred            | 0.370   | 0.314  | 0.816   | 0.358  |
+| 2 | dockpred          | 0.263   | 0.196  | 0.652   | 0.152  |
+| 3 | logisticregresion | 0.374   | 0.318  | 0.841   | 0.326  |
+| 4 | linearregression  | 0.372   | 0.316  | 0.842   | 0.324  |
+| 5 | randomforest      | 0.403   | 0.350  | 0.846   | 0.369  |
+| 6 | xgboost           | 0.422   | 0.371  | 0.853   | 0.435  |
+
+
+<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png" width="450" height="400" />
+
+<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" width="450" height="400" />
 
 
 
