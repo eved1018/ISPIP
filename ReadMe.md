@@ -90,9 +90,8 @@ Output:
 
 	- roc_model.csv and pr_model.csv: the TRP and FPR by threshold for each individual method and model, can be used to generate specific ROC or PR graphs.
 
-<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png" width="200" height="400" />
+<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png" width="400" height="400" />
 
-![Images](/Media/PR_model.png)	 
 
 	- fscore_mcc_by_protein: the individual fscore and mcc for each protein in the test set. 
 	- *.joblib: the trained models from a generate, test or cv run. Move these into the input directory to be used with 'predict' mode. 
