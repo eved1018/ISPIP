@@ -90,7 +90,7 @@ Output:
 	-cvout: Directory containing the best parameters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
 
 
-![Screenshot](Media/PR_model.png)	
+![Images](/Media/PR_model.png)	
 
 ---
 ### Special thanks to:
