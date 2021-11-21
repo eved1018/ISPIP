@@ -31,8 +31,9 @@ Requirements:
 
 Usage: 
 	
-		1. cd to MetaDPIv2 
-		2. execute: python -m metadpi -mode {mode to use} 
+		1. git clone https://github.com/eved1018/MetaDPIv2.git
+		2. cd MetaDPIv2 
+		2. python -m metadpi -mode {mode to use} 
 
 
 Arguments:
