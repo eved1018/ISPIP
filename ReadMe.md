@@ -6,8 +6,7 @@
 ---
 ## Written by Evan Edelstein 
 
-## Manuscript by Mordechai Walder , Dr. Raji Viswanathan, Evan Edelstein, Shahar Lazarev, Moshe Carrol 
-
+## Manuscript by R.Viswanathan1, M. Walder, E.Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A.Fiser
 ---
 
 ### Motivation: 
