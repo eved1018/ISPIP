@@ -105,7 +105,7 @@ Example:
 <table>
   <tr>
     <td> <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png"  alt="1" width = 25%  height = 400px>
-   	<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" alt="3" width = 15% height = 400px></td>
+   	<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" alt="3" width = 25% height = 400px></td>
 
 </table>
 
