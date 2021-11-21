@@ -104,8 +104,8 @@ Example:
 
 <table>
   <tr>
-    <td> <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png"  alt="1" width = 360px height = 640px>
-   	<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" alt="3" width = 360px height = 640px></td>
+    <td> <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png"  alt="1" width = 500px height = 640px>
+   	<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" alt="3" width = 200px height = 640px></td>
 
 </table>
 
