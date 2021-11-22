@@ -102,12 +102,12 @@ Example:
 | 6 | xgboost           | 0.422   | 0.371  | 0.853   | 0.435  |
 
 
-<table>
+<!-- <table>
   <tr>
     <td> <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png"  alt="1" width = 50%  height = 400px>
    	<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" alt="3" width = 25% height = 400px></td>
 
-</table>
+</table> -->
 
 <!-- <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png" width="450" height="400" />
 <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" width="400" height="400" /> -->
