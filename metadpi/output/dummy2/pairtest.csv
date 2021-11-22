@@ -1,9 +1,0 @@
-,predus,ispred,dockpred,logisticregresion,linearregression,randomforest,nueralnet,xgboost
-predus,predus,-0.151,0.013,-0.176,-0.177,-0.182,-0.177,-0.19
-ispred,-40.258,ispred,0.164,-0.025,-0.026,-0.031,-0.026,-0.039
-dockpred,-0.599,-41.591,dockpred,-0.189,-0.19,-0.195,-0.19,-0.203
-logisticregresion,-80.391,-7.034,-84.894,logisticregresion,-0.002,-0.006,-0.001,-0.014
-linearregression,-85.417,-7.433,-85.76,-4.811,linearregression,-0.004,0.001,-0.012
-randomforest,-97.553,-6.585,-92.712,-2.292,-1.567,randomforest,0.005,-0.008
-nueralnet,-85.885,-5.995,-88.324,-0.572,-0.326,-2.905,nueralnet,-0.013
-xgboost,-98.716,-9.048,-97.897,-7.384,-6.309,-5.743,-9.675,xgboost
