@@ -90,7 +90,7 @@ Output:
 	- proteins: Directory containing pymol sessions for each protein in the test set.  
 	-cvout: Directory containing the best parameters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
 
-Example: 
+<!-- Example: 
 |   | predictor         | f-score | mcc    | roc_auc | pr_auc |
 | - | ----------------- | ------- | ------ | ------- | ------ |
 | 0 | predus            | 0.337   | 0.2776 | 0.665   | 0.235  |
@@ -99,7 +99,7 @@ Example:
 | 3 | logisticregresion | 0.374   | 0.318  | 0.841   | 0.326  |
 | 4 | linearregression  | 0.372   | 0.316  | 0.842   | 0.324  |
 | 5 | randomforest      | 0.403   | 0.350  | 0.846   | 0.369  |
-| 6 | xgboost           | 0.422   | 0.371  | 0.853   | 0.435  |
+| 6 | xgboost           | 0.422   | 0.371  | 0.853   | 0.435  | -->
 
 
 <!-- <table>
