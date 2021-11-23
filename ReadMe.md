@@ -16,7 +16,12 @@ variety of computational approaches have been developed for predicting a protein
 intrinsic features, such as physico-chemical properties of residues, as well as using template-based information
 from known interfaces that share high sequence or structure similarity. Methods that rely on features from
 templates will not be successful in predicting interfaces when structural homologues with known interfaces are
-not available.</p>
+not available. Here we describe the development of meta-DPI to explore the hypothesis that the efficacy of a
+computational prediction method of protein binding sites can be enhanced by using a combination of methods
+that rely on orthogonal properties of a query protein, combining and balancing both intrinsic or template-based
+features. Meta-DPI is a metamethod that integrates the orthogonal approaches by either logistic regression
+or random forest. Meta-DPI on a set of 223 query proteins outperforms each of its constituent methods in
+identifying protein binding interfaces.</p>
 
 ---
 
