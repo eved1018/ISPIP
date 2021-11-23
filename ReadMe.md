@@ -8,8 +8,6 @@
 
 ## Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser
 ---
-<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png"  /> 
----
 ### Motivation: 
 <p>Identifying protein interfaces is important to learn how proteins interact with their binding partners,
 to uncover the regulatory mechanisms to control biological functions and to develop novel therapeutic agents. A
