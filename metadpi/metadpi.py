@@ -13,7 +13,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 """
 TODO:
-1) change return type tuple to be Tuple[type1,type2...] ad include type safety on arguments!
+1) type saftey
 2) for output dir: create nested folders for ease of access!
 3) make folder for all models to output into
 4) make cvout folder for all cv stuff
@@ -112,6 +112,7 @@ def main() -> None:
         bin_frame = pd.read_csv(os.path.join(
             args_container.output_path_dir, "bin_frame.csv"), index_col=0)
         protein_to_viz = test_frame["protein"].unique()
+
         pymol_viz(bin_frame, protein_to_viz, predicted_col, annotated_col,
                   args_container.pymolscriptpath, args_container.output_path_dir)
 
