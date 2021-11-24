@@ -27,7 +27,7 @@ def randomforest_generate_model(df: pd.DataFrame, feature_cols, annotated_col, r
     model = RandomForestClassifier(
         n_estimators=trees, random_state=0, bootstrap=False, max_depth=depth, ccp_alpha=ccp).fit(X, y)
     tree = model.estimators_[0]
-    # compression is ON!
+
     joblib.dump(model, f"{output_path_dir}/RF_{model_name}.joblib", compress=3)
     return model, tree
 
@@ -35,7 +35,7 @@ def randomforest_generate_model(df: pd.DataFrame, feature_cols, annotated_col, r
 def linreg_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name):
     regr = linear_model.LinearRegression().fit(
         df[feature_cols], df[annotated_col])
-    # compression is ON!
+
     joblib.dump(
         regr, f"{output_path_dir}/LinRegr_{model_name}.joblib", compress=3)
     return regr
@@ -44,7 +44,7 @@ def linreg_generate_model(df, feature_cols, annotated_col, output_path_dir, mode
 def logreg_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name):
     regr = linear_model.LogisticRegression().fit(
         df[feature_cols], df[annotated_col])
-    # compression is ON!
+
     joblib.dump(
         regr, f"{output_path_dir}/Logit_{model_name}.joblib", compress=3)
     return regr
@@ -52,7 +52,7 @@ def logreg_generate_model(df, feature_cols, annotated_col, output_path_dir, mode
 
 def NueralNet_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name):
     regr = MLPRegressor().fit(df[feature_cols], df[annotated_col])
-    # compression is ON!
+
     joblib.dump(regr, f"{output_path_dir}/NN_{model_name}.joblib", compress=3)
     return regr
 
@@ -60,6 +60,6 @@ def NueralNet_generate_model(df, feature_cols, annotated_col, output_path_dir, m
 def xgboost_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name):
     regr = HistGradientBoostingRegressor().fit(
         df[feature_cols], df[annotated_col])
-    # compression is ON!
+
     joblib.dump(regr, f"{output_path_dir}/XGB_{model_name}.joblib", compress=3)
     return regr
