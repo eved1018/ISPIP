@@ -23,17 +23,16 @@ with pymol2.PyMOL() as p1:
     cmd.create("predicted", "indicate")
 
     cmd.show("sphere", "annotated")
-    cmd.color("pink","annotated")
-    cmd.set("sphere_transparency","0.5","annotated")
+    cmd.color("pink", "annotated")
+    cmd.set("sphere_transparency", "0.5", "annotated")
 
     cmd.show("sphere", "predicted")
-    cmd.set("sphere_scale","0.5","predicted")
-    cmd.color("green","predicted")
-    cmd.set("sphere_transparency","0","predicted")
+    cmd.set("sphere_scale", "0.5", "predicted")
+    cmd.color("green", "predicted")
+    cmd.set("sphere_transparency", "0", "predicted")
     cmd.set("cartoon_transparency", "1", "predicted")
     cmd.remove("resn hoh")
     cmd.bg_color("white")
     cmd.zoom(complete=1)
     cmd.save(f"{output_path_dir}/proteins/{pdbid}/pymol_{pred}.pse")
     # cmd.png(f"{output_path_dir}/{pdbid}/pymol_viz_{pred}.png")
-    

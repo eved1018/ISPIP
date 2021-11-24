@@ -4,10 +4,10 @@ import pathlib
 
 
 class ArgsContainer:
-    def __init__(self, args: argparse.Namespace, folder_path: pathlib.PosixPath) -> None:
+    def __init__(self, args: argparse.Namespace, folder_path: pathlib.Path) -> None:
         self.args: argparse.Namespace = args
         self.mode: str = args.modeselection
-        self.folder_path: pathlib.PosixPath = folder_path
+        self.folder_path: pathlib.Path = folder_path
         self.model_name: str = args.model_name
         self.autocutoff: int = args.autocutoff
         self.plotmode: str = args.plotselection
@@ -18,23 +18,42 @@ class ArgsContainer:
         self.xg: bool = args.xgboost
         self.nn: bool = args.nuarelnet
         self.models_to_use: list = []
-        self.outputfolder = args.outputfolder
-        self.inputfolder = args.inputfolder
-        self.cvs_path = os.path.join(
+        self.outputfolder: str = args.outputfolder
+        self.inputfolder: str = args.inputfolder
+        self.cvs_path: str = os.path.join(
             folder_path, self.inputfolder, args.cvfoldername)
-        self.output_path_dir = os.path.join(folder_path, self.outputfolder)
-        self.input_folder_path = os.path.join(folder_path, self.inputfolder)
-        self.input_frames_file = os.path.join(
+        self.output_path_dir: str = os.path.join(
+            folder_path, self.outputfolder)
+        self.input_folder_path: str = os.path.join(
+            folder_path, self.inputfolder)
+        self.input_frames_file: str = os.path.join(
             folder_path, self.inputfolder, args.inputfile)
-        self.test_proteins_file = os.path.join(
+        self.test_proteins_file: str = os.path.join(
             folder_path, self.inputfolder, args.testset)
-        self.train_proteins_file = os.path.join(
+        self.train_proteins_file: str = os.path.join(
             folder_path, self.inputfolder, args.trainset)
-        self.cutoff_frame = os.path.join(
+        self.cutoff_frame: str = os.path.join(
             folder_path, self.inputfolder, args.cutoffs)
-        self.rf_params = [args.randomforest_parameter_trees,
-                          args.random_forest_parameter_depth, args.random_forest_parameter_ccp]
-        self.pymolscriptpath = os.path.join(
+        self.rf_params: list = [args.randomforest_parameter_trees,
+                                args.random_forest_parameter_depth, args.random_forest_parameter_ccp]
+        self.pymolscriptpath: str = os.path.join(
             folder_path, 'scripts', 'visualization', 'pymolviz.py')
         return
 
+    # def predict_params(self, df, feature_cols):
+    #     self.df: pd.DataFrame = df
+    #     self.feature_cols: list = feature_cols
+    #     return
+
+    # def postprocess_params(self, df, predicted_col, annotated_col):
+    #     self.df: pd.DataFrame = df
+    #     self.predicted_col: list = predicted_col
+    #     self.annotated_col: list = annotated_col
+    #     return
+
+    # def visualization_params(self, roc_curve_data, pr_curve_data, tree, bin_frame):
+    #     self.roc_curve_data = roc_curve_data
+    #     self.pr_curve_data = pr_curve_data
+    #     self.tree = tree
+    #     self.bin_frame = bin_frame
+    #     return

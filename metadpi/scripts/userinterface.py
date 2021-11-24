@@ -2,6 +2,7 @@ import argparse
 import pathlib
 import os
 from .containers.argscontainer import ArgsContainer
+import sys
 
 
 def userinterface() -> ArgsContainer:
@@ -43,7 +44,7 @@ def userinterface() -> ArgsContainer:
 
 
 def parse(args: argparse.Namespace) -> ArgsContainer:
-    folder_path: pathlib.PosixPath = pathlib.Path(__file__).parent.parent
+    folder_path: pathlib.Path = pathlib.Path(__file__).parent.parent
     args_container = ArgsContainer(args, folder_path)
 
     if args_container.mode == 'test':
@@ -59,8 +60,7 @@ def parse(args: argparse.Namespace) -> ArgsContainer:
 
     elif not os.path.isfile(args_container.input_frames_file):
         print("please include an input csv file")
-        return
-
+        sys.exit(0)
     if args_container.nn:
         args_container.models_to_use.append("nueralnet")
     if args_container.xg:

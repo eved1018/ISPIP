@@ -1,5 +1,4 @@
 import os
-
 from metadpi.scripts.containers.argscontainer import ArgsContainer
 from .scripts.userinterface import userinterface
 import pandas as pd
@@ -24,24 +23,26 @@ TODO:
 def main() -> None:
     # get Command line arguments and defaults.
     args_container: ArgsContainer = userinterface()
-    # index_col = 0, wrap this in a try statement | read input file containing residues, individual predictors and annotated columns.
+
+    # read input file containing residues, individual predictors and annotated columns.
     df: pd.DataFrame = pd.read_csv(args_container.input_frames_file)
+
     # preprocess data -> remove any null or missing data from the dataset and check that annoted is number  nulls.
     df, feature_cols, annotated_col, proteins = data_preprocesss(df)
+
     # make this automatic? if we do more models later change this!!!
     predicted_col = feature_cols + \
         ['logisticregresion', "linearregression",
             'randomforest'] + args_container.models_to_use
-    nn: bool = args_container.nn
-    xg: bool = args_container.xg
 
     # Mode 1: predict
-
     if args_container.mode == 'predict':
         df = predict(df, feature_cols, args_container.input_folder_path,
-                     args_container.model_name, nn, xg)
+                     args_container.model_name, args_container.nn, args_container.xg)
+
         results_df, roc_curve_data, pr_curve_data, bin_frame, stats_df = postprocess(
             df, predicted_col, args_container, annotated_col, args_container.autocutoff)
+
         visualization(roc_curve_data, pr_curve_data, None, df, feature_cols,
                       annotated_col, predicted_col, df, bin_frame, args_container)
 
@@ -49,7 +50,8 @@ def main() -> None:
 
     elif args_container.mode == 'generate':
         models, tree = generate(df, feature_cols, annotated_col, args_container.output_path_dir,
-                                args_container.model_name, args_container.rf_params, nn, xg)
+                                args_container.model_name, args_container.rf_params, args_container.nn, args_container.xg)
+
         if (tree is not None) and args_container.save_tree:
             treeviz(tree, df, feature_cols, annotated_col,
                     args_container.model_name, args_container.output_path_dir)
@@ -66,10 +68,10 @@ def main() -> None:
         print(f'lenght of test set: {len(test_frame)}',
               f"length of training set: {len(train_frame)}")
         models, tree = generate(train_frame, feature_cols, annotated_col, args_container.output_path_dir,
-                                args_container.model_name, args_container.rf_params, nn, xg)  # train
+                                args_container.model_name, args_container.rf_params, args_container.nn, args_container.xg)  # train
         # test
         test_frame = predict(test_frame, feature_cols, args_container.input_folder_path,
-                             args_container.model_name, nn, xg, models)
+                             args_container.model_name, args_container.nn, args_container.xg, models)
         results_df, roc_curve_data, pr_curve_data, bin_frame, fscore_mcc_by_protein, stats_df = postprocess(
             test_frame, predicted_col, args_container, annotated_col, args_container.autocutoff)
         df_saver(results_df, "results", args_container.output_path_dir)
@@ -91,7 +93,7 @@ def main() -> None:
 
         model_param_writer(models, args_container.output_path_dir)
         test_frame = predict(test_frame, feature_cols, args_container.input_folder_path,
-                             args_container.model_name, nn, xg, models)
+                             args_container.model_name, args_container.nn, args_container.xg, models)
         results_df, roc_curve_data, pr_curve_data, bin_frame, fscore_mcc_by_protein, stats_df = postprocess(
             test_frame, predicted_col, args_container, annotated_col, args_container.autocutoff)
         df_saver(results_df, "results", args_container.output_path_dir)
@@ -125,15 +127,15 @@ def df_saver(df, name, output_path_dir):
 
 
 def model_param_writer(models, output_path_dir):
-    rf_model, linear_model, logit_model, NN_model, xgb_model = models
+    rf_model, linear_model, logit_model, nn_model, xgb_model = models
 
     ensable_param_dict = [f"{type(model).__name__}: {model.get_params()}\n"
-                          for model in filter(None, [rf_model, NN_model, xgb_model])]
+                          for model in filter(None, [rf_model, nn_model, xgb_model])]
 
     regr_param_dict = [f"{type(model).__name__}:    {model.coef_}\n"
                        for model in filter(None, [linear_model, logit_model])]
 
-    out = os.path.join(output_path_dir, f'best_parameters.txt')
+    out = os.path.join(output_path_dir, 'best_parameters.txt')
     with open(out, 'w+') as file:
         file.writelines(regr_param_dict)
         file.writelines(ensable_param_dict)
