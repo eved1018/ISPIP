@@ -8,15 +8,8 @@
 
 ## Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser
 ---
-
 ### Motivation: 
-<p>Identifying protein interfaces is important to learn how proteins interact with their binding partners,
-to uncover the regulatory mechanisms to control biological functions and to develop novel therapeutic agents. A
-variety of computational approaches have been developed for predicting a protein’s interfacial residues from its
-intrinsic features, such as physico-chemical properties of residues, as well as using template-based information
-from known interfaces that share high sequence or structure similarity. Methods that rely on features from
-templates will not be successful in predicting interfaces when structural homologues with known interfaces are
-not available.</p>
+<p>The identification of a protein’s binding interface is key to understanding its role in the cellular interactome, how it mechanistically functions with its complex partner, and how mutations affect its binding properties. A variety of computational approaches have been developed for predicting a protein’s interfacial residues from its intrinsic features, as well as from the features of homologues. Here we describe the development of meta-DPI to explore the hypothesis that the efficacy of a computational prediction method can be enhanced by combining it with other methods that are based on orthogonal properties of query proteins. Meta-DPI is a metamethod that integrates the orthogonal approaches of DockPred, ISPRED 4, and PredUs 2.0 by either logistic regression or random forest. Meta-DPI significantly outperforms each of its constituent methods in predicting protein binding interfaces.</p>
 
 ---
 
@@ -101,16 +94,6 @@ Output:
 | 5 | randomforest      | 0.403   | 0.350  | 0.846   | 0.369  |
 | 6 | xgboost           | 0.422   | 0.371  | 0.853   | 0.435  | -->
 
-
-<!-- <table>
-  <tr>
-    <td> <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png"  alt="1" width = 50%  height = 400px>
-   	<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" alt="3" width = 25% height = 400px></td>
-
-</table> -->
-
-<!-- <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/PR_model.png" width="450" height="400" />
-<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" width="400" height="400" /> -->
 
 ---
 ### Special thanks to:
