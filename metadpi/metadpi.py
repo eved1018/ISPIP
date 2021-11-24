@@ -113,6 +113,7 @@ def main() -> None:
         print(results_df)
 
     # Mode 5: visualization
+
     elif args_container.mode == 'viz':
         test_frame, cvs, train_proteins = cross_validation_set_generater(
             args_container.cvs_path, df)
@@ -138,16 +139,16 @@ def df_saver(df, name, output_path_dir):
 def model_param_writer(models, output_path_dir):
     rf_model, linear_model, logit_model, nn_model, xgb_model = models
 
-    ensable_param_dict = [f"{type(model).__name__}: {model.get_params()}\n"
-                          for model in filter(None, [rf_model, nn_model, xgb_model])]
+    ensable_param: list = [f"{type(model).__name__}: {model.get_params()}\n"
+                           for model in filter(None, [rf_model, nn_model, xgb_model])]
 
-    regr_param_dict = [f"{type(model).__name__}:    {model.coef_}\n"
-                       for model in filter(None, [linear_model, logit_model])]
+    regr_param: list = [f"{type(model).__name__}:    {model.coef_}\n"
+                        for model in filter(None, [linear_model, logit_model])]
 
     out = os.path.join(output_path_dir, 'best_parameters.txt')
     with open(out, 'w+') as file:
-        file.writelines(regr_param_dict)
-        file.writelines(ensable_param_dict)
+        file.writelines(regr_param)
+        file.writelines(ensable_param)
     return
 
 
