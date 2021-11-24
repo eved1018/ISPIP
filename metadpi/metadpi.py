@@ -67,18 +67,23 @@ def main() -> None:
 
         print(f'lenght of test set: {len(test_frame)}',
               f"length of training set: {len(train_frame)}")
+
+        # train
         models, tree = generate(train_frame, feature_cols, annotated_col, args_container.output_path_dir,
                                 args_container.model_name, args_container.rf_params, args_container.nn, args_container.xg)  # train
         # test
         test_frame = predict(test_frame, feature_cols, args_container.input_folder_path,
                              args_container.model_name, args_container.nn, args_container.xg, models)
+
         results_df, roc_curve_data, pr_curve_data, bin_frame, fscore_mcc_by_protein, stats_df = postprocess(
             test_frame, predicted_col, args_container, annotated_col, args_container.autocutoff)
+
         df_saver(results_df, "results", args_container.output_path_dir)
         df_saver(bin_frame, "bin_frame", args_container.output_path_dir)
         df_saver(fscore_mcc_by_protein, "fscore_mcc_by_protein",
                  args_container.output_path_dir)
         df_saver(stats_df, "pairtest", args_container.output_path_dir)
+
         visualization(roc_curve_data, pr_curve_data, tree, df, feature_cols,
                       annotated_col, predicted_col, test_frame, bin_frame, args_container)
         print(results_df)
@@ -96,15 +101,18 @@ def main() -> None:
                              args_container.model_name, args_container.nn, args_container.xg, models)
         results_df, roc_curve_data, pr_curve_data, bin_frame, fscore_mcc_by_protein, stats_df = postprocess(
             test_frame, predicted_col, args_container, annotated_col, args_container.autocutoff)
+
         df_saver(results_df, "results", args_container.output_path_dir)
         df_saver(bin_frame, "bin_frame", args_container.output_path_dir)
         df_saver(fscore_mcc_by_protein, "fscore_mcc_by_protein",
                  args_container.output_path_dir)
         df_saver(stats_df, "pairtest", args_container.output_path_dir)
+
         visualization(roc_curve_data, pr_curve_data, None, df, feature_cols,
                       annotated_col, predicted_col, test_frame, bin_frame, args_container)
         print(results_df)
 
+    # Mode 5: visualization
     elif args_container.mode == 'viz':
         test_frame, cvs, train_proteins = cross_validation_set_generater(
             args_container.cvs_path, df)
