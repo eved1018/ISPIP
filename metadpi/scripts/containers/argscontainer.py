@@ -39,21 +39,3 @@ class ArgsContainer:
         self.pymolscriptpath: str = os.path.join(
             folder_path, 'scripts', 'visualization', 'pymolviz.py')
         return
-
-    # def predict_params(self, df, feature_cols):
-    #     self.df: pd.DataFrame = df
-    #     self.feature_cols: list = feature_cols
-    #     return
-
-    # def postprocess_params(self, df, predicted_col, annotated_col):
-    #     self.df: pd.DataFrame = df
-    #     self.predicted_col: list = predicted_col
-    #     self.annotated_col: list = annotated_col
-    #     return
-
-    # def visualization_params(self, roc_curve_data, pr_curve_data, tree, bin_frame):
-    #     self.roc_curve_data = roc_curve_data
-    #     self.pr_curve_data = pr_curve_data
-    #     self.tree = tree
-    #     self.bin_frame = bin_frame
-    #     return

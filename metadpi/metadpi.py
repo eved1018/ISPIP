@@ -1,6 +1,6 @@
 import os
 from metadpi.scripts.containers.argscontainer import ArgsContainer
-from .scripts.userinterface import userinterface
+from .scripts.cli_interface import userinterface
 import pandas as pd
 from .scripts.postprocess import postprocess
 from .scripts.crossvalidation import hyperparamtertuning_and_crossvalidation
