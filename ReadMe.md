@@ -13,7 +13,7 @@
 
 ---
 <p align="center">
-<img src="https://your-image-url.type" width="250" height="250" allign="center">
+<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" width="250" height="250" allign="center">
 </p>
 
 
