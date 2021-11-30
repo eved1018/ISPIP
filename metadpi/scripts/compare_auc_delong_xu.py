@@ -1,9 +1,10 @@
-import pandas as pd
 import numpy as np
 import scipy.stats
 
 # AUC comparison adapted from
 # https://github.com/Netflix/vmaf/
+
+
 def compute_midrank(x):
     """Computes midranks.
     Args:
@@ -20,7 +21,7 @@ def compute_midrank(x):
         j = i
         while j < N and Z[j] == Z[i]:
             j += 1
-        T[i:j] = 0.5*(i + j - 1)
+        T[i:j] = 0.5 * (i + j - 1)
         i = j
     T2 = np.empty(N, dtype=np.float)
     # Note(kazeevn) +1 is due to Python using 0-based indexing
@@ -104,7 +105,8 @@ def delong_roc_variance(ground_truth, predictions):
     order, label_1_count = compute_ground_truth_statistics(ground_truth)
     predictions_sorted_transposed = predictions[np.newaxis, order]
     aucs, delongcov = fastDeLong(predictions_sorted_transposed, label_1_count)
-    assert len(aucs) == 1, "There is a bug in the code, please forward this to the developers"
+    assert len(
+        aucs) == 1, "There is a bug in the code, please forward this to the developers"
     return aucs[0], delongcov
 
 
@@ -119,6 +121,7 @@ def delong_roc_test(ground_truth, predictions_one, predictions_two):
           np.array of floats of the probability of being class 1
     """
     order, label_1_count = compute_ground_truth_statistics(ground_truth)
-    predictions_sorted_transposed = np.vstack((predictions_one, predictions_two))[:, order]
+    predictions_sorted_transposed = np.vstack(
+        (predictions_one, predictions_two))[:, order]
     aucs, delongcov = fastDeLong(predictions_sorted_transposed, label_1_count)
     return calc_pvalue(aucs, delongcov), aucs

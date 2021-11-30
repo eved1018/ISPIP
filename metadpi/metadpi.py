@@ -30,7 +30,6 @@ def main() -> None:
     # preprocess data -> remove any null or missing data from the dataset and check that annoted is number  nulls.
     df, feature_cols, annotated_col, proteins = data_preprocesss(df)
 
-    # make this automatic? if we do more models later change this!!!
     predicted_col = feature_cols + \
         ['logisticregresion', "linearregression",
             'randomforest'] + args_container.models_to_use
