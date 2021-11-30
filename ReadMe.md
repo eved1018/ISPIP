@@ -26,7 +26,7 @@
 	
 - `git clone https://github.com/eved1018/MetaDPIv2.git`
 - `cd MetaDPIv2`
-- `python -m metadpi -mode` 
+- `python -m metadpi` 
 
 
 <h3>Arguments:</h3>
