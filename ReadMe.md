@@ -27,9 +27,9 @@ Requirements:
 
 Usage: 
 	
-		1. `git clone https://github.com/eved1018/MetaDPIv2.git`
-		2. `cd MetaDPIv2`
-		2. `python -m metadpi -mode` 
+- `git clone https://github.com/eved1018/MetaDPIv2.git`
+- `cd MetaDPIv2`
+- `python -m metadpi -mode` 
 
 
 Arguments:
