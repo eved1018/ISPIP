@@ -18,12 +18,9 @@
 
 
 Requirements:
-
-	- python3  (tested with 3.7 and above)
-
-	- packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt' 
-
-	- optional: pymol, dtreeviz and graphviz
+- python3  (tested with 3.7 and above)
+- packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt' 
+- optional: pymol, dtreeviz and graphviz
 
 Usage: 
 	
