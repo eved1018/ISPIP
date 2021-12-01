@@ -13,7 +13,7 @@
 
 ---
 <p align="center">
-<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/4XXH.A_rfscore.png" width="350" height="350" allign="center">
+<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/ezgif-7-e32ea8fecb17.gif" >
 </p>
 
 
@@ -26,7 +26,7 @@
 	
 - `git clone https://github.com/eved1018/MetaDPIv2.git`
 - `cd MetaDPIv2`
-- `python -m metadpi -mode` 
+- `python -m metadpi` 
 
 
 <h3>Arguments:</h3>
