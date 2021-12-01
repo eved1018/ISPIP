@@ -96,7 +96,7 @@ def pr_to_csv(pr_curve_data, output_path_dir, model_name):
         pred, recall, precision, pr_auc, thresholds = data
         pr_frame[f"{pred}_fpr"] = recall
         pr_frame[f"{pred}_tpr"] = precision
-    pr_frame.to_csv(f"{output_path_dir}/roc_{model_name}.csv")
+    pr_frame.to_csv(f"{output_path_dir}/pr_{model_name}.csv")
     return
 
 

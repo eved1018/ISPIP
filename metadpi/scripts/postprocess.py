@@ -91,17 +91,19 @@ def statistics(x, annotated_col, pred1, pred2) -> tuple:
     y2 = x[pred2]
     pval, aucs = delong_roc_test(y_true, y1, y2)
     aucs = aucs.tolist()
-    Dauc = round(aucs[1] - aucs[0], 3)
+    dauc = round(aucs[1] - aucs[0], 3)
     pval = round(pval.tolist()[0][0], 3)
     test = "signifigant" if pval < 0.05 else "not significant"
-    return pval, test, Dauc
+    return pval, test, dauc
+
+# name better, type correct
 
 
-def roc_pr(x, annotated_col, pred) -> dict:
-    fpr, tpr, roc_thresholds = roc_curve(x[annotated_col], x[pred])
+def roc_pr(test_frame: pd.DataFrame, annotated_col, pred) -> dict:
+    fpr, tpr, roc_thresholds = roc_curve(test_frame[annotated_col], test_frame[pred])
     roc_auc = round(auc(fpr, tpr), 3)
     precision, recall, pr_thresholds = precision_recall_curve(
-        x[annotated_col], x[pred])
+        test_frame[annotated_col], test_frame[pred])
     pr_auc = round(auc(recall, precision), 3)
     result_dic = {"fpr": fpr, "tpr": tpr, "roc_thresholds": roc_thresholds, "roc_auc": roc_auc,
                   "precision": precision, "recall": recall, "pr_thresholds": pr_thresholds, "pr_auc": pr_auc}
