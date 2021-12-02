@@ -6,7 +6,6 @@ from .compare_auc_delong_xu import delong_roc_test
 
 """"
 TODO:
-change pval to not log(pval);
 """
 
 
@@ -58,7 +57,7 @@ def cutoff_file_parser(cutoff_frame) -> dict:
     return cutoff_dict
 
 
-def analyses(params) -> tuple:  # TODO make this much better
+def analyses(params) -> tuple:
     pred, cutoff_dict, test_frame, annotated_col = params
     top = test_frame.sort_values(by=[pred], ascending=False).groupby((["protein"])).apply(
         lambda x: x.head(cutoff_dict[x.name])).index.get_level_values(1).tolist()
@@ -69,14 +68,15 @@ def analyses(params) -> tuple:  # TODO make this much better
         lambda x: fscore_mcc(x, annotated_col, pred))
 
     fscore, mcc = fscore_mcc(test_frame, annotated_col, pred)
-    roc_dict = roc_pr(test_frame, annotated_col, pred)
+    roc_and_pr_dic = roc_and_pr(test_frame, annotated_col, pred)
 
-    results_list = [pred, fscore, mcc, roc_dict["roc_auc"], roc_dict["pr_auc"]]
-    roclist = [pred, roc_dict["fpr"], roc_dict["tpr"],
-               roc_dict["roc_auc"], roc_dict["roc_thresholds"]]
+    results_list = [pred, fscore, mcc,
+                    roc_and_pr_dic["roc_auc"], roc_and_pr_dic["pr_auc"]]
+    roclist = [pred, roc_and_pr_dic["fpr"], roc_and_pr_dic["tpr"],
+               roc_and_pr_dic["roc_auc"], roc_and_pr_dic["roc_thresholds"]]
 
-    prlist = [pred, roc_dict["recall"], roc_dict["precision"],
-              roc_dict["pr_auc"], roc_dict["pr_thresholds"]]
+    prlist = [pred, roc_and_pr_dic["recall"], roc_and_pr_dic["precision"],
+              roc_and_pr_dic["pr_auc"], roc_and_pr_dic["pr_thresholds"]]
 
     return pred, test_frame[f'{pred}_bin'], fscore_mcc_per_protein, results_list, roclist, prlist
 
@@ -89,22 +89,23 @@ def statistics(x, annotated_col, pred1, pred2) -> tuple:
     y_true = x[annotated_col]
     y1 = x[pred1]
     y2 = x[pred2]
-    pval, aucs = delong_roc_test(y_true, y1, y2)
+    log10_pval, aucs = delong_roc_test(y_true, y1, y2)
     aucs = aucs.tolist()
     dauc = round(aucs[1] - aucs[0], 3)
-    pval = round(pval.tolist()[0][0], 3)
-    test = "signifigant" if pval < 0.05 else "not significant"
-    return pval, test, dauc
+    log10_pval = round(log10_pval.tolist()[0][0], 3)
+    test = "signifigant" if log10_pval < -1.3 else "not significant"
+    return log10_pval, test, dauc
 
 # name better, type correct
 
 
-def roc_pr(test_frame: pd.DataFrame, annotated_col, pred) -> dict:
-    fpr, tpr, roc_thresholds = roc_curve(test_frame[annotated_col], test_frame[pred])
+def roc_and_pr(test_frame: pd.DataFrame, annotated_col, pred) -> dict:
+    fpr, tpr, roc_thresholds = roc_curve(
+        test_frame[annotated_col], test_frame[pred])
     roc_auc = round(auc(fpr, tpr), 3)
     precision, recall, pr_thresholds = precision_recall_curve(
         test_frame[annotated_col], test_frame[pred])
     pr_auc = round(auc(recall, precision), 3)
-    result_dic = {"fpr": fpr, "tpr": tpr, "roc_thresholds": roc_thresholds, "roc_auc": roc_auc,
-                  "precision": precision, "recall": recall, "pr_thresholds": pr_thresholds, "pr_auc": pr_auc}
-    return result_dic
+    roc_and_pr_dic: dict = {"fpr": fpr, "tpr": tpr, "roc_thresholds": roc_thresholds, "roc_auc": roc_auc,
+                            "precision": precision, "recall": recall, "pr_thresholds": pr_thresholds, "pr_auc": pr_auc}
+    return roc_and_pr_dic

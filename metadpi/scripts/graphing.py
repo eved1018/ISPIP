@@ -110,15 +110,12 @@ def pymol_viz(bin_frame, proteins, predicted_col, annotated_col, pymolscriptpath
         pathlib.Path(new_folder).mkdir(parents=True, exist_ok=True)
 
         for pred in predicted_col:
-            pred_residues = protein_df[protein_df[f'{pred}_bin'] == 1].index.tolist(
-            )
+            pred_residues = protein_df[protein_df[f'{pred}_bin'] == 1].index.tolist()
             pred_residues = [i.split("_")[0] for i in pred_residues]
             pred_residues = "+".join(pred_residues)
-            annotated_resiues = protein_df[protein_df[annotated_col] == 1].index.tolist(
-            )
+            annotated_resiues = protein_df[protein_df[annotated_col] == 1].index.tolist()
             annotated_resiues = [i.split("_")[0] for i in annotated_resiues]
             annotated_resiues = "+".join(annotated_resiues)
-
             subprocess.run(
                 f"pymol -Q -c -q  {pymolscriptpath} -- {output_path_dir} {protein} {pred_residues} {annotated_resiues} {pred}", shell=True)
 
