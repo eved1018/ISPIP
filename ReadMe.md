@@ -14,7 +14,10 @@
 ---
 <p align="center">
 <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/ezgif-7-e32ea8fecb17.gif" >
+<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/rf-multi-numtrees.png" >
+
 </p>
+
 
 
 <h3> Requirements: </h3>
