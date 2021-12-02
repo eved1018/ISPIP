@@ -77,8 +77,8 @@ Output:
 - *.joblib: the trained models from a generate, test or cv run. Move these into the input directory to be used with 'predict' mode. 
 
 - pairtest.csv: Comparison of statistical significance between AUCs.
-- top triangle: difference in pairs of AUCs
-- bottom triangle: log(10) of p-values for the difference in pairs of AUCs.
+	- top triangle: difference in pairs of AUCs
+	- bottom triangle: log(10) of p-values for the difference in pairs of AUCs.
 - proteins: Directory containing pymol sessions for each protein in the test set.  
 - cvout: Directory containing the best parameters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
 
