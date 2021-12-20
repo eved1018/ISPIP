@@ -27,7 +27,7 @@ def main() -> None:
     # read input file containing residues, individual predictors and annotated columns.
     df: pd.DataFrame = pd.read_csv(args_container.input_frames_file)
 
-    # preprocess data -> remove any null or missing data from the dataset and check that annoted is number  nulls.
+    # preprocess data -> remove any null or missing data from the dataset and check that annoted is number nulls.
     df, feature_cols, annotated_col, proteins = data_preprocesss(df)
 
     predicted_col = feature_cols + \
