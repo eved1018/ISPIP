@@ -1,8 +1,9 @@
-import numpy as np
-import scipy.stats
 
 # AUC comparison adapted from
 # https://github.com/Netflix/vmaf/
+
+import numpy as np
+import scipy.stats
 
 
 def compute_midrank(x):
