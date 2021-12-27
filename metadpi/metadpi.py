@@ -92,6 +92,7 @@ def main() -> None:
     elif args_container.mode == 'cv':
         test_frame, cvs, train_proteins = cross_validation_set_generater(
             args_container.cvs_path, df)
+        print(test_frame, cvs, train_proteins)
         models = hyperparamtertuning_and_crossvalidation(
             df, train_proteins, feature_cols, annotated_col, args_container)
 

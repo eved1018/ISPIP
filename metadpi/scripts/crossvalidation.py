@@ -1,4 +1,4 @@
-#Evan Edelstein
+# Evan Edelstein
 
 import joblib
 from sklearn.linear_model import LogisticRegression, LinearRegression
@@ -80,14 +80,16 @@ def hyperparam(model, cvs, output_path_dir, name):
         col = f"split{c}_test_score"
         mean = round(cv_results[col].mean(), 3)
         stdev = round(cv_results[col].std(), 3)
-        best_score = cv_results.loc[[cv_results[col].idxmax(), [
-            'params', col, ]]].values
+        best_score = cv_results.loc[[
+            cv_results[col].idxmax(), ['params', col, ]]].values
         chart1_list.append(
             [c, best_score[0], round(best_score[1], 3), mean, stdev])
+
     means = model.cv_results_["mean_test_score"]
     stds = model.cv_results_["std_test_score"]
     for mean, std, params in zip(means, stds, model.cv_results_["params"]):
         chart2_list.append([params, mean, std * 2])
+
     by_params = pd.DataFrame(chart2_list, columns=[
                              "params", "mean roc auc", "+/- std"])
     best_score = pd.DataFrame(chart1_list, columns=[

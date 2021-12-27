@@ -30,8 +30,14 @@ def data_split_auto(df, proteins) -> tuple:
 def data_split_from_file(df: pd.DataFrame, args_container: ArgsContainer) -> tuple:
     test_file = args_container.test_proteins_file
     train_file = args_container.train_proteins_file
-    test_frame, lines = input_parser(test_file, df)
-    train_frame, lines = input_parser(train_file, df)
+    if test_file.endswith(".txt"):
+        test_frame, lines = input_parser_txt(test_file, df)
+    elif test_file.endswith(".csv"):
+        test_frame, lines = input_parser_csv(test_file, df)
+    if train_file.endswith(".txt"):
+        train_frame, lines = input_parser_txt(train_file, df)
+    elif train_file.endswith(".csv"):
+        train_frame, lines = input_parser_csv(train_file, df)
     return test_frame, train_frame
 
 
@@ -40,25 +46,40 @@ def cross_validation_set_generater(cvs_path: str, df: pd.DataFrame) -> tuple:
     train_proteins: list = []
     test_frame = None
     for file_name in os.listdir(cvs_path):
-        if file_name.startswith("training"):
+        if file_name.startswith("train"):
             file_name_path = os.path.join(cvs_path, file_name)
-            train_frame, lines = input_parser(file_name_path, df)
+            if file_name.endswith(".txt"):
+                train_frame, lines = input_parser_txt(file_name_path, df)
+            elif file_name.endswith(".csv"):
+                train_frame, lines = input_parser_csv(file_name_path, df)
             cvs.append(train_frame)
             train_proteins.append(lines)
 
         elif file_name.startswith("test"):
             file_name_path = os.path.join(cvs_path, file_name)
-            test_frame, _ = input_parser(file_name_path, df)
+            if file_name.endswith(".txt"):
+                test_frame, _ = input_parser_txt(file_name_path, df)
+            elif file_name.endswith(".csv"):
+                train_frame, line = input_parser_csv(file_name_path, df)
         else:
             print("please include test and train sets")
 
     return test_frame, cvs, train_proteins
 
 
-def input_parser(file, df) -> tuple:
+def input_parser_txt(file, df) -> tuple:
     with open(file) as f:
         lines = f.read().rstrip().splitlines()
     lines = [i if i[-2] == '.' else f"{i[:-1]}.{i[-1:]}" if i[-2].isdigit(
     ) or i[-2].isalpha() else i.replace(i[-2], '.') for i in lines]
     frame: pd.DataFrame = df[df['protein'].isin(lines)]
+    return frame, lines
+
+
+def input_parser_csv(file, df) -> tuple:
+    f = pd.read_csv(file, index_col=0)
+    lines = [i.upper() for i in f["protein"].values.tolist()]
+    print(f, lines)
+    frame: pd.DataFrame = df[df['protein'].isin(lines)]
+    print(frame)
     return frame, lines
