@@ -3,7 +3,7 @@ import os
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
-
+import sys
 from metadpi.scripts.containers.argscontainer import ArgsContainer
 
 
@@ -46,6 +46,7 @@ def cross_validation_set_generater(cvs_path: str, df: pd.DataFrame) -> tuple:
     train_proteins: list = []
     test_frame = None
     for file_name in os.listdir(cvs_path):
+        print(file_name)
         if file_name.startswith("train"):
             file_name_path = os.path.join(cvs_path, file_name)
             if file_name.endswith(".txt"):
@@ -62,8 +63,10 @@ def cross_validation_set_generater(cvs_path: str, df: pd.DataFrame) -> tuple:
             elif file_name.endswith(".csv"):
                 train_frame, line = input_parser_csv(file_name_path, df)
         else:
-            print("please include test and train sets")
-
+            pass
+    if not cvs:
+        print("please include test and train sets")
+        sys.exit()
     return test_frame, cvs, train_proteins
 
 
@@ -79,7 +82,5 @@ def input_parser_txt(file, df) -> tuple:
 def input_parser_csv(file, df) -> tuple:
     f = pd.read_csv(file, index_col=0)
     lines = [i.upper() for i in f["protein"].values.tolist()]
-    print(f, lines)
     frame: pd.DataFrame = df[df['protein'].isin(lines)]
-    print(frame)
     return frame, lines

@@ -80,10 +80,9 @@ def hyperparam(model, cvs, output_path_dir, name):
         col = f"split{c}_test_score"
         mean = round(cv_results[col].mean(), 3)
         stdev = round(cv_results[col].std(), 3)
-        best_score = cv_results.loc[[
-            cv_results[col].idxmax(), ['params', col, ]]].values
-        chart1_list.append(
-            [c, best_score[0], round(best_score[1], 3), mean, stdev])
+        print("\n\n", cv_results, "\n\n")
+        best_score = cv_results.loc[[cv_results[col].idxmax(), ['params', col, ]]].values
+        chart1_list.append([c, best_score[0], round(best_score[1], 3), mean, stdev])
 
     means = model.cv_results_["mean_test_score"]
     stds = model.cv_results_["std_test_score"]
