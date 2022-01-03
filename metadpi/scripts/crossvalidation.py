@@ -26,6 +26,7 @@ def hyperparamtertuning_and_crossvalidation(df: pd.DataFrame, cvs, feature_cols,
 
     p_grid = {"n_estimators": [10, 50, 100, 200], "max_depth": [
         None, 5, 10, 15], "ccp_alpha": [0.0, 0.25, 0.5, 0.75], "bootstrap": [True, False]}
+
     rf_model = GridSearchCV(estimator=RandomForestClassifier(
     ), param_grid=p_grid, cv=cviterator, scoring="roc_auc").fit(df[feature_cols], df[annotated_col])
     hyperparam(rf_model, cvs, args_container.output_path_dir, "rf")
@@ -33,15 +34,17 @@ def hyperparamtertuning_and_crossvalidation(df: pd.DataFrame, cvs, feature_cols,
 
     logit_frame = pd.DataFrame(cross_validate(LogisticRegression(
     ), df[feature_cols], df[annotated_col], cv=cviterator, return_estimator=True, scoring="roc_auc"))
-    logit_model = logit_frame.loc[[logit_frame['test_score'].idxmax(
-    ), "estimator"]]
+    print(logit_frame)
+    logit_model = logit_frame.loc[
+        logit_frame['test_score'].idxmax(), "estimator"]
 
     crossval_chart(logit_frame, args_container.output_path_dir, "logit")
 
     linmodel_frame = pd.DataFrame(cross_validate(LinearRegression(
     ), df[feature_cols], df[annotated_col], cv=cviterator, return_estimator=True, scoring="roc_auc"))
-    linear_model = linmodel_frame.loc[[linmodel_frame['test_score'].idxmax(
-    ), "estimator"]]
+    print(linmodel_frame)
+    linear_model = linmodel_frame.loc[linmodel_frame['test_score'].idxmax(
+    ), "estimator"]
     crossval_chart(linmodel_frame, args_container.output_path_dir, "linear")
 
     if args_container.nn:
@@ -80,9 +83,12 @@ def hyperparam(model, cvs, output_path_dir, name):
         col = f"split{c}_test_score"
         mean = round(cv_results[col].mean(), 3)
         stdev = round(cv_results[col].std(), 3)
-        print("\n\n", cv_results, "\n\n")
-        best_score = cv_results.loc[[cv_results[col].idxmax(), ['params', col, ]]].values
-        chart1_list.append([c, best_score[0], round(best_score[1], 3), mean, stdev])
+        print("\n\n", cv_results[col].idxmax(),
+              "\n\n", cv_results[col], "\n\n")
+        best_score = cv_results.loc[cv_results[col].idxmax(), [
+            'params', col, ]].values
+        chart1_list.append(
+            [c, best_score[0], round(best_score[1], 3), mean, stdev])
 
     means = model.cv_results_["mean_test_score"]
     stds = model.cv_results_["std_test_score"]

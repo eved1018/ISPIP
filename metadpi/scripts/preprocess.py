@@ -61,12 +61,14 @@ def cross_validation_set_generater(cvs_path: str, df: pd.DataFrame) -> tuple:
             if file_name.endswith(".txt"):
                 test_frame, _ = input_parser_txt(file_name_path, df)
             elif file_name.endswith(".csv"):
-                train_frame, line = input_parser_csv(file_name_path, df)
+                test_frame, line = input_parser_csv(file_name_path, df)
         else:
             pass
     if not cvs:
         print("please include test and train sets")
         sys.exit()
+    # print(cvs, train_proteins, test_frame)
+    
     return test_frame, cvs, train_proteins
 
 
