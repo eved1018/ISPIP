@@ -11,13 +11,6 @@ from .scripts.preprocess import data_preprocesss, data_split_auto,\
     data_split_from_file, cross_validation_set_generater
 pd.options.mode.chained_assignment = None  # default='warn'
 
-"""
-TODO:
-1) type saftey
-2) for output dir: create nested folders for ease of access!
-3) make folder for all models to output into
-4) make cvout folder for all cv stuff
-"""
 
 
 def main() -> None:
