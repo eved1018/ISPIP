@@ -1,7 +1,7 @@
 ,predus,ispred,dockpred,logisticregresion,linearregression,randomforest
-predus,predus,-0.094,-0.085,-0.153,-0.155,-0.163
-ispred,-12.785,ispred,0.01,-0.059,-0.06,-0.069
-dockpred,-12.979,-0.408,dockpred,-0.069,-0.07,-0.078
-logisticregresion,-51.493,-28.41,-18.394,logisticregresion,-0.001,-0.01
-linearregression,-54.271,-28.045,-19.283,-6.168,linearregression,-0.008
-randomforest,-64.615,-23.499,-27.943,-5.393,-4.584,randomforest
+predus,predus,-0.094,-0.085,-0.153,-0.155,-0.162
+ispred,-12.785,ispred,0.01,-0.059,-0.06,-0.068
+dockpred,-12.979,-0.408,dockpred,-0.069,-0.07,-0.077
+logisticregresion,-51.493,-28.41,-18.394,logisticregresion,-0.001,-0.009
+linearregression,-54.271,-28.045,-19.283,-6.168,linearregression,-0.007
+randomforest,-64.002,-22.923,-27.759,-4.515,-3.704,randomforest
