@@ -47,7 +47,7 @@ def pr_viz(pr_curve_data, output_path_dir, model_name, df, annotated_col):
         plt.plot(recall, precision, lw=lw, label=f"{pred} (area = {pr_auc})")
 
     pr_frame = pd.concat(pr_frames, axis=1)
-    pr_frame.to_csv(f"{output_path_dir}/roc_{model_name}.csv")
+    pr_frame.to_csv(f"{output_path_dir}/pr_{model_name}.csv")
     no_skill = len(df[df[annotated_col] == 1]) / len(df)
     plt.plot([0, 1], [no_skill, no_skill], linestyle='--', color='gray')
     plt.xlim([0.0, 1.0])

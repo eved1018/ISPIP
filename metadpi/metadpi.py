@@ -12,7 +12,6 @@ from .scripts.preprocess import data_preprocesss, data_split_auto,\
 pd.options.mode.chained_assignment = None  # default='warn'
 
 
-
 def main() -> None:
     # get Command line arguments and defaults.
     args_container: ArgsContainer = userinterface()
