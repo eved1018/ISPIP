@@ -1,6 +1,6 @@
 ,CV,best params,best ROC_AUC,mean,stdev
-0,0,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 50}",0.88,0.582,0.146
-1,1,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 50}",0.839,0.575,0.133
-2,2,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 200}",0.82,0.573,0.127
-3,3,"{'bootstrap': False, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 10}",0.881,0.587,0.153
-4,4,"{'bootstrap': False, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 10}",0.876,0.583,0.146
+0,0,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 200}",0.879,0.582,0.146
+1,1,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 200}",0.838,0.575,0.133
+2,2,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 10}",0.82,0.573,0.128
+3,3,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 10, 'n_estimators': 200}",0.88,0.587,0.153
+4,4,"{'bootstrap': False, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 50}",0.875,0.583,0.146

@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.metrics import f1_score, matthews_corrcoef
 
 
-def trainningsetstats():
+def trainningsetstats():   
     df = pd.read_csv(
         "/Users/evanedelstein/Desktop/MetaDPIv2/metadpi/input/input_data_all.csv")
 

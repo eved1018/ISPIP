@@ -1,4 +1,49 @@
 ,params,mean roc auc,+/- std
-0,{'loss': 'squared_error'},0.8501103748947155,0.05354149375037831
-1,{'loss': 'absolute_error'},0.5,0.0
-2,{'loss': 'poisson'},0.8494015793268753,0.0521100730126024
+0,"{'loss': 'squared_error', 'max_depth': None, 'max_leaf_nodes': None}",0.809492882935694,0.047941418703869955
+1,"{'loss': 'squared_error', 'max_depth': None, 'max_leaf_nodes': 5}",0.8551348415380648,0.050024295498780416
+2,"{'loss': 'squared_error', 'max_depth': None, 'max_leaf_nodes': 10}",0.8537017534408532,0.04935716790876187
+3,"{'loss': 'squared_error', 'max_depth': None, 'max_leaf_nodes': 15}",0.8536011203598672,0.05326177741198066
+4,"{'loss': 'squared_error', 'max_depth': 5, 'max_leaf_nodes': None}",0.8505375447821377,0.049009513766782746
+5,"{'loss': 'squared_error', 'max_depth': 5, 'max_leaf_nodes': 5}",0.8546941834779238,0.049781923625375375
+6,"{'loss': 'squared_error', 'max_depth': 5, 'max_leaf_nodes': 10}",0.8531561023439769,0.050209461224259906
+7,"{'loss': 'squared_error', 'max_depth': 5, 'max_leaf_nodes': 15}",0.8523485980465167,0.052180838131202945
+8,"{'loss': 'squared_error', 'max_depth': 10, 'max_leaf_nodes': None}",0.8295872890120272,0.05013253303489844
+9,"{'loss': 'squared_error', 'max_depth': 10, 'max_leaf_nodes': 5}",0.8553097536229007,0.051932705607095786
+10,"{'loss': 'squared_error', 'max_depth': 10, 'max_leaf_nodes': 10}",0.8542678805512571,0.050661354234627864
+11,"{'loss': 'squared_error', 'max_depth': 10, 'max_leaf_nodes': 15}",0.8549877114512874,0.05045929465904425
+12,"{'loss': 'squared_error', 'max_depth': 15, 'max_leaf_nodes': None}",0.8196772969742827,0.04563382762825527
+13,"{'loss': 'squared_error', 'max_depth': 15, 'max_leaf_nodes': 5}",0.8548094217244404,0.05287604736125876
+14,"{'loss': 'squared_error', 'max_depth': 15, 'max_leaf_nodes': 10}",0.8529161405708068,0.05174097509942127
+15,"{'loss': 'squared_error', 'max_depth': 15, 'max_leaf_nodes': 15}",0.8540401248582468,0.050386384314448675
+16,"{'loss': 'absolute_error', 'max_depth': None, 'max_leaf_nodes': None}",0.5,0.0
+17,"{'loss': 'absolute_error', 'max_depth': None, 'max_leaf_nodes': 5}",0.5,0.0
+18,"{'loss': 'absolute_error', 'max_depth': None, 'max_leaf_nodes': 10}",0.5,0.0
+19,"{'loss': 'absolute_error', 'max_depth': None, 'max_leaf_nodes': 15}",0.5,0.0
+20,"{'loss': 'absolute_error', 'max_depth': 5, 'max_leaf_nodes': None}",0.5,0.0
+21,"{'loss': 'absolute_error', 'max_depth': 5, 'max_leaf_nodes': 5}",0.5,0.0
+22,"{'loss': 'absolute_error', 'max_depth': 5, 'max_leaf_nodes': 10}",0.5,0.0
+23,"{'loss': 'absolute_error', 'max_depth': 5, 'max_leaf_nodes': 15}",0.5,0.0
+24,"{'loss': 'absolute_error', 'max_depth': 10, 'max_leaf_nodes': None}",0.5,0.0
+25,"{'loss': 'absolute_error', 'max_depth': 10, 'max_leaf_nodes': 5}",0.5,0.0
+26,"{'loss': 'absolute_error', 'max_depth': 10, 'max_leaf_nodes': 10}",0.5,0.0
+27,"{'loss': 'absolute_error', 'max_depth': 10, 'max_leaf_nodes': 15}",0.5,0.0
+28,"{'loss': 'absolute_error', 'max_depth': 15, 'max_leaf_nodes': None}",0.5,0.0
+29,"{'loss': 'absolute_error', 'max_depth': 15, 'max_leaf_nodes': 5}",0.5,0.0
+30,"{'loss': 'absolute_error', 'max_depth': 15, 'max_leaf_nodes': 10}",0.5,0.0
+31,"{'loss': 'absolute_error', 'max_depth': 15, 'max_leaf_nodes': 15}",0.5,0.0
+32,"{'loss': 'poisson', 'max_depth': None, 'max_leaf_nodes': None}",0.8179762195257189,0.05098680200143167
+33,"{'loss': 'poisson', 'max_depth': None, 'max_leaf_nodes': 5}",0.8560142954642733,0.04996426644547361
+34,"{'loss': 'poisson', 'max_depth': None, 'max_leaf_nodes': 10}",0.8541654019475027,0.0518057550464392
+35,"{'loss': 'poisson', 'max_depth': None, 'max_leaf_nodes': 15}",0.852508834845483,0.05098803068364607
+36,"{'loss': 'poisson', 'max_depth': 5, 'max_leaf_nodes': None}",0.8490428161257435,0.04840050993914018
+37,"{'loss': 'poisson', 'max_depth': 5, 'max_leaf_nodes': 5}",0.8561960966517754,0.05142164687066789
+38,"{'loss': 'poisson', 'max_depth': 5, 'max_leaf_nodes': 10}",0.8541661595759326,0.04931691819792547
+39,"{'loss': 'poisson', 'max_depth': 5, 'max_leaf_nodes': 15}",0.8520727646516695,0.05256559256616134
+40,"{'loss': 'poisson', 'max_depth': 10, 'max_leaf_nodes': None}",0.8343319521881808,0.05204632073575869
+41,"{'loss': 'poisson', 'max_depth': 10, 'max_leaf_nodes': 5}",0.8552699665838025,0.05137017827524633
+42,"{'loss': 'poisson', 'max_depth': 10, 'max_leaf_nodes': 10}",0.85384980845193,0.04936312828066197
+43,"{'loss': 'poisson', 'max_depth': 10, 'max_leaf_nodes': 15}",0.8525209854967344,0.04989880483002963
+44,"{'loss': 'poisson', 'max_depth': 15, 'max_leaf_nodes': None}",0.8265547900018154,0.04475238306872329
+45,"{'loss': 'poisson', 'max_depth': 15, 'max_leaf_nodes': 5}",0.8546110880498983,0.049400877572659
+46,"{'loss': 'poisson', 'max_depth': 15, 'max_leaf_nodes': 10}",0.8545342161942772,0.0541497673723179
+47,"{'loss': 'poisson', 'max_depth': 15, 'max_leaf_nodes': 15}",0.853050078635641,0.05217376008590677

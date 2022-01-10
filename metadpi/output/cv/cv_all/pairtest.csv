@@ -1,8 +1,8 @@
 ,predus,ispred,dockpred,logisticregresion,linearregression,randomforest,xgboost
-predus,predus,-0.096,-0.075,-0.152,-0.154,-0.165,-0.171
-ispred,-14.373,ispred,0.021,-0.056,-0.058,-0.069,-0.075
-dockpred,-9.75,-1.185,dockpred,-0.077,-0.079,-0.09,-0.096
-logisticregresion,-53.93,-31.263,-18.695,logisticregresion,-0.002,-0.013,-0.019
-linearregression,-57.533,-31.02,-19.724,-8.693,linearregression,-0.011,-0.017
-randomforest,-71.412,-25.777,-29.274,-7.904,-6.582,randomforest,-0.006
-xgboost,-71.917,-28.959,-32.674,-11.871,-10.378,-4.458,xgboost
+predus,predus,-0.096,-0.075,-0.152,-0.154,-0.165,-0.167
+ispred,-14.373,ispred,0.021,-0.056,-0.058,-0.069,-0.071
+dockpred,-9.75,-1.185,dockpred,-0.077,-0.079,-0.09,-0.092
+logisticregresion,-53.93,-31.263,-18.695,logisticregresion,-0.002,-0.013,-0.015
+linearregression,-57.533,-31.02,-19.724,-8.693,linearregression,-0.011,-0.013
+randomforest,-72.036,-25.994,-29.741,-8.529,-7.231,randomforest,-0.002
+xgboost,-69.465,-27.207,-30.781,-9.088,-7.586,-1.018,xgboost
