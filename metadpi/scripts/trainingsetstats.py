@@ -44,4 +44,10 @@ def cutoff_file_parser(cutoff_frame) -> dict:
     return cutoff_dict
 
 
-trainningsetstats()
+# trainningsetstats()
+
+
+
+
+
+

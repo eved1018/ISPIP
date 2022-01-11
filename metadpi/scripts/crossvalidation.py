@@ -64,8 +64,7 @@ def hyperparamtertuning_and_crossvalidation(df: pd.DataFrame, cvs, feature_cols,
                        "max_leaf_nodes": [None, 5, 10, 15],
                        "max_depth": [None, 5, 10, 15]
                        }
-        xgb_model = GridSearchCV(estimator=HistGradientBoostingRegressor(
-        ), param_grid=xparam_grid, cv=cviterator, scoring="roc_auc").fit(df[feature_cols], df[annotated_col])
+        xgb_model = GridSearchCV(estimator=HistGradientBoostingRegressor(), param_grid=xparam_grid, cv=cviterator, scoring="roc_auc").fit(df[feature_cols], df[annotated_col])
         hyperparam(xgb_model, cvs, args_container.output_path_dir, "xgb")
         xgb_model.best_estimator_
     else:
