@@ -1,0 +1,6 @@
+,CV,best params,best ROC_AUC,mean,stdev
+0,0,{'loss': 'poisson'},0.849,0.732,0.201
+1,1,{'loss': 'squared_error'},0.873,0.748,0.215
+2,2,{'loss': 'squared_error'},0.859,0.738,0.206
+3,3,{'loss': 'squared_error'},0.803,0.701,0.174
+4,4,{'loss': 'squared_error'},0.827,0.715,0.187

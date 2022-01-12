@@ -8,8 +8,8 @@ from metadpi.scripts.containers.argscontainer import ArgsContainer
 
 
 def data_preprocesss(df: pd.DataFrame) -> tuple:
-    feature_cols: list = df.columns.tolist()[1:-1]
-    # feature_cols = ["ispred", "dockpred"]
+    # feature_cols: list = df.columns.tolist()[1:-1]
+    feature_cols = ["ispred", "dockpred"]
     annotated_col: str = df.columns.tolist()[-1]
     df["protein"] = [x.split('_')[1] for x in df['residue']]
     proteins: np.ndarray = df["protein"].unique()

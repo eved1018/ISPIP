@@ -1,0 +1,4 @@
+,params,mean roc auc,+/- std
+0,{'loss': 'squared_error'},0.7828341874667266,0.08641896950256497
+1,{'loss': 'absolute_error'},0.5,0.0
+2,{'loss': 'poisson'},0.7738274848057449,0.08967834334246118

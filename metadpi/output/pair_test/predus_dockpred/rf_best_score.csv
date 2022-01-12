@@ -1,0 +1,6 @@
+,CV,best params,best ROC_AUC,mean,stdev
+0,0,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 50}",0.813,0.563,0.116
+1,1,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 200}",0.837,0.567,0.121
+2,2,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 200}",0.765,0.551,0.093
+3,3,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 100}",0.713,0.545,0.08
+4,4,"{'bootstrap': True, 'ccp_alpha': 0.0, 'max_depth': 5, 'n_estimators': 200}",0.813,0.565,0.117
