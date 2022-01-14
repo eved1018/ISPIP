@@ -32,7 +32,7 @@ with pymol2.PyMOL() as p1:
     cmd.color("green", "predicted")
     cmd.set("sphere_transparency", "0", "predicted")
     cmd.set("cartoon_transparency", "1", "predicted")
-    cmd.remove("resn hoh")
+    cmd.remove("resn hoh and not polymer.protein")
     cmd.bg_color("white")
     cmd.zoom(complete=1)
     cmd.save(f"{output_path_dir}/proteins/{pdbid}/pymol_{pred}.pse")
