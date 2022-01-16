@@ -13,7 +13,7 @@
 
 ---
 <p align="center">
-<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/ezgif-7-e32ea8fecb17.gif" >
+<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/ezgif-2-992a01766233.gif " >
 </p>
 
 
@@ -102,9 +102,9 @@ Output:
 
 <p>Terence Parr and Prince Grover for use of dtreeviz.</p>
 
-<p align="center">
+<!-- <p align="center">
 <img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/rf-numtrees.png" >
 </p>
- 
+  -->
 	
 
