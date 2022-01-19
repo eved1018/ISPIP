@@ -1,15 +1,19 @@
 # Evan Edelstein
 import pymol2
 import sys
+"""
+1) color TPs as deep blue 
 
+"""
 
 with pymol2.PyMOL() as p1:
     cmd = p1.cmd
     output_path_dir = sys.argv[1]
     pdbid = sys.argv[2]
-    pred_residues = sys.argv[3]
-    annotated_resiues = sys.argv[4]
-    pred = sys.argv[5]
+    tp_residues = sys.argv[3]
+    fp_residues = sys.argv[4]
+    annotated_resiues = sys.argv[5]
+    pred = sys.argv[6]
 
     cmd.fetch(f"{pdbid}")
     cmd.orient(f"{pdbid}")
@@ -19,19 +23,31 @@ with pymol2.PyMOL() as p1:
     cmd.select("ann", f"resi {annotated_resiues}")
     cmd.indicate("bycalpha ann")
     cmd.create("annotated", "indicate")
-    cmd.select("pred", f"resi {pred_residues}")
-    cmd.indicate("bycalpha pred")
-    cmd.create("predicted", "indicate")
 
     cmd.show("sphere", "annotated")
     cmd.color("pink", "annotated")
-    cmd.set("sphere_transparency", "0.5", "annotated")
+    cmd.set("sphere_transparency", "0.4", "annotated")
 
-    cmd.show("sphere", "predicted")
-    cmd.set("sphere_scale", "0.5", "predicted")
-    cmd.color("green", "predicted")
-    cmd.set("sphere_transparency", "0", "predicted")
-    cmd.set("cartoon_transparency", "1", "predicted")
+    cmd.select("tp_residues", f"resi {tp_residues}")
+    cmd.indicate("bycalpha tp_residues")
+    cmd.create("tp_residues", "indicate")
+
+    cmd.select("fp_residues", f"resi {fp_residues}")
+    cmd.indicate("bycalpha fp_residues")
+    cmd.create("fp_residues", "indicate")
+
+    cmd.show("sphere", "tp_residues")
+    cmd.set("sphere_scale", "0.5", "tp_residues")
+    cmd.color("green", "tp_residues")
+    cmd.set("sphere_transparency", "0", "tp_residues")
+    cmd.set("cartoon_transparency", "1", "tp_residues")
+
+    cmd.show("sphere", "fp_residues")
+    cmd.set("sphere_scale", "0.5", "fp_residues")
+    cmd.color("orange", "fp_residues")
+    cmd.set("sphere_transparency", "0.65", "fp_residues")
+    cmd.set("cartoon_transparency", "1", "fp_residues")
+
     cmd.remove("resn hoh and not polymer.protein")
     cmd.bg_color("white")
     cmd.zoom(complete=1)
