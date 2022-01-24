@@ -18,7 +18,7 @@ with pymol2.PyMOL() as p1:
     cmd.fetch(f"{pdbid}")
     cmd.orient(f"{pdbid}")
 
-    cmd.color("blue")
+    cmd.color("orange")
     cmd.set("cartoon_transparency", "0.75")
     cmd.select("ann", f"resi {annotated_resiues}")
     cmd.indicate("bycalpha ann")
@@ -44,8 +44,8 @@ with pymol2.PyMOL() as p1:
 
     cmd.show("sphere", "fp_residues")
     cmd.set("sphere_scale", "0.5", "fp_residues")
-    cmd.color("orange", "fp_residues")
-    cmd.set("sphere_transparency", "0.65", "fp_residues")
+    cmd.color("deepblue", "fp_residues")
+    cmd.set("sphere_transparency", "0.45", "fp_residues")
     cmd.set("cartoon_transparency", "1", "fp_residues")
 
     cmd.remove("resn hoh and not polymer.protein")
