@@ -54,9 +54,9 @@ def parse(args: argparse.Namespace) -> ArgsContainer:
                 "train and or test sets are not set, random 80/20 ditribution will be used")
             args_container.use_test_train_files = False
 
-    elif not os.path.isfile(args_container.cutoff_frame):
+    if not os.path.isfile(args_container.cutoff_frame):
         print(
-            f"cutoffs not found, a global cutoff of {args.autocutoff} residues will be used")
+            f"cutoffs not found, a global cutoff of {args.autocutoff} residues will be used (this value can be changed with the -autocutoff flag")
         args_container.use_cutoff_from_file = False
 
     elif not os.path.isfile(args_container.input_frames_file):

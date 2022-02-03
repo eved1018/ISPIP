@@ -24,7 +24,7 @@ def hyperparamtertuning_and_crossvalidation(df: pd.DataFrame, cvs, feature_cols,
         testindices = df[df["protein"].isin(testk)].index.values.astype(int)
         cviterator.append((trainindices, testindices))
 
-    p_grid = {"n_estimators": [10, 50, 100, 200], "max_depth": [
+    p_grid = {"n_estimators": [N], "max_depth": [
         None, 5, 10, 15], "ccp_alpha": [0.0, 0.25, 0.5, 0.75], "bootstrap": [True, False]}
 
     rf_model = GridSearchCV(estimator=RandomForestClassifier(

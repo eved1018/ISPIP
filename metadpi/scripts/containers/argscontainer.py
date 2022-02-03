@@ -10,7 +10,7 @@ class ArgsContainer:
         self.mode: str = args.modeselection
         self.folder_path: pathlib.Path = folder_path
         self.model_name: str = args.model_name
-        self.autocutoff: int = args.autocutoff
+        self.autocutoff: int = int(args.autocutoff)
         self.plotmode: str = args.plotselection
         self.use_test_train_files: bool = True
         self.use_cutoff_from_file: bool = True
