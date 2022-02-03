@@ -46,7 +46,7 @@ def postprocess(test_frame, predicted_col, args_container, annotated_col, autocu
                     test_frame, annotated_col, index, column)
                 stats_df.loc[index, column] = pval  # below diagnol
                 stats_df.loc[column, index] = auc_diff  # above diagnol
-
+    
     return result_df, roc_curve_data, pr_curve_data, test_frame, fscore_mcc_by_protein, stats_df
 
 
