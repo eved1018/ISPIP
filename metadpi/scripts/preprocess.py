@@ -14,7 +14,7 @@ def data_preprocesss(df: pd.DataFrame) -> tuple:
     proteins: np.ndarray = df["protein"].unique()
     df.set_index('residue', inplace=True)
     df.isnull().any()
-    df = df.fillna(method='ffill')
+    df = df.fillna(0)
     df = df[df['annotated'] != "ERROR"]
     df["annotated"] = pd.to_numeric(df["annotated"])
     return df, feature_cols, annotated_col, proteins
