@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
 import sys
-from metadpi.scripts.containers.argscontainer import ArgsContainer
+from ispip.scripts.containers.argscontainer import ArgsContainer
 
 
 def data_preprocesss(df: pd.DataFrame) -> tuple:
@@ -13,8 +13,8 @@ def data_preprocesss(df: pd.DataFrame) -> tuple:
     df["protein"] = [x.split('_')[1] for x in df['residue']]
     proteins: np.ndarray = df["protein"].unique()
     df.set_index('residue', inplace=True)
-    df.isnull().any()
-    df = df.fillna(0)
+    df.isnull().any()  # double check use
+    df = df.fillna(0)  # fill empty
     df = df[df['annotated'] != "ERROR"]
     df["annotated"] = pd.to_numeric(df["annotated"])
     return df, feature_cols, annotated_col, proteins

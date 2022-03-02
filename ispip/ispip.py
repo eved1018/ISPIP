@@ -1,5 +1,5 @@
 import os
-from metadpi.scripts.containers.argscontainer import ArgsContainer
+from ispip.scripts.containers.argscontainer import ArgsContainer
 from .scripts.cli_interface import userinterface
 import pandas as pd
 from .scripts.postprocess import postprocess
