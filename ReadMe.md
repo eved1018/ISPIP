@@ -25,9 +25,9 @@
 
 <h3>Usage: </h3>
 	
-- `git clone https://github.com/eved1018/MetaDPIv2.git`
-- `cd MetaDPIv2`
-- `python -m metadpi` 
+- `git clone https://github.com/eved1018/ISPIP.git`
+- `cd ISPIP`
+- `python -m ISPIP` 
 
 
 <h3>Arguments:</h3>
