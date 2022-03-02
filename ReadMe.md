@@ -13,7 +13,7 @@
 
 ---
 <p align="center">
-<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/ezgif-2-992a01766233.gif " >
+<img src="https://github.com/eved1018/ISPIP/blob/main/Media/ezgif-2-992a01766233.gif" >
 </p>
 
 
