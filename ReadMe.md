@@ -1,4 +1,4 @@
-# Meta-DPI: 
+# ISIP: 
 
 <br>[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5706324.svg)](https://doi.org/10.5281/zenodo.5706324)
 
@@ -13,7 +13,7 @@
 
 ---
 <p align="center">
-<img src="https://github.com/eved1018/MetaDPIv2/blob/main/Media/ezgif-2-992a01766233.gif " >
+<img src="https://github.com/eved1018/ISPIP/blob/main/Media/ezgif-2-992a01766233.gif" >
 </p>
 
 
@@ -25,9 +25,9 @@
 
 <h3>Usage: </h3>
 	
-- `git clone https://github.com/eved1018/MetaDPIv2.git`
-- `cd MetaDPIv2`
-- `python -m metadpi` 
+- `git clone https://github.com/eved1018/ISPIP.git`
+- `cd ISPIP`
+- `python -m ISPIP` 
 
 
 <h3>Arguments:</h3>
