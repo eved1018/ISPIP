@@ -1,6 +1,10 @@
-# ISIP: 
+# ISPIP: 
 
-<br>[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5706324.svg)](https://doi.org/10.5281/zenodo.5706324)
+
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6323262.svg)](https://doi.org/10.5281/zenodo.6323262)
+
+
 
 
 ---
@@ -9,7 +13,7 @@
 ## Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser
 ---
 ### Motivation: 
-<p>The identification of a protein’s binding interface is key to understanding its role in the cellular interactome, how it mechanistically functions with its complex partner, and how mutations affect its binding properties. A variety of computational approaches have been developed for predicting a protein’s interfacial residues from its intrinsic features, as well as from the features of homologues. Here we describe the development of meta-DPI to explore the hypothesis that the efficacy of a computational prediction method can be enhanced by combining it with other methods that are based on orthogonal properties of query proteins. Meta-DPI is a metamethod that integrates the orthogonal approaches of DockPred, ISPRED 4, and PredUs 2.0 by either logistic regression or random forest. Meta-DPI significantly outperforms each of its constituent methods in predicting protein binding interfaces.</p>
+<p>The identification of a protein’s binding interface is key to understanding its role in the cellular interactome, how it mechanistically functions with its complex partner, and how mutations affect its binding properties. A variety of computational approaches have been developed for predicting a protein’s interfacial residues from its intrinsic features, as well as from the features of homologues. Here we describe the development of meta-DPI to explore the hypothesis that the efficacy of a computational prediction method can be enhanced by combining it with other methods that are based on orthogonal properties of query proteins. ISPIP is a metamethod that integrates the orthogonal approaches of DockPred, ISPRED 4, and PredUs 2.0 by either logistic regression or random forest. ISPIP significantly outperforms each of its constituent methods in predicting protein binding interfaces.</p>
 
 ---
 <p align="center">
