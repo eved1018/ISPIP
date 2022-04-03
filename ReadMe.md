@@ -50,11 +50,11 @@
 
 - Mode selection:
 	* `-mode`: ['predict', 'test', 'generate','cv','viz'] default: 'predict'  
-		* predict: Use pre-trained model in input folder to predict on set.
-		* generate: Generate a new rf model from a test set without predicting on any data.
-		* test: Generate a new rf model from a test set and train on a training set.
-		* viz: Only call the pymol visualization function.
-		* cv: perform cross-validation and hyperparameter tuning of models on split training set, the best models are then used to predict on a designated testing set. 
+		* __predict__: Use pre-trained model in input folder to predict on set.
+		* __generate__: Generate a new rf model from a test set without predicting on any data.
+		* __test__: Generate a new rf model from a test set and train on a training set.
+		* __viz__: Only call the pymol visualization function.
+		* __cv__: perform cross-validation and hyperparameter tuning of models on split training set, the best models are then used to predict on a designated testing set. 
 
 
 - Parameters: 
