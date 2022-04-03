@@ -20,13 +20,14 @@
 <!-- <p align="center">
 <img src="Media/ezgif-2-992a01766233.gif" >
 </p> -->
-![image](Media/test2.png)
+![image](Media/1cp2_gif.gif)
 
 
 <h3> Requirements: </h3>
-- python3  (tested with 3.7 and above)
-- packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt' 
-- optional: pymol, dtreeviz and graphviz
+
+* python3  (tested with 3.7 and above)
+* packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt' 	
+* optional: pymol, dtreeviz and graphviz
 
 <h3>Usage: </h3>
 	
