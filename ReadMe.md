@@ -17,10 +17,10 @@
 <p> In this work, we describe the development of an integrated method to explore the hypothesis that the efficacy of a computational prediction method of protein binding sites can be enhanced by using a combination of methods that rely on orthogonal structure-based properties of a query protein, combining and balancing both template-free and template-based features. ISPIP is a method that integrates these approaches by linear or logistic regression, random forest, or Gradient boosted tree models. ISPIP on a diverse test set of query proteins outperforms each of its individual classifiers in identifying protein binding interfaces.</p>
 
 ---
-<p align="center">
+<!-- <p align="center">
 <img src="Media/ezgif-2-992a01766233.gif" >
-</p>
-
+</p> -->
+![image](Media/test2.png)
 
 
 <h3> Requirements: </h3>
