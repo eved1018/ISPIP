@@ -1,4 +1,4 @@
-# ISPIP: 
+# ISPIP: Integrated Structure-based Protein Interface Prediction
 
 
 
