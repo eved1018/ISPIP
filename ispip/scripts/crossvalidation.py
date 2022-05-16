@@ -48,17 +48,18 @@ def hyperparamtertuning_and_crossvalidation(df: pd.DataFrame, cvs, feature_cols,
     crossval_chart(linmodel_frame, args_container.output_path_dir, "linear")
 
     # IN DEVELOPMENT 
-    if args_container.nn:
-        param_grid = {'hidden_layer_sizes': [(50, 50, 50), (50, 100, 50), (100, 1)],
-                      'alpha': [0.0001, 0.05],
-                      'learning_rate': ['constant', 'adaptive'],
-                      }
-        nn_model = GridSearchCV(estimator=MLPRegressor(), param_grid=param_grid,
-                                cv=cviterator, scoring="roc_auc").fit(df[feature_cols], df[annotated_col])
-        hyperparam(nn_model, cvs, args_container.output_path_dir, "NN")
-        nn_model = nn_model.best_estimator_
-    else:
-        nn_model = None
+    # if args_container.nn:
+    #     param_grid = {'hidden_layer_sizes': [(50, 50, 50), (50, 100, 50), (100, 1)],
+    #                   'alpha': [0.0001, 0.05],
+    #                   'learning_rate': ['constant', 'adaptive'],
+    #                   }
+    #     nn_model = GridSearchCV(estimator=MLPRegressor(), param_grid=param_grid,
+    #                             cv=cviterator, scoring="roc_auc").fit(df[feature_cols], df[annotated_col])
+    #     hyperparam(nn_model, cvs, args_container.output_path_dir, "NN")
+    #     nn_model = nn_model.best_estimator_
+    # else:
+    #     nn_model = None
+    nn_model = None
 
     if args_container.xg:
         xparam_grid = {"loss": ["squared_error", "absolute_error", "poisson"]}

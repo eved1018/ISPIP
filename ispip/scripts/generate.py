@@ -13,8 +13,9 @@ def generate(df, feature_cols, annotated_col, output_path_dir, model_name, rf_pa
         df, feature_cols, annotated_col, output_path_dir, model_name)
     logreg_model = logreg_generate_model(
         df, feature_cols, annotated_col, output_path_dir, model_name)
-    NN_model = NueralNet_generate_model(
-        df, feature_cols, annotated_col, output_path_dir, model_name) if nn else None
+    NN_model = None
+    # NN_model = NueralNet_generate_model(
+    #     df, feature_cols, annotated_col, output_path_dir, model_name) if nn else None
     xgboost_model = xgboost_generate_model(
         df, feature_cols, annotated_col, output_path_dir, model_name) if xg else None
     models = [rf_model, linreg_model, logreg_model, NN_model, xgboost_model]
@@ -51,10 +52,10 @@ def logreg_generate_model(df, feature_cols, annotated_col, output_path_dir, mode
     return regr
 
 # IN DEVELOPMENT 
-def NueralNet_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name): 
-    regr = MLPRegressor().fit(df[feature_cols], df[annotated_col])
-    joblib.dump(regr, f"{output_path_dir}/NN_{model_name}.joblib", compress=3)
-    return regr
+# def NueralNet_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name): 
+#     regr = MLPRegressor().fit(df[feature_cols], df[annotated_col])
+#     joblib.dump(regr, f"{output_path_dir}/NN_{model_name}.joblib", compress=3)
+#     return regr
 
 
 def xgboost_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name):

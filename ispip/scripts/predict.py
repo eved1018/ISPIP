@@ -48,7 +48,7 @@ def linreg_predict_from_trained_model(df, feature_cols, linreg_model) -> pd.Data
 
 
 def nueralnet_predict_from_trained_model(df, feature_cols, nn_model) -> pd.DataFrame: # IN DEVELOPMENT 
-    df["nueralnet"] = nn_model.predict(df[feature_cols])
+    # df["nueralnet"] = nn_model.predict(df[feature_cols])
     return df
 
 
