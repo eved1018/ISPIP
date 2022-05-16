@@ -69,7 +69,7 @@
 	* `-pymol`: Output pymol session and image of protein with experimental and predicted interfaces overladed. 
 	* `-tv`: Output svg image of a randomly sampled tree (for large datasets this can take up a huge amount of time and space) see https://github.com/parrt/dtreeviz for details.
 	* `-xg`: Include the use of gradient boosting regression model.
-	* `-nn`: Include the use of Multi-layer Perceptron regressor model.
+	* `-nn`: Include the use of Multi-layer Perceptron regressor model (In development).
 
 
 Output:
