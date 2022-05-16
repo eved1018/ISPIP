@@ -9,7 +9,6 @@ from .compare_auc_delong_xu import delong_roc_test
 TODO:
 """
 
-
 def postprocess(test_frame, predicted_col, args_container, annotated_col, autocutoff) -> tuple:
     proteins = test_frame.protein.unique()
     results = []

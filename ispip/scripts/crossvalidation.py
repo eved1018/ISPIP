@@ -47,6 +47,7 @@ def hyperparamtertuning_and_crossvalidation(df: pd.DataFrame, cvs, feature_cols,
     ), "estimator"]
     crossval_chart(linmodel_frame, args_container.output_path_dir, "linear")
 
+    # IN DEVELOPMENT 
     if args_container.nn:
         param_grid = {'hidden_layer_sizes': [(50, 50, 50), (50, 100, 50), (100, 1)],
                       'alpha': [0.0001, 0.05],

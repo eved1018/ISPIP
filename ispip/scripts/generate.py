@@ -50,10 +50,9 @@ def logreg_generate_model(df, feature_cols, annotated_col, output_path_dir, mode
         regr, f"{output_path_dir}/Logit_{model_name}.joblib", compress=3)
     return regr
 
-
-def NueralNet_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name):
+# IN DEVELOPMENT 
+def NueralNet_generate_model(df, feature_cols, annotated_col, output_path_dir, model_name): 
     regr = MLPRegressor().fit(df[feature_cols], df[annotated_col])
-
     joblib.dump(regr, f"{output_path_dir}/NN_{model_name}.joblib", compress=3)
     return regr
 

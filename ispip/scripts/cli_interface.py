@@ -26,7 +26,7 @@ def userinterface() -> ArgsContainer:
     parser.add_argument('-xg', '--xgboost',
                         action='store_true', help='add -xg to use it')
     parser.add_argument('-nn', '--nuarelnet',
-                        action='store_true', help='add -nn to use it')
+                        action='store_true', help='add -nn to use it, Feature is IN DEVELOPMENT ')
     parser.add_argument('-pymol', '--protein_visualization',
                         action='store_true', help='add -pymol to use it ')
     parser.add_argument('-cutoffs', default='cutoffs.csv', help='')
