@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn import linear_model
 import joblib
 from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingRegressor
-from sklearn.neural_network import MLPRegressor
+# from sklearn.neural_network import MLPRegressor
 
 
 def generate(df, feature_cols, annotated_col, output_path_dir, model_name, rf_params, nn, xg):
