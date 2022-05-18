@@ -1,7 +1,0 @@
-,ispred,dockpred,logisticregresion,linearregression,randomforest,xgboost
-ispred,ispred,0.021,-0.047,-0.047,0.147,-0.045
-dockpred,-1.185,dockpred,-0.068,-0.069,0.125,-0.066
-logisticregresion,-25.377,-15.183,logisticregresion,-0.0,0.193,0.002
-linearregression,-25.28,-15.554,-9.39,linearregression,0.194,0.002
-randomforest,-38.582,-21.476,-77.418,-77.843,randomforest,-0.192
-xgboost,-14.092,-15.251,-0.357,-0.498,-79.847,xgboost

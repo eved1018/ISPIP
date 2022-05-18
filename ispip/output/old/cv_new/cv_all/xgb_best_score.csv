@@ -1,6 +1,0 @@
-,CV,best params,best ROC_AUC,mean,stdev
-0,0,"{'loss': 'poisson', 'max_depth': 10, 'max_leaf_nodes': 5}",0.87,0.74,0.172
-1,1,"{'loss': 'poisson', 'max_depth': None, 'max_leaf_nodes': 5}",0.883,0.747,0.177
-2,2,"{'loss': 'squared_error', 'max_depth': 5, 'max_leaf_nodes': 5}",0.871,0.74,0.172
-3,3,"{'loss': 'poisson', 'max_depth': None, 'max_leaf_nodes': 5}",0.826,0.711,0.151
-4,4,"{'loss': 'poisson', 'max_depth': None, 'max_leaf_nodes': 5}",0.84,0.72,0.158

@@ -8,26 +8,26 @@
 
 ## Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser
 ---
-### Motivation: 
-<p>Identifying protein interfaces is important to learn how proteins interact with their binding partners, to uncover the regulatory mechanisms to control biological functions and to develop novel therapeutic agents. A variety of computational approaches have been developed for predicting a protein’s interfacial residues from its sequence features, such as physico-chemical properties of residues, as well as using structure-based information from known interfaces that share high sequence or structure similarity. Structure-based methods that rely on finding suitable templates will not be successful in predicting interfaces when structural homologues with known complex structures are not available. <p>
-<p> In this work, we describe the development of an integrated method to explore the hypothesis that the efficacy of a computational prediction method of protein binding sites can be enhanced by using a combination of methods that rely on orthogonal structure-based properties of a query protein, combining and balancing both template-free and template-based features. ISPIP is a method that integrates these approaches by linear or logistic regression, random forest, or Gradient boosted tree models. ISPIP on a diverse test set of query proteins outperforms each of its individual classifiers in identifying protein binding interfaces.</p>
+### Abstarct: 
+<p>Background: Identifying protein interfaces can inform how proteins interact with their binding partners, uncover the regulatory mechanisms that control biological functions and guide the development of novel therapeutic agents. A variety of computational approaches have been developed for predicting a protein’s interfacial residues from its known sequence and structure. Methods using the known three- dimensional structures of proteins can be template-based or template-free. Template-based methods have limited success in predicting interfaces when homologues with known complex structures are not available to use as templates. The prediction performance of template-free methods that only rely only upon proteins’ intrinsic properties is limited by the amount of biologically relevant features that can be included in an interface prediction model.</p>
+<p>Results: We describe the development of an integrated method, ISPIP, to explore the hypothesis that the efficacy of a computational prediction method of protein binding sites can be enhanced by using a combination of methods that rely on orthogonal structure-based properties of a query protein, combining and balancing both template-free and template-based features. ISPIP is a method that integrates these approaches through simple linear or logistic regression models and more complex decision tree models. On a diverse test set of 156 query proteins, ISPIP outperforms each of its individual classifiers in identifying protein binding interfaces. </p>
+<p>Conclusions: The integrated method captures the best performance of individual classifiers and delivers an improved interface prediction. The method is robust and performs well even when one of the individual classifiers performs poorly on a particular query protein. This work demonstrates that integrating orthogonal methods that depend on different structural properties of proteins performs better at interface prediction than any individual classifier alone.</p>
+
 
 ---
 
 ![image](Media/1cp2_gif.gif)
 
+---
 
 <h3> Requirements: </h3>
 
 * python3  (tested with 3.7 and above)
-* packages listed in requirements.txt to install execute 'pip3 install -r requirements.txt' 	
-* optional: pymol, dtreeviz and graphviz
 
 <h3>Usage: </h3>
 	
-- `git clone https://github.com/eved1018/ISPIP.git`
-- `cd ISPIP`
-- `python -m ISPIP` 
+- `pip install ISPIP`
+- `ISPIP` 
 
 
 <h3>Arguments:</h3>

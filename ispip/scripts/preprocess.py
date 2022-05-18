@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
 import sys
-from ispip.scripts.containers.argscontainer import ArgsContainer
+from .argscontainer import ArgsContainer
 
 
 def data_preprocesss(df: pd.DataFrame) -> tuple:
