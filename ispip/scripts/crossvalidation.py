@@ -3,7 +3,7 @@
 import joblib
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingRegressor
-from sklearn.neural_network import MLPRegressor
+# from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV, cross_validate
 from itertools import chain
 import pandas as pd
