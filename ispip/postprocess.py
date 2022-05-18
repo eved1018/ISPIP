@@ -2,7 +2,7 @@
 from sklearn.metrics import auc, matthews_corrcoef, f1_score, precision_recall_curve, roc_curve
 import pandas as pd
 from concurrent.futures import ProcessPoolExecutor
-from .compare_auc_delong_xu import delong_roc_test
+from compare_auc_delong_xu import delong_roc_test
 
 
 """"

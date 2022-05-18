@@ -2,7 +2,7 @@
 import argparse
 import pathlib
 import os
-from .argscontainer import ArgsContainer
+from argscontainer import ArgsContainer
 import sys
 
 

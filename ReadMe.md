@@ -27,7 +27,7 @@
 <h3>Usage: </h3>
 	
 - `pip install ISPIP`
-- `ISPIP` 
+- `ispip` 
 
 
 <h3>Arguments:</h3>

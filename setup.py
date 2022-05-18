@@ -1,4 +1,4 @@
-from setuptools import setup  
+from setuptools import setup
 
 if __name__ == '__main__':
     with open("ReadMe.md", "r", encoding="utf-8") as fh:
@@ -11,7 +11,7 @@ if __name__ == '__main__':
         author='Evan Edelstein',
         author_email='edelsteinevan@gmail.com',
         license='MIT',
-        packages=['ispip'],
+        packages=['ispip', "ispip/scripts"],
         data_files=[('',["ReadMe.md"])],
         install_requires=[         
             'pandas',         

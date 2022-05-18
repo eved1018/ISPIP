@@ -1,13 +1,13 @@
 import os
-from .scripts.argscontainer import ArgsContainer
-from .scripts.cli_interface import userinterface
+from argscontainer import ArgsContainer
+from cli_interface import userinterface
 import pandas as pd
-from .scripts.postprocess import postprocess
-from .scripts.crossvalidation import hyperparamtertuning_and_crossvalidation
-from .scripts.generate import generate
-from .scripts.predict import predict
-from .scripts.graphing import roc_viz, pr_viz, treeviz, pymol_viz
-from .scripts.preprocess import data_preprocesss, data_split_auto,\
+from postprocess import postprocess
+from crossvalidation import hyperparamtertuning_and_crossvalidation
+from generate import generate
+from predict import predict
+from graphing import roc_viz, pr_viz, treeviz, pymol_viz
+from preprocess import data_preprocesss, data_split_auto,\
     data_split_from_file, cross_validation_set_generater
 pd.options.mode.chained_assignment = None  # default='warn'
 
