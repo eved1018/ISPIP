@@ -1,17 +1,18 @@
 from setuptools import setup  
 
 if __name__ == '__main__':
-    with open("README.md", "r", encoding="utf-8") as fh:
+    with open("ReadMe.md", "r", encoding="utf-8") as fh:
         long_description = fh.read()
 
     setup(name='ISPIP',
-        version="1.2",
+        version="1.5",
         description='Integrated Structure-based Protein Interface Prediction',
         url='https://github.com/eved1018/ISPIP',
         author='Evan Edelstein',
         author_email='edelsteinevan@gmail.com',
         license='MIT',
         packages=['ispip'],
+        data_files=[('',["ReadMe.md"])],
         install_requires=[         
             'pandas',         
             'scikit-learn',
