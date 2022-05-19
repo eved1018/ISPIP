@@ -11,7 +11,7 @@
 
 ---
 
-### Abstarct: 
+### Abstract: 
 
 __Background__
 <p>Identifying protein interfaces can inform how proteins interact with their binding partners, uncover the regulatory mechanisms that control biological functions and guide the development of novel therapeutic agents. A variety of computational approaches have been developed for predicting a protein’s interfacial residues from its known sequence and structure. Methods using the known three- dimensional structures of proteins can be template-based or template-free. Template-based methods have limited success in predicting interfaces when homologues with known complex structures are not available to use as templates. The prediction performance of template-free methods that only rely only upon proteins’ intrinsic properties is limited by the amount of biologically relevant features that can be included in an interface prediction model.</p>
