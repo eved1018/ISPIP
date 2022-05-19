@@ -44,10 +44,10 @@ __Conclusions__
 - Input/Output:
 	* `-if`: [str] default: empty - Directory containing input data.
 	* `-of`: [str] default: output - Directory to place output of MeatDPI.
-	* `-i`: [str] default: input.csv - Csv file should be in input folder.
+	* `-i`: [str] default: input.csv - csv input file. 
 	* `-cv`: [str] default: cv - Directory containing test and train sets for cross-validation. 
-	* `-trainset`: [str] default: test_set.txt - Filename containing proteins for models to train on should be in input folder.
-	* `-testset`: [str] default: train_set.txt - Filename containing proteins for models to test on should be in input folder.
+	* `-trainset`: [str] default: test_set.txt - Filename containing proteins for models to train on.
+	* `-testset`: [str] default: train_set.txt - Filename containing proteins for models to test on.
 	* `-cutoffs`: [str] default:'cutoffs.csv' - Filename containing length of interface or precalculated cutoff for each protein. 
 	* `-model_name`: [str] default:'model' - Name of models to import/export.
 
