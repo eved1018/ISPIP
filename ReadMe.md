@@ -4,10 +4,12 @@
 
 
 ---
-## Written by Evan Edelstein 
 
-## Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser
+<H2>Written by Evan Edelstein<H2>
+<H2>Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser<H2>
+
 ---
+
 ### Abstarct: 
 
 __Background__
