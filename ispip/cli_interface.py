@@ -33,7 +33,7 @@ def userinterface() -> ArgsContainer:
     parser.add_argument('-autocutoff', default='15', help='')
     parser.add_argument('-model_name', default='model', help='')
     parser.add_argument('-of', '--outputfolder', default='output', help='')
-    parser.add_argument('-if', '--inputfolder', default='input', help='')
+    parser.add_argument('-if', '--inputfolder', default='', help='')
     parser.add_argument('-cv', '--cvfoldername', default='cv', help='')
     # TODO add this argscontainer
     parser.add_argument('-plot', '--plotselection', choices=[
@@ -47,6 +47,8 @@ def userinterface() -> ArgsContainer:
 def parse(args: argparse.Namespace) -> ArgsContainer:
     folder_path: pathlib.Path = pathlib.Path(__file__).parent.parent
     args_container = ArgsContainer(args, folder_path)
+
+    os.makedirs(args_container.output_path_dir, exist_ok=True)
 
     if args_container.mode == 'test':
         if (not os.path.isfile(args_container.test_proteins_file)) or (not os.path.isfile(args_container.train_proteins_file)):
