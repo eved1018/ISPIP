@@ -25,7 +25,7 @@ __Conclusions__
 
 ---
 
-| ![image](Media/1cp2_gif.gif) | ![image](Media/legend-removebg-preview.png) |
+| ![image](Media/output-onlinegiftools.gif) | ![image](Media/legend-removebg-preview.png) |
 | --- | --- |
 | The structure of 1CP2.A is shown with the annotated and predicted interface resiues highlighted in pink and green respectively | 
 
