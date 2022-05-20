@@ -25,7 +25,11 @@ __Conclusions__
 
 ---
 
-![image](Media/1cp2_gif.gif)
+<!-- ![image](Media/1cp2_gif.gif) -->
+
+|  ![image](Media/1cp2_gif.gif) |  ![image](Media/legend-removebg-preview.png)|
+| --- | --- |
+
 
 ---
 
