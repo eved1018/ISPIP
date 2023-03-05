@@ -10,8 +10,7 @@ def postprocess(test_frame, predicted_col, args_container, annotated_col, autocu
     results = []
     roc_curve_data: list = []
     pr_curve_data: list = []
-    fscore_mcc_by_protein = pd.DataFrame(index=proteins)
-    data_frames = []
+    fscore_mcc_dfs = []
     cutoff_dict = cutoff_file_parser(args_container.cutoff_frame) if (
         args_container.use_cutoff_from_file) else {protein: autocutoff for protein in proteins}
     # make testframe and cutoff dict this self in class
@@ -22,12 +21,12 @@ def postprocess(test_frame, predicted_col, args_container, annotated_col, autocu
         return_vals = exe.map(analyses, params)
         for return_val in return_vals:
             test_frame[f'{return_val[0]}_bin'] = return_val[1]
-            data_frames.append(return_val[2])
+            fscore_mcc_dfs.append(return_val[2])
             results.append(return_val[3])
             roc_curve_data.append(return_val[4])
             pr_curve_data.append(return_val[5])
 
-    fscore_mcc_by_protein = reduce(lambda  left,right: pd.merge(left,right,right_index=True, left_index=True), data_frames)
+    fscore_mcc_by_protein = reduce(lambda  left,right: pd.merge(left,right,  on="protein", how = 'outer'), fscore_mcc_dfs)
     result_df = pd.DataFrame(
         results, columns=['predictor', 'f-score', 'mcc', 'roc_auc', 'pr_auc'])
     stats_df = pd.DataFrame(index=predicted_col, columns=predicted_col)
@@ -60,10 +59,12 @@ def analyses(params) -> tuple:
     test_frame[f'{pred}_bin'] = [
         1 if i in top else 0 for i in test_frame.index.tolist()]
     
-    fscore_mcc_by_protein = pd.DataFrame()
+    fscores = test_frame.groupby(["protein"]).apply( lambda x: fscore(x, annotated_col, pred))
+    mccs= test_frame.groupby(["protein"]).apply( lambda x: mcc(x, annotated_col, pred))
 
-    fscore_mcc_by_protein[[f"{pred}_fscore", f"{pred}_fscore"]] = test_frame.groupby(["protein"]).apply(
-        lambda x:fscore_mcc(x, annotated_col, pred)).values.to_list()
+    fscores = pd.DataFrame({f"{pred}_fscore": fscores}).reset_index()
+    mccs = pd.DataFrame({f"{pred}_mcc":mccs}).reset_index()
+    fscore_mcc_by_protein = pd.merge(fscores, mccs, on ="protein")
 
     fscore, mcc = fscore_mcc(test_frame, annotated_col, pred)
     roc_and_pr_dic = roc_and_pr(test_frame, annotated_col, pred)
