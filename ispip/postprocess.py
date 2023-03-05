@@ -3,7 +3,7 @@ from sklearn.metrics import auc, matthews_corrcoef, f1_score, precision_recall_c
 import pandas as pd
 from concurrent.futures import ProcessPoolExecutor
 from .compare_auc_delong_xu import delong_roc_test
-
+from functools import reduce
 
 def postprocess(test_frame, predicted_col, args_container, annotated_col, autocutoff) -> tuple:
     proteins = test_frame.protein.unique()
@@ -11,6 +11,7 @@ def postprocess(test_frame, predicted_col, args_container, annotated_col, autocu
     roc_curve_data: list = []
     pr_curve_data: list = []
     fscore_mcc_by_protein = pd.DataFrame(index=proteins)
+    data_frames = []
     cutoff_dict = cutoff_file_parser(args_container.cutoff_frame) if (
         args_container.use_cutoff_from_file) else {protein: autocutoff for protein in proteins}
     # make testframe and cutoff dict this self in class
@@ -21,13 +22,12 @@ def postprocess(test_frame, predicted_col, args_container, annotated_col, autocu
         return_vals = exe.map(analyses, params)
         for return_val in return_vals:
             test_frame[f'{return_val[0]}_bin'] = return_val[1]
-            fscore_mcc_by_protein[[
-                f'{return_val[0]}_fscore', f'{return_val[0]}_mcc']] = return_val[2].values.tolist()
-
+            data_frames.append(return_val[2])
             results.append(return_val[3])
             roc_curve_data.append(return_val[4])
             pr_curve_data.append(return_val[5])
 
+    fscore_mcc_by_protein = reduce(lambda  left,right: pd.merge(left,right,right_index=True, left_index=True), data_frames)
     result_df = pd.DataFrame(
         results, columns=['predictor', 'f-score', 'mcc', 'roc_auc', 'pr_auc'])
     stats_df = pd.DataFrame(index=predicted_col, columns=predicted_col)
@@ -57,11 +57,13 @@ def analyses(params) -> tuple:
     pred, cutoff_dict, test_frame, annotated_col = params
     top = test_frame.sort_values(by=[pred], ascending=False).groupby((["protein"])).apply(
         lambda x: x.head(cutoff_dict[x.name])).index.get_level_values(1).tolist()
-
     test_frame[f'{pred}_bin'] = [
         1 if i in top else 0 for i in test_frame.index.tolist()]
-    fscore_mcc_per_protein = test_frame.groupby((["protein"])).apply(
-        lambda x: fscore_mcc(x, annotated_col, pred))
+    
+    fscore_mcc_by_protein = pd.DataFrame()
+
+    fscore_mcc_by_protein[[f"{pred}_fscore", f"{pred}_fscore"]] = test_frame.groupby(["protein"]).apply(
+        lambda x:fscore_mcc(x, annotated_col, pred)).values.to_list()
 
     fscore, mcc = fscore_mcc(test_frame, annotated_col, pred)
     roc_and_pr_dic = roc_and_pr(test_frame, annotated_col, pred)
@@ -74,12 +76,11 @@ def analyses(params) -> tuple:
     prlist = [pred, roc_and_pr_dic["recall"], roc_and_pr_dic["precision"],
               roc_and_pr_dic["pr_auc"], roc_and_pr_dic["pr_thresholds"]]
 
-    return pred, test_frame[f'{pred}_bin'], fscore_mcc_per_protein, results_list, roclist, prlist
+    return pred, test_frame[f'{pred}_bin'], fscore_mcc_by_protein, results_list, roclist, prlist
 
 
 def fscore_mcc(x, annotated_col, pred) -> tuple:
     return f1_score(x[annotated_col], x[f'{pred}_bin']), matthews_corrcoef(x[annotated_col], x[f'{pred}_bin'])
-
 
 def statistics(x, annotated_col, pred1, pred2) -> tuple:
     y_true = x[annotated_col]
@@ -93,8 +94,6 @@ def statistics(x, annotated_col, pred1, pred2) -> tuple:
     return log10_pval, test, dauc
 
 # name better, type correct
-
-
 def roc_and_pr(test_frame: pd.DataFrame, annotated_col, pred) -> dict:
     fpr, tpr, roc_thresholds = roc_curve(
         test_frame[annotated_col], test_frame[pred])

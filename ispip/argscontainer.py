@@ -39,4 +39,5 @@ class ArgsContainer:
                                 args.random_forest_parameter_depth, args.random_forest_parameter_ccp]
         self.pymolscriptpath: str = os.path.join(
             folder_path, 'scripts', 'pymolviz.py')
+        self.results_df_input = args.results_df_input
         return

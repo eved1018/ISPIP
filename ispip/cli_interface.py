@@ -13,7 +13,7 @@ def userinterface() -> ArgsContainer:
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--inputfile',
                         default='input_data_all.csv', help='input file name')
-    parser.add_argument('-mode', '--modeselection', choices=['predict', 'test', 'generate', 'cv', 'viz'], default='predict',
+    parser.add_argument('-mode', '--modeselection', choices=['predict', 'test', 'generate', 'cv', 'viz', "reprocess"], default='predict',
                         help="predict: Use pretrained model in input folder to predict on set.\nTest_Train: genrate a new rf model from a test set and train on a training set.\nGenerate:  genrate a new rf model from a test set without predicting on any data.\ncrossvalidateion")
     parser.add_argument('-trainset', default='train_set.txt', help='')
     parser.add_argument('-testset', default='test_set.txt', help='')
@@ -38,7 +38,7 @@ def userinterface() -> ArgsContainer:
     # TODO add this argscontainer
     parser.add_argument('-plot', '--plotselection', choices=[
                         'plot', 'csv', 'both'], default='both', help="output pr and roc curve as csv, png or both")
-
+    parser.add_argument('--results_df_input' ,help="csv output from predict mode to reprocess")
     args: argparse.Namespace = parser.parse_args()
     args_container: ArgsContainer = parse(args)
     return args_container

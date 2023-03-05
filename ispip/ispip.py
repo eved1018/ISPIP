@@ -52,7 +52,7 @@ def main() -> None:
 
     # Mode 3: test/train
 
-    elif args_container.mode == 'test':
+    elif args_container.mode == 'train':
 
         if args_container.use_test_train_files:
             test_frame, train_frame = data_split_from_file(df, args_container)
@@ -65,6 +65,7 @@ def main() -> None:
         # train
         models, tree = generate(train_frame, feature_cols, annotated_col, args_container.output_path_dir,
                                 args_container.model_name, args_container.rf_params, args_container.nn, args_container.xg)  # train
+    
         # test
         test_frame = predict(test_frame, feature_cols, args_container.input_folder_path,
                              args_container.model_name, args_container.nn, args_container.xg, models)
@@ -119,6 +120,18 @@ def main() -> None:
 
         pymol_viz(bin_frame, protein_to_viz, predicted_col, annotated_col,
                   args_container.pymolscriptpath, args_container.output_path_dir)
+    # Mode 6: Post process: 
+    if args_container.mode == 'reprocess':
+        results_df = pd.read_csv(args_container.results_df_input)
+        results_df, roc_curve_data, pr_curve_data, bin_frame, fscore_mcc_by_protein, stats_df = postprocess(
+            results_df, predicted_col, args_container, annotated_col, args_container.autocutoff)
+        
+        df_saver(results_df, "results", args_container.output_path_dir)
+        df_saver(bin_frame, "bin_frame", args_container.output_path_dir)
+        df_saver(fscore_mcc_by_protein, "fscore_mcc_by_protein",
+                 args_container.output_path_dir)
+        visualization(roc_curve_data, pr_curve_data, None, df, feature_cols,
+                      annotated_col, predicted_col, df, bin_frame, args_container)
 
     else:
         print("mode is set incorrectly")
