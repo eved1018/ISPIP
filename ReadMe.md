@@ -58,7 +58,7 @@ __Conclusions__
 
 
 - Mode selection:
-	* `-mode`: ['predict', 'train', 'generate','cv','viz', "test] default: 'predict'  
+	* `-mode`: ['predict', 'train', 'generate','cv','viz', "reprocess"] default: 'predict'  
 		* __predict__: Use pre-trained model in input folder to predict on set.
 		* __generate__: Generate a new rf model from a test set without predicting on any data.
 		* __train__: Generate a new rf model from a test set and train on a training set (the runs predict).
