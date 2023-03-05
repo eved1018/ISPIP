@@ -55,7 +55,7 @@ __Conclusions__
 	* `-testset`: [str] default: train_set.txt - Filename containing proteins for models to test on.
 	* `-cutoffs`: [str] default:'cutoffs.csv' - Filename containing length of interface or precalculated cutoff for each protein. 
 	* `-model_name`: [str] default:'model' - Name of models to import/export.
-
+	* `results_df`: [str] - path to result file from previous "predict" run to reprocess.(normally named bin_frame.csv)
 
 - Mode selection:
 	* `-mode`: ['predict', 'train', 'generate','cv','viz', "reprocess"] default: 'predict'  
@@ -64,7 +64,7 @@ __Conclusions__
 		* __train__: Generate a new rf model from a test set and train on a training set (the runs predict).
 		* __viz__: Only call the pymol visualization function.
 		* __cv__: Perform cross-validation and hyperparameter tuning of models on split training set, the best models are then used to predict on a designated testing set.  
-		* __reprocess__: Generate statistcis from a succesful predict 
+		* __reprocess__: Generate statistics from a succesful predict run. (takes --results_df_input as input)
 
 
 - Parameters: 

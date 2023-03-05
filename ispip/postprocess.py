@@ -83,6 +83,12 @@ def analyses(params) -> tuple:
 def fscore_mcc(x, annotated_col, pred) -> tuple:
     return f1_score(x[annotated_col], x[f'{pred}_bin']), matthews_corrcoef(x[annotated_col], x[f'{pred}_bin'])
 
+def fscore(x, annotated_col, pred) -> tuple:
+    return f1_score(x[annotated_col], x[f'{pred}_bin'])
+
+def mcc(x, annotated_col, pred) -> tuple:
+    return matthews_corrcoef(x[annotated_col], x[f'{pred}_bin'])
+
 def statistics(x, annotated_col, pred1, pred2) -> tuple:
     y_true = x[annotated_col]
     y1 = x[pred1]
