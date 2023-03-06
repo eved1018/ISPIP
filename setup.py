@@ -5,7 +5,7 @@ if __name__ == '__main__':
         long_description = fh.read()
 
     setup(name='ISPIP',
-        version="1.11",
+        version="1.12",
         description='Integrated Structure-based Protein Interface Prediction',
         url='https://github.com/eved1018/ISPIP',
         author='Evan Edelstein',
@@ -30,5 +30,5 @@ if __name__ == '__main__':
             
         })
 
-#python setup.py sdist
-#python3 -m twine upload dist/*
+# python setup.py sdist
+# python3 -m twine upload dist/*
