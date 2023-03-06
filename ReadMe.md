@@ -2,13 +2,15 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6323262.svg)](https://doi.org/10.5281/zenodo.6323262)
 
-
-
 ---
 
-<p1>Written by Evan Edelstein<p1>
+<p1> 
+Written by Evan Edelstein 
+</p1>
 
-<p1>Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser<p1>
+<p1> 
+Manuscript by R. Viswanathan, M. Walder, E. Edelstein, S. Lazarev, M. Carroll, J.E. Fajardo, A. Fiser 
+</p1>
 
 [Walder, M., Edelstein, E., Carroll, M. et al. Integrated structure-based protein interface prediction.](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-022-04852-2)
 

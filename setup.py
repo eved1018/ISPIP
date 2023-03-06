@@ -5,7 +5,7 @@ if __name__ == '__main__':
         long_description = fh.read()
 
     setup(name='ISPIP',
-        version="1.9",
+        version="1.11",
         description='Integrated Structure-based Protein Interface Prediction',
         url='https://github.com/eved1018/ISPIP',
         author='Evan Edelstein',
