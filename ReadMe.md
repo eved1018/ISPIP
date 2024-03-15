@@ -34,7 +34,7 @@ __Conclusions__
 
 <h3> Requirements: </h3>
 
-* python3  (tested with 3.7 and above)
+* python3.7
 
 <h3>Usage: </h3>
 
