@@ -173,3 +173,7 @@ def visualization(roc_curve_data, pr_curve_data, tree, df, feature_cols, annotat
         pymol_viz(bin_frame, protein_to_viz, predicted_col, annotated_col,
                   args_container.pymolscriptpath, args_container.output_path_dir)
     return
+
+# if __name__ == "__main__":
+#     main()
+

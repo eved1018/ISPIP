@@ -37,10 +37,20 @@ __Conclusions__
 * python3  (tested with 3.7 and above)
 
 <h3>Usage: </h3>
-	
-- `pip install ISPIP`
-- `ispip` 
 
+```shell
+pip install ISPIP
+ispip
+```
+
+<h3>Development: </h3>
+
+```shell
+git clone https://github.com/eved1018/ISPIP
+cd ISPIP
+pip install -r requirements.txt`
+python3 main.py
+```
 
 <h3>Arguments:</h3>
 
