@@ -40,7 +40,7 @@ __Conclusions__
 
 ```shell
 pip install ISPIP
-ispip -i /path/to/input/file
+ispip -i /path/to/input/file --mode generate
 ```
 
 <h3>Development: </h3>
@@ -48,7 +48,7 @@ ispip -i /path/to/input/file
 ```shell
 git clone https://github.com/eved1018/ISPIP
 cd ISPIP
-pip install -r requirements.txt`
+pip3 install -r requirements.txt
 python3 main.py -i /path/to/input/file
 ```
 

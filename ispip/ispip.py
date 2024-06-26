@@ -52,7 +52,7 @@ def main() -> None:
 
     # Mode 3: test/train
 
-    elif args_container.mode == 'train':
+    elif args_container.mode == 'test':
 
         if args_container.use_test_train_files:
             test_frame, train_frame = data_split_from_file(df, args_container)

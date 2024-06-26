@@ -28,7 +28,7 @@ def userinterface() -> ArgsContainer:
     parser.register('action', 'ignore', DeprecateAction)
     parser.add_argument('-i', '--inputfile',
                         default='input_data_all.csv', help='CSV Filename with columns: "residue","predus","ispred","dockpred","annotated". The column residue is of the form {residue number}_{PDB ID}.{chain}. The annotated column is 1 or interface residue and 0 for non-interface residue')
-    parser.add_argument('-m', '--mode', choices=['predict', 'test', 'generate', 'cv', 'viz', "reprocess"], default='predict',
+    parser.add_argument('-m', '--mode', dest="modeselection", choices=['predict', 'test', 'generate', 'cv', 'viz', "reprocess"], default='predict',
                         help="predict: Use pretrained model in input folder to predict on set.\nTest_Train: generate a new rf model from a test set and train on a training set.\nGenerate:  genrate a new rf model from a test set without predicting on any data.\ncrossvalidateion")
 
     parser.add_argument('--trainset', default='train_set.csv', help='CSV Filename containing proteins for models to train on with columns: protein,size. The column protein is of the form {PDB ID}.{chain}')
