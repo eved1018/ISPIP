@@ -59,7 +59,7 @@ def main() -> None:
         else:
             test_frame, train_frame = data_split_auto(df, proteins)
 
-        print(f'lenght of test set: {len(test_frame)}',
+        print(f'length of test set: {len(test_frame)}',
               f"length of training set: {len(train_frame)}")
 
         # train

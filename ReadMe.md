@@ -40,7 +40,7 @@ __Conclusions__
 
 ```shell
 pip install ISPIP
-ispip
+ispip -i /path/to/input/file
 ```
 
 <h3>Development: </h3>
@@ -49,24 +49,33 @@ ispip
 git clone https://github.com/eved1018/ISPIP
 cd ISPIP
 pip install -r requirements.txt`
-python3 main.py
+python3 main.py -i /path/to/input/file
 ```
 
 <h3>Arguments:</h3>
 
 - Input/Output:
-	* `-if`: [str] default: empty - Directory containing input data.
-	* `-of`: [str] default: output - Directory to place output of MeatDPI.
-	* `-i`: [str] default: input.csv - csv input file. 
-	* `-cv`: [str] default: cv - Directory containing test and train sets for cross-validation. 
-	* `-trainset`: [str] default: test_set.txt - Filename containing proteins for models to train on.
-	* `-testset`: [str] default: train_set.txt - Filename containing proteins for models to test on.
-	* `-cutoffs`: [str] default:'cutoffs.csv' - Filename containing length of interface or precalculated cutoff for each protein. 
-	* `-model_name`: [str] default:'model' - Name of models to import/export.
-	* `results_df`: [str] - path to result file from previous "predict" run to reprocess.(normally named bin_frame.csv)
+	* `-if`: [str] default: None - Directory containing trained models. This folder should contain .joblib files to use as model inputs. 
+
+
+			| Model    | Name |
+			| -------- | ------- |
+			| RandomForest  | RF_{model_name}.joblib    |
+			| Log Regression  | Logit_{model_name}.joblib    |
+			| Lin Regression  | LinRerg_{model_name}.joblib    |
+			| XGBoost  | XGB_{model_name}.joblib    |
+
+	* `-of`: [str] default: output - Directory to place output of ISPIP.
+	* `-i`: [str] default: input.csv - CSV Filename with columns: "residue","predus","ispred","dockpred","annotated". The column residue is of the form {residue number}_{PDB ID}.{chain}. The annotated column is 1 or interface residue and 0 for non-interface residue'
+	* `-cv`: [str] default: cv -'Directory containing test and train sets for cross-validation. Same csv format as train/test. Filenames should start with train and test
+	* `--trainset`: [str] default: test_set.txt - CSV Filename containing proteins for models to train on with columns: protein,size. The column protein is of the form {PDB ID}.{chain}
+	* `--testset`: [str] default: train_set.txt - CSV Filename containing proteins for models to test on with columns: protein,size. The column protein is of the form {PDB ID}.{chain}
+	* `--cutoffs`: [str] default:'cutoffs.csv' - CSV Filename containing length of interface or precalculated cutoff for each protein. File should have columns: Protein,surface res,cutoff res,annotated res. 
+	* `--model-name`: [str] default:'model' - Name of models to import/export. (see -if about)
+	* `--results-df`: [str] - path to result file from previous "predict" run to reprocess. (normally named bin_frame.csv)
 
 - Mode selection:
-	* `-mode`: ['predict', 'train', 'generate','cv','viz', "reprocess"] default: 'predict'  
+	* `--mode`: ['predict', 'train', 'generate','cv','viz', "reprocess"] default: 'predict'  
 		* __predict__: Use pre-trained model in input folder to predict on set.
 		* __generate__: Generate a new rf model from a test set without predicting on any data.
 		* __train__: Generate a new rf model from a test set and train on a training set (the runs predict).
@@ -76,14 +85,14 @@ python3 main.py
 
 
 - Parameters: 
-	* `-randomforest_parameter_trees`: [integer] default: 10 - Scikit learn 'n_estimators' parameter.
-	* `-random_forest_parameter_depth`: [integer] default: None - Scikit learn 'max_depth' parameter.
-	* `-random_forest_parameter_ccp`: [float] default: 0.0 - Scikit learn 'ccp_alpha' parameter. (https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning).
-	* `-autocutoff`: [int] default: 15 - If no cutoff file is used this sets the default interface cutoff value.
+	* `--rf-trees`: [integer] default: 10 - Scikit learn 'n_estimators' parameter.
+	* `--rf-depth`: [integer] default: None - Scikit learn 'max_depth' parameter.
+	* `--rf-ccp`: [float] default: 0.0 - Scikit learn 'ccp_alpha' parameter. (https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning).
+	* `--autocutoff`: [int] default: 15 - If no cutoff file is used this sets the default interface cutoff value.
 
 
 - Flags: 
-	* `-pymol`: Output pymol session and image of protein with experimental and predicted interfaces overladed. 
+	* `--pymol`: Output pymol session and image of protein with experimental and predicted interfaces overladed. 
 	* `-tv`: Output svg image of a randomly sampled tree (for large datasets this can take up a huge amount of time and space) see https://github.com/parrt/dtreeviz for details.
 	* `-xg`: Include the use of gradient boosting regression model.
 
@@ -102,7 +111,7 @@ Output:
 	- top triangle: difference in pairs of AUCs
 	- bottom triangle: log(10) of p-values for the difference in pairs of AUCs.
 - `proteins`: Directory containing pymol sessions for each protein in the test set.  
-- `cvou`t: Directory containing the best parameters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
+- `cvout`: Directory containing the best parameters for each model used in the final prediction, as well as the individual metrics over each cross validation step. 
 
 
 ---
@@ -112,5 +121,8 @@ Output:
 
 <p>Terence Parr and Prince Grover for use of dtreeviz.</p>
 
-	
+
+---
+### Updates:
+Please Consult the CHANGELOG.md for all updates
 
