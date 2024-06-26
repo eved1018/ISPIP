@@ -66,8 +66,8 @@ python3 main.py -i /path/to/input/file
 			| XGBoost  | XGB_{model_name}.joblib    |
 
 	* `-of`: [str] default: output - Directory to place output of ISPIP.
-	* `-i`: [str] default: input.csv - CSV Filename with columns: "residue","predus","ispred","dockpred","annotated". The column residue is of the form {residue number}_{PDB ID}.{chain}. The annotated column is 1 or interface residue and 0 for non-interface residue'
-	* `-cv`: [str] default: cv -'Directory containing test and train sets for cross-validation. Same csv format as train/test. Filenames should start with train and test
+	* `-i`: [str] default: input.csv - CSV Filename with columns: "residue","predus","ispred","dockpred","annotated". The column residue is of the form {residue number}_{PDB ID}.{chain}. The annotated column is 1 or interface residue and 0 for non-interface residue
+	* `-cv`: [str] default: cv -Directory containing test and train sets for cross-validation. Same csv format as train/test. Filenames should start with train and test
 	* `--trainset`: [str] default: test_set.txt - CSV Filename containing proteins for models to train on with columns: protein,size. The column protein is of the form {PDB ID}.{chain}
 	* `--testset`: [str] default: train_set.txt - CSV Filename containing proteins for models to test on with columns: protein,size. The column protein is of the form {PDB ID}.{chain}
 	* `--cutoffs`: [str] default:'cutoffs.csv' - CSV Filename containing length of interface or precalculated cutoff for each protein. File should have columns: Protein,surface res,cutoff res,annotated res. 
