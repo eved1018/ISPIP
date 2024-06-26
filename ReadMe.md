@@ -79,10 +79,9 @@ python3 main.py -i /path/to/input/file
 		* __predict__: Use pre-trained model in input folder to predict on set.
 		* __generate__: Generate a new rf model from a test set without predicting on any data.
 		* __train__: Generate a new rf model from a test set and train on a training set (the runs predict).
-		* __viz__: Only call the pymol visualization function.
+		* __viz__: Only call the pymol visualization function. (takes --results_df_input and -cv as input)
 		* __cv__: Perform cross-validation and hyperparameter tuning of models on split training set, the best models are then used to predict on a designated testing set.  
 		* __reprocess__: Generate statistics from a succesful predict run. (takes --results_df_input as input)
-
 
 - Parameters: 
 	* `--rf-trees`: [integer] default: 10 - Scikit learn 'n_estimators' parameter.

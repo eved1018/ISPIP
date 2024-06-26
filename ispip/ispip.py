@@ -111,11 +111,10 @@ def main() -> None:
     # Mode 5: visualization
 
     elif args_container.mode == 'viz':
-        test_frame, cvs, train_proteins = cross_validation_set_generater(
-            args_container.cvs_path, df)
-
-        bin_frame = pd.read_csv(os.path.join(
-            args_container.output_path_dir, "bin_frame.csv"), index_col=0)
+        test_frame, cvs, train_proteins = cross_validation_set_generater(args_container.cvs_path, df)
+        # bin_frame = pd.read_csv(os.path.join(
+        #     args_container.output_path_dir, "bin_frame.csv"), index_col=0)
+        bin_frame = pd.read_csv(args_container.results_df_input, index_col=0)
         protein_to_viz = test_frame["protein"].unique()
 
         pymol_viz(bin_frame, protein_to_viz, predicted_col, annotated_col,
