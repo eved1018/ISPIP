@@ -1,6 +1,7 @@
 # Evan Edelstein
 
 import joblib
+from sklearn.experimental import enable_hist_gradient_boosting
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingRegressor
 # from sklearn.neural_network import MLPRegressor

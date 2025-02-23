@@ -90,7 +90,7 @@ def parse(args: argparse.Namespace) -> ArgsContainer:
 
     if not os.path.isfile(args_container.cutoff_frame):
         print(
-            f"cutoffs not found, a global cutoff of {args.autocutoff} residues will be used (this value can be changed with the -autocutoff flag")
+            f"cutoffs not found, a global cutoff of {args.autocutoff} residues will be used (this value can be changed with the --autocutoff flag")
         args_container.use_cutoff_from_file = False
 
     elif not os.path.isfile(args_container.input_frames_file):
