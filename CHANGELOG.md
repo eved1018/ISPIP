@@ -1,3 +1,6 @@
+## 2025.02.23
+* Add experimental import to crossvalidation
+* Add dockerfile and steps to run in readme
 
 ## - 2024.06.25
 

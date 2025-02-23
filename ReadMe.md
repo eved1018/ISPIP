@@ -34,14 +34,29 @@ __Conclusions__
 
 <h3> Requirements: </h3>
 
-* python3.7
+* python3.7 or Docker
 
-<h3>Usage: </h3>
+<h3>CLI Usage: </h3>
 
 ```shell
 pip install ISPIP
 ispip -i /path/to/input/file --mode generate
 ```
+
+<h3>Docker Usage: </h3>
+
+```shell
+# Clone repo 
+git clone https://github.com/eved1018/ISPIP.git
+cd ISPIP
+
+# Build docker image
+docker build --rm --pull -f "Dockerfile" -t ispip:latest 
+
+# Run ispip
+docker run -v $PWD:$PWD --rm --name ispip_run ispip:latest python3 /usr/src/ispip/main.py -i /path/to/input/file --mode generate
+```
+
 
 <h3>Development: </h3>
 
