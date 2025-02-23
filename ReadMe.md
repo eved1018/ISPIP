@@ -54,7 +54,7 @@ cd ISPIP
 docker build --rm --pull -f "Dockerfile" -t ispip:latest 
 
 # Run ispip
-docker run -v $PWD:$PWD --rm --name ispip_run ispip:latest python3 /usr/src/ispip/main.py -i /path/to/input/file --mode generate
+docker run -v $PWD:$PWD --rm --name ispip_run ispip:latest python /usr/src/ispip/main.py -i /path/to/input/file --mode generate
 ```
 
 
